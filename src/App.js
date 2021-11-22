@@ -1,24 +1,19 @@
-import logo from './logo.svg';
-import './App.css';
+
+import React from "react";
+import { BrowserRouter, Route } from "react-router-dom";
+import Starterdy from "./pages/starterdy";
+import Msg from "./pages/msg";
+// import Webdesign from "./pages/webdesign";
+
 
 function App() {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+ 
+        <Route path="/starterdy" component={Starterdy} />
+        <Route path="/msggg" component={Msg} />
+    </BrowserRouter>
   );
 }
 
