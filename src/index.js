@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 import Header from './components/header'; 
 import Visual from './components/visual'; 
+// import { Header, Visual} from './components';
 import Webdesign from './pages/webdesign';
 import Design from './pages/design';
 import Profile from './pages/profile';

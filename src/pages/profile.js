@@ -13,6 +13,7 @@ const Profile = () => {
                 <div className="so-img">
                     <img src="images/so-title.png"></img>
                 </div>
+                <img src="images/profile1.png"></img>
                 <div className="etc">이 사이트는 직접 제작하였습니다.</div>
             </Wrapper>
         </>
