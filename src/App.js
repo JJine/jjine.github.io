@@ -1,19 +1,18 @@
-
-import React from "react";
-import { BrowserRouter, Route } from "react-router-dom";
-import Starterdy from "./pages/starterdy";
-import Msg from "./pages/msg";
-// import Webdesign from "./pages/webdesign";
-
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Home from './pages/Home';
+import Layout from './components/Layout';
 
 function App() {
-
   return (
-    <BrowserRouter>
- 
-        <Route path="/starterdy" component={Starterdy} />
-        <Route path="/msggg" component={Msg} />
-    </BrowserRouter>
+    <Router>
+      <Layout>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          {/* 다른 라우트들 추가 */}
+        </Routes>
+      </Layout>
+    </Router>
   );
 }
 

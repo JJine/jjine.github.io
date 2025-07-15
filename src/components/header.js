@@ -1,32 +1,74 @@
-// import React, {useState} from 'react';
-import styled from 'styled-components';
-import Flip from "react-reveal/Flip";
-// import title from '../assets/title.png';
-// import aseets from '../'   
+import React, { useState } from 'react';
+import { Menu, X, Home, User, Mail, FileText } from 'lucide-react';
 
+const Header = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-const Nav = styled.div`
-    display: flex;
+  const navigation = [
+    { name: 'Home', href: '/', icon: Home },
+    { name: 'About', href: '/about', icon: User },
+    { name: 'Blog', href: '/blog', icon: FileText },
+    { name: 'Contact', href: '/contact', icon: Mail }
+  ];
 
-    position: absolute;
-    top: 3%; 
-    left: 34%;
-`;
+  return (
+    <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-200">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center h-16">
+          {/* Logo */}
+          <div className="flex-shrink-0">
+            <a href="/" className="text-2xl font-bold text-gray-900">
+              YourName
+            </a>
+          </div>
+          
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex space-x-8">
+            {navigation.map((item) => (
+              <a
+                key={item.name}
+                href={item.href}
+                className="text-gray-700 hover:text-gray-900 px-3 py-2 text-sm font-medium transition-colors"
+              >
+                {item.name}
+              </a>
+            ))}
+          </nav>
 
-const head = () => {
-    return (
-        <Nav>
-            <Flip top>
-                <div className="title active" data-menuanchor="인트로" data-tooltip="인트로"><a href="#인트로"><img src="images/e2.png"></img></a></div>
-                <div className="title" data-menuanchor="웹디자인" data-tooltip="웹디자인" ><a href="#웹디자인"><img src="images/e3.png"></img></a></div>
-                <div className="title" data-menuanchor="작업물" data-tooltip="작업물" ><a href="#작업물"><img src="images/e4.png"></img></a></div>
-                <div className="title" data-menuanchor="프로필" data-tooltip="프로필" ><a href="#프로필"><img src="images/e5.png"></img></a></div>
-            </Flip>
-        </Nav>
-    );
+          {/* Mobile menu button */}
+          <div className="md:hidden">
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="text-gray-700 hover:text-gray-900 p-2"
+            >
+              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Mobile Navigation */}
+      {isMenuOpen && (
+        <div className="md:hidden bg-white border-t border-gray-200">
+          <div className="px-2 pt-2 pb-3 space-y-1">
+            {navigation.map((item) => {
+              const Icon = item.icon;
+              return (
+                <a
+                  key={item.name}
+                  href={item.href}
+                  className="flex items-center text-gray-700 hover:text-gray-900 hover:bg-gray-50 px-3 py-2 text-base font-medium transition-colors"
+                >
+                  <Icon size={20} className="mr-3" />
+                  {item.name}
+                </a>
+              );
+            })}
+          </div>
+        </div>
+      )}
+    </header>
+  );
 };
 
-
-
-export default head;
-   
+export default Header;
