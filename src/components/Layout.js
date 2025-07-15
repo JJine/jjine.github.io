@@ -1,16 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Header from './Header';
 import Footer from './Footer';
 
-// export default를 사용
-export default function Layout({ children }) {
+const Layout = ({ children }) => {
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen bg-white">
       <Header />
-      <main className="flex-grow">
+      <main className="pt-16">
         {children}
       </main>
       <Footer />
     </div>
   );
-}
+};
+
+export default Layout;
