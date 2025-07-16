@@ -63,26 +63,26 @@ const HomePage = () => {
         className="mb-16"
       >
         <div className="max-w-3xl">
-          <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-6">
+          <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-6 text-gray-900 dark:text-white">
             안녕하세요,
             <br />
-            <span className="text-muted-foreground">디자이너</span> Jjine입니다.
+            <span className="text-gray-600 dark:text-gray-400">디자이너</span> Jjine입니다.
           </h1>
-          <p className="text-lg md:text-xl text-muted-foreground leading-relaxed mb-8">
+          <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 leading-relaxed mb-8">
             사용자 중심의 디자인과 기술을 통해 의미 있는 경험을 만들어갑니다. 
             UX/UI 디자인부터 프론트엔드 개발까지, 아이디어를 현실로 만드는 과정을 즐깁니다.
           </p>
           <div className="flex flex-col sm:flex-row gap-4">
             <Link
               href="/project"
-              className="inline-flex items-center justify-center px-6 py-3 text-sm font-medium text-background bg-foreground rounded-md hover:bg-foreground/90 transition-colors"
+              className="inline-flex items-center justify-center px-6 py-3 text-sm font-medium text-white bg-gray-900 dark:bg-white dark:text-gray-900 rounded-md hover:bg-gray-800 dark:hover:bg-gray-100 transition-colors"
             >
               프로젝트 보기
               <ArrowRight className="ml-2 h-4 w-4" />
             </Link>
             <Link
               href="/about"
-              className="inline-flex items-center justify-center px-6 py-3 text-sm font-medium text-foreground border border-border rounded-md hover:bg-muted transition-colors"
+              className="inline-flex items-center justify-center px-6 py-3 text-sm font-medium text-gray-900 dark:text-white border border-gray-200 dark:border-gray-700 rounded-md hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
             >
               더 알아보기
             </Link>
@@ -98,10 +98,10 @@ const HomePage = () => {
         className="mb-16"
       >
         <div className="flex items-center justify-between mb-8">
-          <h2 className="text-2xl md:text-3xl font-bold">Featured Projects</h2>
+          <h2 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white">Featured Projects</h2>
           <Link
             href="/project"
-            className="inline-flex items-center text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+            className="inline-flex items-center text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
           >
             모든 프로젝트 보기
             <ArrowRight className="ml-1 h-4 w-4" />
@@ -118,32 +118,32 @@ const HomePage = () => {
               className="group"
             >
               <Link href={`/project/${project.id}`} className="block">
-                <div className="aspect-[4/3] relative overflow-hidden rounded-lg bg-muted mb-4">
-                  <div className="absolute inset-0 bg-gradient-to-br from-muted to-muted-foreground/10 flex items-center justify-center">
-                    <span className="text-muted-foreground">Project Image</span>
+                <div className="aspect-[4/3] relative overflow-hidden rounded-lg bg-gray-100 dark:bg-gray-800 mb-4">
+                  <div className="absolute inset-0 bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-700 flex items-center justify-center">
+                    <span className="text-gray-500 dark:text-gray-400">Project Image</span>
                   </div>
                   <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300" />
                 </div>
                 <div className="space-y-2">
                   <div className="flex items-center justify-between">
-                    <span className="text-xs text-muted-foreground font-medium uppercase tracking-wide">
+                    <span className="text-xs text-gray-500 dark:text-gray-400 font-medium uppercase tracking-wide">
                       {project.category}
                     </span>
-                    <span className="text-xs text-muted-foreground">
+                    <span className="text-xs text-gray-500 dark:text-gray-400">
                       {project.year}
                     </span>
                   </div>
-                  <h3 className="text-lg font-semibold group-hover:text-muted-foreground transition-colors">
+                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white group-hover:text-gray-600 dark:group-hover:text-gray-300 transition-colors">
                     {project.title}
                   </h3>
-                  <p className="text-sm text-muted-foreground line-clamp-2">
+                  <p className="text-sm text-gray-600 dark:text-gray-400 line-clamp-2">
                     {project.description}
                   </p>
                   <div className="flex flex-wrap gap-2 pt-2">
                     {project.tags.map((tag) => (
                       <span
                         key={tag}
-                        className="text-xs px-2 py-1 bg-muted text-muted-foreground rounded-full"
+                        className="text-xs px-2 py-1 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 rounded-full"
                       >
                         {tag}
                       </span>
@@ -163,7 +163,7 @@ const HomePage = () => {
         transition={{ duration: 0.6, delay: 0.4 }}
         className="mb-16"
       >
-        <h2 className="text-2xl md:text-3xl font-bold mb-8">Recent Work</h2>
+        <h2 className="text-2xl md:text-3xl font-bold mb-8 text-gray-900 dark:text-white">Recent Work</h2>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {regularProjects.map((project, index) => (
@@ -175,25 +175,25 @@ const HomePage = () => {
               className="group"
             >
               <Link href={`/project/${project.id}`} className="block">
-                <div className="aspect-[3/2] relative overflow-hidden rounded-lg bg-muted mb-3">
-                  <div className="absolute inset-0 bg-gradient-to-br from-muted to-muted-foreground/10 flex items-center justify-center">
-                    <span className="text-muted-foreground text-sm">Project Image</span>
+                <div className="aspect-[3/2] relative overflow-hidden rounded-lg bg-gray-100 dark:bg-gray-800 mb-3">
+                  <div className="absolute inset-0 bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-700 flex items-center justify-center">
+                    <span className="text-gray-500 dark:text-gray-400 text-sm">Project Image</span>
                   </div>
                   <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300" />
                 </div>
                 <div className="space-y-1">
                   <div className="flex items-center justify-between">
-                    <span className="text-xs text-muted-foreground font-medium uppercase tracking-wide">
+                    <span className="text-xs text-gray-500 dark:text-gray-400 font-medium uppercase tracking-wide">
                       {project.category}
                     </span>
-                    <span className="text-xs text-muted-foreground">
+                    <span className="text-xs text-gray-500 dark:text-gray-400">
                       {project.year}
                     </span>
                   </div>
-                  <h3 className="font-semibold group-hover:text-muted-foreground transition-colors">
+                  <h3 className="font-semibold text-gray-900 dark:text-white group-hover:text-gray-600 dark:group-hover:text-gray-300 transition-colors">
                     {project.title}
                   </h3>
-                  <p className="text-sm text-muted-foreground line-clamp-1">
+                  <p className="text-sm text-gray-600 dark:text-gray-400 line-clamp-1">
                     {project.description}
                   </p>
                 </div>
@@ -208,26 +208,26 @@ const HomePage = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.6 }}
-        className="text-center py-16 border-t border-border"
+        className="text-center py-16 border-t border-gray-200 dark:border-gray-700"
       >
-        <h2 className="text-2xl md:text-3xl font-bold mb-4">
+        <h2 className="text-2xl md:text-3xl font-bold mb-4 text-gray-900 dark:text-white">
           함께 작업하고 싶으신가요?
         </h2>
-        <p className="text-muted-foreground mb-8 max-w-2xl mx-auto">
+        <p className="text-gray-600 dark:text-gray-300 mb-8 max-w-2xl mx-auto">
           새로운 프로젝트나 협업 기회에 대해 언제든 연락주세요. 
           좋은 아이디어를 현실로 만드는 과정을 함께 할 수 있기를 기대합니다.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Link
             href="/info"
-            className="inline-flex items-center justify-center px-6 py-3 text-sm font-medium text-background bg-foreground rounded-md hover:bg-foreground/90 transition-colors"
+            className="inline-flex items-center justify-center px-6 py-3 text-sm font-medium text-white bg-gray-900 dark:bg-white dark:text-gray-900 rounded-md hover:bg-gray-800 dark:hover:bg-gray-100 transition-colors"
           >
             연락하기
             <ArrowRight className="ml-2 h-4 w-4" />
           </Link>
           <a
             href="mailto:your-email@example.com"
-            className="inline-flex items-center justify-center px-6 py-3 text-sm font-medium text-foreground border border-border rounded-md hover:bg-muted transition-colors"
+            className="inline-flex items-center justify-center px-6 py-3 text-sm font-medium text-gray-900 dark:text-white border border-gray-200 dark:border-gray-700 rounded-md hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
           >
             <ExternalLink className="mr-2 h-4 w-4" />
             이메일 보내기

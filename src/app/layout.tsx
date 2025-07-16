@@ -1,8 +1,14 @@
 import type { Metadata } from 'next'
 import { ThemeProvider } from 'next-themes'
-import Header from '@/components/Header'
-import Footer from '@/components/Footer'
+import { Inter } from 'next/font/google'
+import Header from './components/Header'
+import Footer from './components/Footer'
 import './globals.css'
+
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-inter',
+})
 
 export const metadata: Metadata = {
   title: 'Jjine - Personal Blog',
@@ -40,7 +46,7 @@ const RootLayout = ({ children }: RootLayoutProps) => {
         <link rel="preconnect" href="https://cdn.jsdelivr.net" />
         <link rel="dns-prefetch" href="https://cdn.jsdelivr.net" />
       </head>
-      <body className="min-h-screen bg-background antialiased">
+      <body className={`${inter.className} min-h-screen flex flex-col`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="light"
