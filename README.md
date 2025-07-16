@@ -1,70 +1,203 @@
-# Getting Started with Create React App
+# Personal Blog - Jjine
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+현대적인 개인 블로그 및 포트폴리오 웹사이트입니다. Next.js 14, TypeScript, Tailwind CSS로 구축되었습니다.
 
-## Available Scripts
+## 🚀 기술 스택
 
-In the project directory, you can run:
+- **Framework**: Next.js 14 (App Router)
+- **Language**: TypeScript 5.x
+- **Styling**: Tailwind CSS 4.0
+- **Font**: Pretendard
+- **Animation**: Framer Motion
+- **Icons**: Lucide React
+- **Theme**: Next Themes (다크모드 지원)
+- **Deployment**: GitHub Pages
 
-### `yarn start`
+## 📁 프로젝트 구조
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+```
+├── app/                    # Next.js App Router
+│   ├── globals.css        # 전역 스타일
+│   ├── layout.tsx         # 루트 레이아웃
+│   ├── page.tsx          # 홈페이지
+│   ├── project/          # 프로젝트 페이지
+│   ├── about/            # 소개 페이지
+│   ├── info/             # 연락처 페이지
+│   └── article/          # 블로그 아티클
+├── components/            # 재사용 가능한 컴포넌트
+│   ├── Header.tsx
+│   └── Footer.tsx
+├── public/               # 정적 파일
+└── .github/workflows/    # GitHub Actions
+```
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## 🛠️ 설치 및 실행
 
-### `yarn test`
+### 1. 저장소 클론
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```bash
+git clone https://github.com/jjine/jjine.github.io.git
+cd jjine.github.io
+```
 
-### `yarn build`
+### 2. 의존성 설치
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```bash
+npm install
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### 3. 개발 서버 실행
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```bash
+npm run dev
+```
 
-### `yarn eject`
+http://localhost:3000에서 확인할 수 있습니다.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### 4. 프로덕션 빌드
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```bash
+npm run build
+npm run start
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## 🌐 GitHub Pages 배포 설정
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### 1. 저장소 설정
 
-## Learn More
+1. GitHub에서 새 저장소 생성: `username.github.io`
+2. 저장소 Settings → Pages 설정
+3. Source를 "GitHub Actions"로 설정
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### 2. 환경 변수 설정 (필요시)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+`.env.local` 파일 생성:
 
-### Code Splitting
+```env
+NEXT_PUBLIC_SITE_URL=https://username.github.io
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### 3. 자동 배포
 
-### Analyzing the Bundle Size
+- `main` 브랜치에 push하면 자동으로 배포됩니다
+- GitHub Actions를 통해 빌드 및 배포가 진행됩니다
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## 📝 콘텐츠 관리
 
-### Making a Progressive Web App
+### 프로젝트 추가
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+`app/page.tsx`와 `app/project/page.tsx`의 `projects` 배열에서 프로젝트를 관리합니다:
 
-### Advanced Configuration
+```typescript
+const projects = [
+  {
+    id: '새-프로젝트-id',
+    title: '프로젝트 제목',
+    description: '프로젝트 설명',
+    category: '카테고리',
+    year: '2024',
+    tags: ['태그1', '태그2'],
+    featured: true, // 메인페이지 노출 여부
+  },
+  // ...
+]
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### 아티클 추가
 
-### Deployment
+`app/article/page.tsx`의 `articles` 배열에서 아티클을 관리합니다:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+```typescript
+const articles = [
+  {
+    id: '새-아티클-id',
+    title: '아티클 제목',
+    excerpt: '아티클 요약',
+    category: '카테고리',
+    date: '2024-07-16',
+    readTime: '5분',
+    tags: ['태그1', '태그2'],
+    featured: true,
+  },
+  // ...
+]
+```
 
-### `yarn build` fails to minify
+상세 콘텐츠는 `app/article/[id]/page.tsx`와 `app/project/[id]/page.tsx`에서 관리됩니다.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## 🎨 커스터마이징
+
+### 색상 및 테마
+
+`app/globals.css`에서 CSS 변수를 수정하여 색상을 변경할 수 있습니다:
+
+```css
+:root {
+  --background: 0 0% 100%;
+  --foreground: 0 0% 3.9%;
+  /* ... 기타 색상 변수 */
+}
+```
+
+### 폰트 변경
+
+`tailwind.config.ts`에서 폰트를 변경할 수 있습니다:
+
+```typescript
+fontFamily: {
+  'custom': ['Your Font', 'fallback'],
+}
+```
+
+### 레이아웃 수정
+
+각 페이지의 레이아웃은 해당 `page.tsx` 파일에서 수정할 수 있습니다.
+
+## 📱 반응형 디자인
+
+- 모바일 우선 디자인
+- Tailwind CSS의 반응형 클래스 활용
+- 모든 디바이스에서 최적화된 경험 제공
+
+## ⚡ 성능 최적화
+
+- Next.js 14 App Router 사용
+- 정적 사이트 생성 (SSG)
+- 이미지 최적화
+- 코드 분할 및 지연 로딩
+
+## 🔧 개발 도구
+
+### 린팅 및 포맷팅
+
+```bash
+npm run lint        # ESLint 실행
+```
+
+### 타입 체크
+
+```bash
+npx tsc --noEmit   # TypeScript 타입 체크
+```
+
+## 📄 라이선스
+
+MIT License
+
+## 🤝 기여하기
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## 📞 연락처
+
+- **Email**: hello@jjine.dev
+- **GitHub**: [@jjine](https://github.com/jjine)
+- **Website**: [https://jjine.github.io](https://jjine.github.io)
+
+---
+
+⭐ 이 프로젝트가 도움이 되셨다면 스타를 눌러주세요!
