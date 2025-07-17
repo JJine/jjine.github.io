@@ -17,6 +17,28 @@ export default function ArticleDetailClient({ article, content }: ArticleDetailC
   const [isBookmarked, setIsBookmarked] = useState(false)
   const [isSharing, setIsSharing] = useState(false)
 
+  // article이 없는 경우 처리
+  if (!article) {
+    return (
+      <div className="container mx-auto max-w-4xl px-4 py-12">
+        <div className="text-center">
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+            아티클을 찾을 수 없습니다
+          </h1>
+          <p className="text-gray-600 dark:text-gray-400 mb-8">
+            요청하신 아티클이 존재하지 않습니다.
+          </p>
+          <Link
+            href="/article"
+            className="inline-flex items-center text-blue-600 hover:text-blue-800 underline"
+          >
+            ← 아티클 목록으로 돌아가기
+          </Link>
+        </div>
+      </div>
+    )
+  }
+
   const formatDate = (dateString: string) => {
     const date = new Date(dateString)
     return date.toLocaleDateString('ko-KR', {
@@ -45,6 +67,28 @@ export default function ArticleDetailClient({ article, content }: ArticleDetailC
     }
     
     setIsSharing(false)
+  }
+
+  // 볼드 텍스트를 JSX로 변환하는 함수
+  const parseBoldText = (text: string): React.ReactNode[] => {
+    const parts = text.split(/(\*\*.*?\*\*)/g)
+    const result: React.ReactNode[] = []
+    
+    parts.forEach((part, index) => {
+      if (part.startsWith('**') && part.endsWith('**') && part.length > 4) {
+        // 볼드 텍스트
+        result.push(
+          <strong key={`bold-${index}`} className="font-semibold text-gray-900 dark:text-white">
+            {part.slice(2, -2)}
+          </strong>
+        )
+      } else if (part.trim() !== '') {
+        // 일반 텍스트
+        result.push(part)
+      }
+    })
+    
+    return result.length > 0 ? result : [text]
   }
 
   // 마크다운 스타일 콘텐츠를 JSX로 변환하는 함수

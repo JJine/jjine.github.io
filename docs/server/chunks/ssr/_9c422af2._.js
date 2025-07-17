@@ -1,6 +1,6 @@
 module.exports = {
 
-"[project]/src/app/article/[id]/ArticleDetailClient.tsx [app-ssr] (ecmascript)": ((__turbopack_context__) => {
+"[project]/src/app/article/[id]/page.tsx [app-ssr] (ecmascript)": ((__turbopack_context__) => {
 "use strict";
 
 __turbopack_context__.s({
@@ -39,7 +39,7 @@ function ArticleDetailClient({ article, content }) {
                         className: "text-2xl font-bold text-gray-900 dark:text-white mb-4",
                         children: "아티클을 찾을 수 없습니다"
                     }, void 0, false, {
-                        fileName: "[project]/src/app/article/[id]/ArticleDetailClient.tsx",
+                        fileName: "[project]/src/app/article/[id]/page.tsx",
                         lineNumber: 25,
                         columnNumber: 11
                     }, this),
@@ -47,7 +47,7 @@ function ArticleDetailClient({ article, content }) {
                         className: "text-gray-600 dark:text-gray-400 mb-8",
                         children: "요청하신 아티클이 존재하지 않습니다."
                     }, void 0, false, {
-                        fileName: "[project]/src/app/article/[id]/ArticleDetailClient.tsx",
+                        fileName: "[project]/src/app/article/[id]/page.tsx",
                         lineNumber: 28,
                         columnNumber: 11
                     }, this),
@@ -56,18 +56,18 @@ function ArticleDetailClient({ article, content }) {
                         className: "inline-flex items-center text-blue-600 hover:text-blue-800 underline",
                         children: "← 아티클 목록으로 돌아가기"
                     }, void 0, false, {
-                        fileName: "[project]/src/app/article/[id]/ArticleDetailClient.tsx",
+                        fileName: "[project]/src/app/article/[id]/page.tsx",
                         lineNumber: 31,
                         columnNumber: 11
                     }, this)
                 ]
             }, void 0, true, {
-                fileName: "[project]/src/app/article/[id]/ArticleDetailClient.tsx",
+                fileName: "[project]/src/app/article/[id]/page.tsx",
                 lineNumber: 24,
                 columnNumber: 9
             }, this)
         }, void 0, false, {
-            fileName: "[project]/src/app/article/[id]/ArticleDetailClient.tsx",
+            fileName: "[project]/src/app/article/[id]/page.tsx",
             lineNumber: 23,
             columnNumber: 7
         }, this);
@@ -98,30 +98,6 @@ function ArticleDetailClient({ article, content }) {
         }
         setIsSharing(false);
     };
-    // 볼드 텍스트를 JSX로 변환하는 함수
-    const parseBoldText = (text)=>{
-        const parts = text.split(/(\*\*.*?\*\*)/g);
-        const result = [];
-        parts.forEach((part, index)=>{
-            if (part.startsWith('**') && part.endsWith('**') && part.length > 4) {
-                // 볼드 텍스트
-                result.push(/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("strong", {
-                    className: "font-semibold text-gray-900 dark:text-white",
-                    children: part.slice(2, -2)
-                }, `bold-${index}`, false, {
-                    fileName: "[project]/src/app/article/[id]/ArticleDetailClient.tsx",
-                    lineNumber: 81,
-                    columnNumber: 11
-                }, this));
-            } else if (part.trim() !== '') {
-                // 일반 텍스트
-                result.push(part);
-            }
-        });
-        return result.length > 0 ? result : [
-            text
-        ];
-    };
     // 마크다운 스타일 콘텐츠를 JSX로 변환하는 함수
     const formatContent = (content)=>{
         const lines = content.split('\n');
@@ -134,8 +110,8 @@ function ArticleDetailClient({ article, content }) {
                     className: "text-3xl font-bold mt-8 mb-4 first:mt-0 text-gray-900 dark:text-white",
                     children: line.slice(2)
                 }, `h1-${currentIndex++}`, false, {
-                    fileName: "[project]/src/app/article/[id]/ArticleDetailClient.tsx",
-                    lineNumber: 106,
+                    fileName: "[project]/src/app/article/[id]/page.tsx",
+                    lineNumber: 84,
                     columnNumber: 11
                 }, this));
             } else if (line.startsWith('## ')) {
@@ -143,8 +119,8 @@ function ArticleDetailClient({ article, content }) {
                     className: "text-2xl font-semibold mt-8 mb-4 text-gray-900 dark:text-white",
                     children: line.slice(3)
                 }, `h2-${currentIndex++}`, false, {
-                    fileName: "[project]/src/app/article/[id]/ArticleDetailClient.tsx",
-                    lineNumber: 112,
+                    fileName: "[project]/src/app/article/[id]/page.tsx",
+                    lineNumber: 90,
                     columnNumber: 11
                 }, this));
             } else if (line.startsWith('### ')) {
@@ -152,8 +128,8 @@ function ArticleDetailClient({ article, content }) {
                     className: "text-xl font-semibold mt-6 mb-3 text-gray-900 dark:text-white",
                     children: line.slice(4)
                 }, `h3-${currentIndex++}`, false, {
-                    fileName: "[project]/src/app/article/[id]/ArticleDetailClient.tsx",
-                    lineNumber: 118,
+                    fileName: "[project]/src/app/article/[id]/page.tsx",
+                    lineNumber: 96,
                     columnNumber: 11
                 }, this));
             } else if (line.startsWith('**') && line.endsWith('**') && line.length > 4) {
@@ -161,8 +137,8 @@ function ArticleDetailClient({ article, content }) {
                     className: "text-lg font-semibold mt-4 mb-2 text-gray-900 dark:text-white",
                     children: line.slice(2, -2)
                 }, `h4-${currentIndex++}`, false, {
-                    fileName: "[project]/src/app/article/[id]/ArticleDetailClient.tsx",
-                    lineNumber: 124,
+                    fileName: "[project]/src/app/article/[id]/page.tsx",
+                    lineNumber: 102,
                     columnNumber: 11
                 }, this));
             } else if (line.startsWith('- ')) {
@@ -170,8 +146,8 @@ function ArticleDetailClient({ article, content }) {
                     className: "ml-4 mb-1 list-disc text-gray-700 dark:text-gray-300",
                     children: line.slice(2)
                 }, `li-${currentIndex++}`, false, {
-                    fileName: "[project]/src/app/article/[id]/ArticleDetailClient.tsx",
-                    lineNumber: 130,
+                    fileName: "[project]/src/app/article/[id]/page.tsx",
+                    lineNumber: 108,
                     columnNumber: 11
                 }, this));
             } else if (line.startsWith('> ')) {
@@ -179,8 +155,8 @@ function ArticleDetailClient({ article, content }) {
                     className: "border-l-4 border-blue-500 pl-4 py-2 my-4 bg-gray-50 dark:bg-gray-800 rounded-r-lg italic text-gray-700 dark:text-gray-300",
                     children: line.slice(2)
                 }, `blockquote-${currentIndex++}`, false, {
-                    fileName: "[project]/src/app/article/[id]/ArticleDetailClient.tsx",
-                    lineNumber: 136,
+                    fileName: "[project]/src/app/article/[id]/page.tsx",
+                    lineNumber: 114,
                     columnNumber: 11
                 }, this));
             } else if (line.startsWith('*') && line.endsWith('*') && line.length > 2) {
@@ -188,22 +164,22 @@ function ArticleDetailClient({ article, content }) {
                     className: "text-sm text-gray-500 dark:text-gray-400 italic text-center my-6",
                     children: line.slice(1, -1)
                 }, `italic-${currentIndex++}`, false, {
-                    fileName: "[project]/src/app/article/[id]/ArticleDetailClient.tsx",
-                    lineNumber: 142,
+                    fileName: "[project]/src/app/article/[id]/page.tsx",
+                    lineNumber: 120,
                     columnNumber: 11
                 }, this));
             } else if (line.startsWith('---')) {
                 elements.push(/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("hr", {
                     className: "border-gray-200 dark:border-gray-700 my-8"
                 }, `hr-${currentIndex++}`, false, {
-                    fileName: "[project]/src/app/article/[id]/ArticleDetailClient.tsx",
-                    lineNumber: 148,
+                    fileName: "[project]/src/app/article/[id]/page.tsx",
+                    lineNumber: 126,
                     columnNumber: 11
                 }, this));
             } else if (line.trim() === '') {
                 elements.push(/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("br", {}, `br-${currentIndex++}`, false, {
-                    fileName: "[project]/src/app/article/[id]/ArticleDetailClient.tsx",
-                    lineNumber: 151,
+                    fileName: "[project]/src/app/article/[id]/page.tsx",
+                    lineNumber: 129,
                     columnNumber: 23
                 }, this));
             } else if (line.trim() !== '') {
@@ -213,8 +189,8 @@ function ArticleDetailClient({ article, content }) {
                         className: "bg-gray-100 dark:bg-gray-800 p-4 rounded-lg my-4 font-mono text-sm overflow-x-auto text-gray-800 dark:text-gray-200",
                         children: line.slice(3)
                     }, `code-${currentIndex++}`, false, {
-                        fileName: "[project]/src/app/article/[id]/ArticleDetailClient.tsx",
-                        lineNumber: 156,
+                        fileName: "[project]/src/app/article/[id]/page.tsx",
+                        lineNumber: 134,
                         columnNumber: 13
                     }, this));
                 } else if (line.startsWith('**') && line.includes(':**')) {
@@ -229,15 +205,15 @@ function ArticleDetailClient({ article, content }) {
                                     ":"
                                 ]
                             }, void 0, true, {
-                                fileName: "[project]/src/app/article/[id]/ArticleDetailClient.tsx",
-                                lineNumber: 164,
+                                fileName: "[project]/src/app/article/[id]/page.tsx",
+                                lineNumber: 142,
                                 columnNumber: 15
                             }, this),
                             parts[1]
                         ]
                     }, `bold-${currentIndex++}`, true, {
-                        fileName: "[project]/src/app/article/[id]/ArticleDetailClient.tsx",
-                        lineNumber: 163,
+                        fileName: "[project]/src/app/article/[id]/page.tsx",
+                        lineNumber: 141,
                         columnNumber: 13
                     }, this));
                 } else {
@@ -245,8 +221,8 @@ function ArticleDetailClient({ article, content }) {
                         className: "mb-4 leading-relaxed text-gray-700 dark:text-gray-300",
                         children: line
                     }, `p-${currentIndex++}`, false, {
-                        fileName: "[project]/src/app/article/[id]/ArticleDetailClient.tsx",
-                        lineNumber: 169,
+                        fileName: "[project]/src/app/article/[id]/page.tsx",
+                        lineNumber: 147,
                         columnNumber: 13
                     }, this));
                 }
@@ -277,20 +253,20 @@ function ArticleDetailClient({ article, content }) {
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$arrow$2d$left$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__ArrowLeft$3e$__["ArrowLeft"], {
                             className: "mr-2 h-4 w-4"
                         }, void 0, false, {
-                            fileName: "[project]/src/app/article/[id]/ArticleDetailClient.tsx",
-                            lineNumber: 193,
+                            fileName: "[project]/src/app/article/[id]/page.tsx",
+                            lineNumber: 171,
                             columnNumber: 11
                         }, this),
                         "아티클 목록으로 돌아가기"
                     ]
                 }, void 0, true, {
-                    fileName: "[project]/src/app/article/[id]/ArticleDetailClient.tsx",
-                    lineNumber: 189,
+                    fileName: "[project]/src/app/article/[id]/page.tsx",
+                    lineNumber: 167,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
-                fileName: "[project]/src/app/article/[id]/ArticleDetailClient.tsx",
-                lineNumber: 183,
+                fileName: "[project]/src/app/article/[id]/page.tsx",
+                lineNumber: 161,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["motion"].header, {
@@ -314,38 +290,38 @@ function ArticleDetailClient({ article, content }) {
                                 className: "text-sm text-gray-600 dark:text-gray-400 font-medium uppercase tracking-wide",
                                 children: article.category
                             }, void 0, false, {
-                                fileName: "[project]/src/app/article/[id]/ArticleDetailClient.tsx",
-                                lineNumber: 206,
+                                fileName: "[project]/src/app/article/[id]/page.tsx",
+                                lineNumber: 184,
                                 columnNumber: 11
                             }, this),
                             article.featured && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                 className: "px-2 py-1 text-xs font-medium bg-blue-100 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 rounded-full",
                                 children: "Featured"
                             }, void 0, false, {
-                                fileName: "[project]/src/app/article/[id]/ArticleDetailClient.tsx",
-                                lineNumber: 210,
+                                fileName: "[project]/src/app/article/[id]/page.tsx",
+                                lineNumber: 188,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
-                        fileName: "[project]/src/app/article/[id]/ArticleDetailClient.tsx",
-                        lineNumber: 205,
+                        fileName: "[project]/src/app/article/[id]/page.tsx",
+                        lineNumber: 183,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h1", {
                         className: "text-4xl md:text-5xl font-bold tracking-tight mb-6 text-gray-900 dark:text-white",
                         children: article.title
                     }, void 0, false, {
-                        fileName: "[project]/src/app/article/[id]/ArticleDetailClient.tsx",
-                        lineNumber: 216,
+                        fileName: "[project]/src/app/article/[id]/page.tsx",
+                        lineNumber: 194,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                         className: "text-xl text-gray-600 dark:text-gray-300 leading-relaxed mb-8",
                         children: article.excerpt
                     }, void 0, false, {
-                        fileName: "[project]/src/app/article/[id]/ArticleDetailClient.tsx",
-                        lineNumber: 220,
+                        fileName: "[project]/src/app/article/[id]/page.tsx",
+                        lineNumber: 198,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -357,15 +333,15 @@ function ArticleDetailClient({ article, content }) {
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$calendar$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Calendar$3e$__["Calendar"], {
                                         className: "mr-2 h-4 w-4"
                                     }, void 0, false, {
-                                        fileName: "[project]/src/app/article/[id]/ArticleDetailClient.tsx",
-                                        lineNumber: 227,
+                                        fileName: "[project]/src/app/article/[id]/page.tsx",
+                                        lineNumber: 205,
                                         columnNumber: 13
                                     }, this),
                                     formatDate(article.date)
                                 ]
                             }, void 0, true, {
-                                fileName: "[project]/src/app/article/[id]/ArticleDetailClient.tsx",
-                                lineNumber: 226,
+                                fileName: "[project]/src/app/article/[id]/page.tsx",
+                                lineNumber: 204,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -374,15 +350,15 @@ function ArticleDetailClient({ article, content }) {
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$clock$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Clock$3e$__["Clock"], {
                                         className: "mr-2 h-4 w-4"
                                     }, void 0, false, {
-                                        fileName: "[project]/src/app/article/[id]/ArticleDetailClient.tsx",
-                                        lineNumber: 231,
+                                        fileName: "[project]/src/app/article/[id]/page.tsx",
+                                        lineNumber: 209,
                                         columnNumber: 13
                                     }, this),
                                     article.readTime
                                 ]
                             }, void 0, true, {
-                                fileName: "[project]/src/app/article/[id]/ArticleDetailClient.tsx",
-                                lineNumber: 230,
+                                fileName: "[project]/src/app/article/[id]/page.tsx",
+                                lineNumber: 208,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -391,21 +367,21 @@ function ArticleDetailClient({ article, content }) {
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$tag$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Tag$3e$__["Tag"], {
                                         className: "mr-2 h-4 w-4"
                                     }, void 0, false, {
-                                        fileName: "[project]/src/app/article/[id]/ArticleDetailClient.tsx",
-                                        lineNumber: 235,
+                                        fileName: "[project]/src/app/article/[id]/page.tsx",
+                                        lineNumber: 213,
                                         columnNumber: 13
                                     }, this),
                                     article.author
                                 ]
                             }, void 0, true, {
-                                fileName: "[project]/src/app/article/[id]/ArticleDetailClient.tsx",
-                                lineNumber: 234,
+                                fileName: "[project]/src/app/article/[id]/page.tsx",
+                                lineNumber: 212,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
-                        fileName: "[project]/src/app/article/[id]/ArticleDetailClient.tsx",
-                        lineNumber: 225,
+                        fileName: "[project]/src/app/article/[id]/page.tsx",
+                        lineNumber: 203,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -418,22 +394,22 @@ function ArticleDetailClient({ article, content }) {
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$heart$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Heart$3e$__["Heart"], {
                                         className: `h-4 w-4 ${isLiked ? 'fill-current' : ''}`
                                     }, void 0, false, {
-                                        fileName: "[project]/src/app/article/[id]/ArticleDetailClient.tsx",
-                                        lineNumber: 250,
+                                        fileName: "[project]/src/app/article/[id]/page.tsx",
+                                        lineNumber: 228,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                         className: "text-sm",
                                         children: "좋아요"
                                     }, void 0, false, {
-                                        fileName: "[project]/src/app/article/[id]/ArticleDetailClient.tsx",
-                                        lineNumber: 251,
+                                        fileName: "[project]/src/app/article/[id]/page.tsx",
+                                        lineNumber: 229,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
-                                fileName: "[project]/src/app/article/[id]/ArticleDetailClient.tsx",
-                                lineNumber: 242,
+                                fileName: "[project]/src/app/article/[id]/page.tsx",
+                                lineNumber: 220,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -443,22 +419,22 @@ function ArticleDetailClient({ article, content }) {
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$bookmark$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Bookmark$3e$__["Bookmark"], {
                                         className: `h-4 w-4 ${isBookmarked ? 'fill-current' : ''}`
                                     }, void 0, false, {
-                                        fileName: "[project]/src/app/article/[id]/ArticleDetailClient.tsx",
-                                        lineNumber: 262,
+                                        fileName: "[project]/src/app/article/[id]/page.tsx",
+                                        lineNumber: 240,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                         className: "text-sm",
                                         children: "북마크"
                                     }, void 0, false, {
-                                        fileName: "[project]/src/app/article/[id]/ArticleDetailClient.tsx",
-                                        lineNumber: 263,
+                                        fileName: "[project]/src/app/article/[id]/page.tsx",
+                                        lineNumber: 241,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
-                                fileName: "[project]/src/app/article/[id]/ArticleDetailClient.tsx",
-                                lineNumber: 254,
+                                fileName: "[project]/src/app/article/[id]/page.tsx",
+                                lineNumber: 232,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -469,34 +445,34 @@ function ArticleDetailClient({ article, content }) {
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$share$2d$2$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Share2$3e$__["Share2"], {
                                         className: "h-4 w-4"
                                     }, void 0, false, {
-                                        fileName: "[project]/src/app/article/[id]/ArticleDetailClient.tsx",
-                                        lineNumber: 271,
+                                        fileName: "[project]/src/app/article/[id]/page.tsx",
+                                        lineNumber: 249,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                         className: "text-sm",
                                         children: isSharing ? '공유 중...' : '공유'
                                     }, void 0, false, {
-                                        fileName: "[project]/src/app/article/[id]/ArticleDetailClient.tsx",
-                                        lineNumber: 272,
+                                        fileName: "[project]/src/app/article/[id]/page.tsx",
+                                        lineNumber: 250,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
-                                fileName: "[project]/src/app/article/[id]/ArticleDetailClient.tsx",
-                                lineNumber: 266,
+                                fileName: "[project]/src/app/article/[id]/page.tsx",
+                                lineNumber: 244,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
-                        fileName: "[project]/src/app/article/[id]/ArticleDetailClient.tsx",
-                        lineNumber: 241,
+                        fileName: "[project]/src/app/article/[id]/page.tsx",
+                        lineNumber: 219,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
-                fileName: "[project]/src/app/article/[id]/ArticleDetailClient.tsx",
-                lineNumber: 199,
+                fileName: "[project]/src/app/article/[id]/page.tsx",
+                lineNumber: 177,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["motion"].div, {
@@ -521,23 +497,23 @@ function ArticleDetailClient({ article, content }) {
                             className: "text-gray-500 dark:text-gray-400",
                             children: "Article Hero Image"
                         }, void 0, false, {
-                            fileName: "[project]/src/app/article/[id]/ArticleDetailClient.tsx",
-                            lineNumber: 286,
+                            fileName: "[project]/src/app/article/[id]/page.tsx",
+                            lineNumber: 264,
                             columnNumber: 13
                         }, this)
                     }, void 0, false, {
-                        fileName: "[project]/src/app/article/[id]/ArticleDetailClient.tsx",
-                        lineNumber: 285,
+                        fileName: "[project]/src/app/article/[id]/page.tsx",
+                        lineNumber: 263,
                         columnNumber: 11
                     }, this)
                 }, void 0, false, {
-                    fileName: "[project]/src/app/article/[id]/ArticleDetailClient.tsx",
-                    lineNumber: 284,
+                    fileName: "[project]/src/app/article/[id]/page.tsx",
+                    lineNumber: 262,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
-                fileName: "[project]/src/app/article/[id]/ArticleDetailClient.tsx",
-                lineNumber: 278,
+                fileName: "[project]/src/app/article/[id]/page.tsx",
+                lineNumber: 256,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["motion"].div, {
@@ -563,18 +539,18 @@ function ArticleDetailClient({ article, content }) {
                                 tag
                             ]
                         }, tag, true, {
-                            fileName: "[project]/src/app/article/[id]/ArticleDetailClient.tsx",
-                            lineNumber: 300,
+                            fileName: "[project]/src/app/article/[id]/page.tsx",
+                            lineNumber: 278,
                             columnNumber: 13
                         }, this))
                 }, void 0, false, {
-                    fileName: "[project]/src/app/article/[id]/ArticleDetailClient.tsx",
-                    lineNumber: 298,
+                    fileName: "[project]/src/app/article/[id]/page.tsx",
+                    lineNumber: 276,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
-                fileName: "[project]/src/app/article/[id]/ArticleDetailClient.tsx",
-                lineNumber: 292,
+                fileName: "[project]/src/app/article/[id]/page.tsx",
+                lineNumber: 270,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["motion"].article, {
@@ -593,8 +569,8 @@ function ArticleDetailClient({ article, content }) {
                 className: "prose prose-lg max-w-none",
                 children: formatContent(content)
             }, void 0, false, {
-                fileName: "[project]/src/app/article/[id]/ArticleDetailClient.tsx",
-                lineNumber: 311,
+                fileName: "[project]/src/app/article/[id]/page.tsx",
+                lineNumber: 289,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["motion"].section, {
@@ -620,13 +596,13 @@ function ArticleDetailClient({ article, content }) {
                                 className: "text-sm text-gray-500 dark:text-gray-400",
                                 children: "Photo"
                             }, void 0, false, {
-                                fileName: "[project]/src/app/article/[id]/ArticleDetailClient.tsx",
-                                lineNumber: 329,
+                                fileName: "[project]/src/app/article/[id]/page.tsx",
+                                lineNumber: 307,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
-                            fileName: "[project]/src/app/article/[id]/ArticleDetailClient.tsx",
-                            lineNumber: 328,
+                            fileName: "[project]/src/app/article/[id]/page.tsx",
+                            lineNumber: 306,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -638,16 +614,16 @@ function ArticleDetailClient({ article, content }) {
                                         article.author
                                     ]
                                 }, void 0, true, {
-                                    fileName: "[project]/src/app/article/[id]/ArticleDetailClient.tsx",
-                                    lineNumber: 332,
+                                    fileName: "[project]/src/app/article/[id]/page.tsx",
+                                    lineNumber: 310,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                     className: "text-sm text-gray-600 dark:text-gray-300 leading-relaxed",
                                     children: "UX/UI 디자이너이자 프론트엔드 개발자입니다. 사용자 중심의 디자인과 기술을 통해 의미 있는 경험을 만들어가는 것을 좋아합니다."
                                 }, void 0, false, {
-                                    fileName: "[project]/src/app/article/[id]/ArticleDetailClient.tsx",
-                                    lineNumber: 333,
+                                    fileName: "[project]/src/app/article/[id]/page.tsx",
+                                    lineNumber: 311,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -657,30 +633,30 @@ function ArticleDetailClient({ article, content }) {
                                         className: "text-sm text-gray-900 dark:text-white hover:text-gray-600 dark:hover:text-gray-300 transition-colors underline underline-offset-4",
                                         children: "더 알아보기 →"
                                     }, void 0, false, {
-                                        fileName: "[project]/src/app/article/[id]/ArticleDetailClient.tsx",
-                                        lineNumber: 338,
+                                        fileName: "[project]/src/app/article/[id]/page.tsx",
+                                        lineNumber: 316,
                                         columnNumber: 15
                                     }, this)
                                 }, void 0, false, {
-                                    fileName: "[project]/src/app/article/[id]/ArticleDetailClient.tsx",
-                                    lineNumber: 337,
+                                    fileName: "[project]/src/app/article/[id]/page.tsx",
+                                    lineNumber: 315,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
-                            fileName: "[project]/src/app/article/[id]/ArticleDetailClient.tsx",
-                            lineNumber: 331,
+                            fileName: "[project]/src/app/article/[id]/page.tsx",
+                            lineNumber: 309,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
-                    fileName: "[project]/src/app/article/[id]/ArticleDetailClient.tsx",
-                    lineNumber: 327,
+                    fileName: "[project]/src/app/article/[id]/page.tsx",
+                    lineNumber: 305,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
-                fileName: "[project]/src/app/article/[id]/ArticleDetailClient.tsx",
-                lineNumber: 321,
+                fileName: "[project]/src/app/article/[id]/page.tsx",
+                lineNumber: 299,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["motion"].section, {
@@ -702,8 +678,8 @@ function ArticleDetailClient({ article, content }) {
                         className: "text-xl font-semibold mb-6 text-gray-900 dark:text-white",
                         children: "관련 글"
                     }, void 0, false, {
-                        fileName: "[project]/src/app/article/[id]/ArticleDetailClient.tsx",
-                        lineNumber: 356,
+                        fileName: "[project]/src/app/article/[id]/page.tsx",
+                        lineNumber: 334,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -716,22 +692,22 @@ function ArticleDetailClient({ article, content }) {
                                         className: "font-medium mb-2 text-gray-900 dark:text-white",
                                         children: "다른 흥미로운 글들"
                                     }, void 0, false, {
-                                        fileName: "[project]/src/app/article/[id]/ArticleDetailClient.tsx",
-                                        lineNumber: 359,
+                                        fileName: "[project]/src/app/article/[id]/page.tsx",
+                                        lineNumber: 337,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                         className: "text-sm text-gray-600 dark:text-gray-400",
                                         children: "더 많은 아티클을 준비 중입니다."
                                     }, void 0, false, {
-                                        fileName: "[project]/src/app/article/[id]/ArticleDetailClient.tsx",
-                                        lineNumber: 360,
+                                        fileName: "[project]/src/app/article/[id]/page.tsx",
+                                        lineNumber: 338,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
-                                fileName: "[project]/src/app/article/[id]/ArticleDetailClient.tsx",
-                                lineNumber: 358,
+                                fileName: "[project]/src/app/article/[id]/page.tsx",
+                                lineNumber: 336,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -741,34 +717,34 @@ function ArticleDetailClient({ article, content }) {
                                         className: "font-medium mb-2 text-gray-900 dark:text-white",
                                         children: "추천 글"
                                     }, void 0, false, {
-                                        fileName: "[project]/src/app/article/[id]/ArticleDetailClient.tsx",
-                                        lineNumber: 365,
+                                        fileName: "[project]/src/app/article/[id]/page.tsx",
+                                        lineNumber: 343,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                         className: "text-sm text-gray-600 dark:text-gray-400",
                                         children: "비슷한 주제의 글들을 곧 추가할 예정입니다."
                                     }, void 0, false, {
-                                        fileName: "[project]/src/app/article/[id]/ArticleDetailClient.tsx",
-                                        lineNumber: 366,
+                                        fileName: "[project]/src/app/article/[id]/page.tsx",
+                                        lineNumber: 344,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
-                                fileName: "[project]/src/app/article/[id]/ArticleDetailClient.tsx",
-                                lineNumber: 364,
+                                fileName: "[project]/src/app/article/[id]/page.tsx",
+                                lineNumber: 342,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
-                        fileName: "[project]/src/app/article/[id]/ArticleDetailClient.tsx",
-                        lineNumber: 357,
+                        fileName: "[project]/src/app/article/[id]/page.tsx",
+                        lineNumber: 335,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
-                fileName: "[project]/src/app/article/[id]/ArticleDetailClient.tsx",
-                lineNumber: 350,
+                fileName: "[project]/src/app/article/[id]/page.tsx",
+                lineNumber: 328,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["motion"].nav, {
@@ -795,15 +771,15 @@ function ArticleDetailClient({ article, content }) {
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$arrow$2d$left$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__ArrowLeft$3e$__["ArrowLeft"], {
                                     className: "mr-2 h-4 w-4"
                                 }, void 0, false, {
-                                    fileName: "[project]/src/app/article/[id]/ArticleDetailClient.tsx",
-                                    lineNumber: 385,
+                                    fileName: "[project]/src/app/article/[id]/page.tsx",
+                                    lineNumber: 363,
                                     columnNumber: 13
                                 }, this),
                                 "모든 아티클 보기"
                             ]
                         }, void 0, true, {
-                            fileName: "[project]/src/app/article/[id]/ArticleDetailClient.tsx",
-                            lineNumber: 381,
+                            fileName: "[project]/src/app/article/[id]/page.tsx",
+                            lineNumber: 359,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -814,8 +790,8 @@ function ArticleDetailClient({ article, content }) {
                                     className: "inline-flex items-center text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors",
                                     children: "작성자 소개"
                                 }, void 0, false, {
-                                    fileName: "[project]/src/app/article/[id]/ArticleDetailClient.tsx",
-                                    lineNumber: 389,
+                                    fileName: "[project]/src/app/article/[id]/page.tsx",
+                                    lineNumber: 367,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
@@ -826,31 +802,31 @@ function ArticleDetailClient({ article, content }) {
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$arrow$2d$left$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__ArrowLeft$3e$__["ArrowLeft"], {
                                             className: "ml-2 h-4 w-4 rotate-180"
                                         }, void 0, false, {
-                                            fileName: "[project]/src/app/article/[id]/ArticleDetailClient.tsx",
-                                            lineNumber: 400,
+                                            fileName: "[project]/src/app/article/[id]/page.tsx",
+                                            lineNumber: 378,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
-                                    fileName: "[project]/src/app/article/[id]/ArticleDetailClient.tsx",
-                                    lineNumber: 395,
+                                    fileName: "[project]/src/app/article/[id]/page.tsx",
+                                    lineNumber: 373,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
-                            fileName: "[project]/src/app/article/[id]/ArticleDetailClient.tsx",
-                            lineNumber: 388,
+                            fileName: "[project]/src/app/article/[id]/page.tsx",
+                            lineNumber: 366,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
-                    fileName: "[project]/src/app/article/[id]/ArticleDetailClient.tsx",
-                    lineNumber: 380,
+                    fileName: "[project]/src/app/article/[id]/page.tsx",
+                    lineNumber: 358,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
-                fileName: "[project]/src/app/article/[id]/ArticleDetailClient.tsx",
-                lineNumber: 374,
+                fileName: "[project]/src/app/article/[id]/page.tsx",
+                lineNumber: 352,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["motion"].section, {
@@ -872,8 +848,8 @@ function ArticleDetailClient({ article, content }) {
                         className: "text-xl font-semibold mb-6 text-gray-900 dark:text-white",
                         children: "댓글"
                     }, void 0, false, {
-                        fileName: "[project]/src/app/article/[id]/ArticleDetailClient.tsx",
-                        lineNumber: 413,
+                        fileName: "[project]/src/app/article/[id]/page.tsx",
+                        lineNumber: 391,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -883,8 +859,8 @@ function ArticleDetailClient({ article, content }) {
                             children: [
                                 "댓글 시스템을 준비 중입니다.",
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("br", {}, void 0, false, {
-                                    fileName: "[project]/src/app/article/[id]/ArticleDetailClient.tsx",
-                                    lineNumber: 417,
+                                    fileName: "[project]/src/app/article/[id]/page.tsx",
+                                    lineNumber: 395,
                                     columnNumber: 13
                                 }, this),
                                 "의견이나 질문이 있으시면 ",
@@ -893,32 +869,32 @@ function ArticleDetailClient({ article, content }) {
                                     className: "underline underline-offset-4 text-gray-900 dark:text-white",
                                     children: "연락처"
                                 }, void 0, false, {
-                                    fileName: "[project]/src/app/article/[id]/ArticleDetailClient.tsx",
-                                    lineNumber: 418,
+                                    fileName: "[project]/src/app/article/[id]/page.tsx",
+                                    lineNumber: 396,
                                     columnNumber: 27
                                 }, this),
                                 "를 통해 문의해주세요."
                             ]
                         }, void 0, true, {
-                            fileName: "[project]/src/app/article/[id]/ArticleDetailClient.tsx",
-                            lineNumber: 415,
+                            fileName: "[project]/src/app/article/[id]/page.tsx",
+                            lineNumber: 393,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
-                        fileName: "[project]/src/app/article/[id]/ArticleDetailClient.tsx",
-                        lineNumber: 414,
+                        fileName: "[project]/src/app/article/[id]/page.tsx",
+                        lineNumber: 392,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
-                fileName: "[project]/src/app/article/[id]/ArticleDetailClient.tsx",
-                lineNumber: 407,
+                fileName: "[project]/src/app/article/[id]/page.tsx",
+                lineNumber: 385,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
-        fileName: "[project]/src/app/article/[id]/ArticleDetailClient.tsx",
-        lineNumber: 181,
+        fileName: "[project]/src/app/article/[id]/page.tsx",
+        lineNumber: 159,
         columnNumber: 5
     }, this);
 }
@@ -1262,4 +1238,4 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$re
 
 };
 
-//# sourceMappingURL=_b545166a._.js.map
+//# sourceMappingURL=_9c422af2._.js.map

@@ -13,11 +13,15 @@ export default async function ArticleDetailPage({ params }: ArticleDetailPagePro
   const { id } = await params
   
   const article = getArticle(id)
+  const content = getArticleContent(id)
+
+  // 둘 다 확인
   if (!article) {
     notFound()
   }
 
-  const content = getArticleContent(id)
+  console.log('Article data:', article) // 디버깅용
+  console.log('Content:', content.slice(0, 100)) // 디버깅용
 
   return <ArticleDetailClient article={article} content={content} />
 }
