@@ -128,6 +128,11 @@ export function getAllCategories(): string[] {
   return categories
 }
 
+// 정적 빌드를 위한 프로젝트 ID 목록 반환
+export function getAllProjectIds() {
+  return projects.map(project => ({ id: project.id }))
+}
+
 // 마크다운 파일에서 프로젝트 콘텐츠를 가져오는 함수
 export function getProjectContent(id: string): string {
   try {

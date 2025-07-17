@@ -112,6 +112,11 @@ export function getRecentArticles(limit: number = 3): Article[] {
   return getAllArticles().slice(0, limit)
 }
 
+// 정적 빌드를 위한 아티클 ID 목록 반환
+export function getAllArticleIds() {
+  return articles.map(article => ({ id: article.id }))
+}
+
 // 마크다운 파일에서 아티클 콘텐츠를 가져오는 함수
 export function getArticleContent(id: string): string {
   try {
