@@ -6,8 +6,19 @@ const nextConfig = {
   images: {
     unoptimized: true
   },
-  basePath: process.env.NODE_ENV === 'production' ? '' : '',
-  assetPrefix: process.env.NODE_ENV === 'production' ? '' : '',
+  async headers() {
+    return [
+      {
+        source: '/(.*)',
+        headers: [
+          {
+            key: 'Permissions-Policy',
+            value: 'camera=(), microphone=(), geolocation=()'
+          }
+        ]
+      }
+    ]
+  }
 }
 
 module.exports = nextConfig

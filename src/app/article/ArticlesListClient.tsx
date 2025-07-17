@@ -4,7 +4,7 @@
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { useState } from 'react'
-import { Calendar, Clock, ArrowRight } from 'lucide-react'
+import { Clock } from 'lucide-react'
 import { Article } from './data/articles-content'
 
 interface ArticlesListClientProps {

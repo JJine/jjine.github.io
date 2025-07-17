@@ -124,7 +124,9 @@ export function getProjectsByCategory(category: string): Project[] {
 }
 
 export function getAllCategories(): string[] {
-  const categories = ['All', ...new Set(projects.map(project => project.category))]
+  // const categories = ['All', ...new Set(projects.map(project => project.category))]
+    const uniqueCategories = new Set(projects.map(project => project.category))
+    const categories = ['All', ...Array.from(uniqueCategories)]
   return categories
 }
 

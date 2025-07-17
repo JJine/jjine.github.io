@@ -104,7 +104,8 @@ export function getArticlesByCategory(category: string): Article[] {
 }
 
 export function getAllCategories(): string[] {
-  const categories = ['All', ...new Set(articles.map(article => article.category))]
+  const uniqueCategories = new Set(articles.map(article => article.category))
+  const categories = ['All', ...Array.from(uniqueCategories)]
   return categories
 }
 
