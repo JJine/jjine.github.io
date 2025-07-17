@@ -1,69 +1,38 @@
-import type { Metadata } from 'next'
-import { ThemeProvider } from 'next-themes'
-import { Inter } from 'next/font/google'
-import Header from './components/Header'
-import Footer from './components/Footer'
-import './globals.css'
+import type { Metadata } from "next";
+import { Inter } from 'next/font/google';
+import "./globals.css";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
 
-const inter = Inter({
+const inter = Inter({ 
   subsets: ['latin'],
   variable: '--font-inter',
-})
+  display: 'swap',
+});
 
 export const metadata: Metadata = {
-  title: 'Jjine - Personal Blog',
-  description: 'A modern personal blog and portfolio',
-  keywords: ['blog', 'portfolio', 'design', 'development'],
-  authors: [{ name: 'Jjine' }],
-  creator: 'Jjine',
-  openGraph: {
-    type: 'website',
-    locale: 'ko_KR',
-    url: 'https://jjine.github.io',
-    title: 'Jjine - Personal Blog',
-    description: 'A modern personal blog and portfolio',
-    siteName: 'Jjine Blog',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Jjine - Personal Blog',
-    description: 'A modern personal blog and portfolio',
-  },
-  robots: {
-    index: true,
-    follow: true,
-  },
-}
+  title: "Jjine - Personal Portfolio",
+  description: "UX/UI Designer & Frontend Developer Portfolio",
+};
 
-interface RootLayoutProps {
-  children: React.ReactNode
-}
-
-const RootLayout = ({ children }: RootLayoutProps) => {
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
   return (
-    <html lang="ko" suppressHydrationWarning>
-      <head>
-        <link rel="preconnect" href="https://cdn.jsdelivr.net" />
-        <link rel="dns-prefetch" href="https://cdn.jsdelivr.net" />
-      </head>
-      <body className={`${inter.className} min-h-screen flex flex-col`}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="light"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <div className="relative flex min-h-screen flex-col">
-            <Header />
-            <main className="flex-1">
+    <html lang="ko" className={inter.variable}>
+      <body className="antialiased bg-white dark:bg-gray-950 text-gray-900 dark:text-white font-inter">
+        <div className="min-h-screen flex flex-col">
+          <Header />
+          <main className="flex-grow">
+            <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               {children}
-            </main>
-            <Footer />
-          </div>
-        </ThemeProvider>
+            </div>
+          </main>
+          <Footer />
+        </div>
       </body>
     </html>
-  )
+  );
 }
-
-export default RootLayout

@@ -2,240 +2,176 @@
 
 import { motion } from 'framer-motion'
 import Link from 'next/link'
-import Image from 'next/image'
-import { ArrowRight, ExternalLink } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 
-// Mock data - 실제로는 CMS나 마크다운 파일에서 가져올 데이터
-const projects = [
-  {
-    id: '1',
-    title: 'E-commerce Platform Redesign',
-    description: '사용자 경험을 개선한 이커머스 플랫폼 리디자인 프로젝트',
-    category: 'UX/UI Design',
-    year: '2024',
-    image: '/images/project-1.jpg',
-    tags: ['Figma', 'React', 'TypeScript'],
-    featured: true,
-  },
-  {
-    id: '2',
-    title: 'Mobile Banking App',
-    description: '직관적이고 안전한 모바일 뱅킹 애플리케이션 디자인',
-    category: 'Mobile Design',
-    year: '2024',
-    image: '/images/project-2.jpg',
-    tags: ['Mobile', 'Fintech', 'UX'],
-    featured: true,
-  },
-  {
-    id: '3',
-    title: 'Brand Identity System',
-    description: '스타트업을 위한 일관성 있는 브랜드 아이덴티티 시스템 구축',
-    category: 'Branding',
-    year: '2023',
-    image: '/images/project-3.jpg',
-    tags: ['Branding', 'Visual Identity', 'Guidelines'],
-    featured: false,
-  },
-  {
-    id: '4',
-    title: 'Design System Library',
-    description: '확장 가능한 디자인 시스템과 컴포넌트 라이브러리 개발',
-    category: 'Design System',
-    year: '2023',
-    image: '/images/project-4.jpg',
-    tags: ['Design System', 'Storybook', 'Components'],
-    featured: false,
-  },
-]
-
-const HomePage = () => {
-  const featuredProjects = projects.filter(project => project.featured)
-  const regularProjects = projects.filter(project => !project.featured)
+export default function HomePage() {
+  const projects = [
+    {
+      id: 1,
+      title: 'E-commerce Platform',
+      description: '사용자 경험을 중심으로 설계된 이커머스 플랫폼',
+      tech: 'React, Next.js, TypeScript',
+      status: '2024'
+    },
+    {
+      id: 2,
+      title: 'Task Management App',
+      description: '효율적인 업무 관리를 위한 협업 도구',
+      tech: 'Vue.js, Node.js, MongoDB',
+      status: '2024'
+    },
+    {
+      id: 3,
+      title: 'Design System',
+      description: '일관된 디자인 언어를 위한 컴포넌트 시스템',
+      tech: 'Figma, Storybook, React',
+      status: '2023'
+    }
+  ]
 
   return (
-    <div className="container mx-auto max-w-6xl px-4 py-12">
+    <div className="min-h-screen bg-white dark:bg-black text-black dark:text-white">
       {/* Hero Section */}
-      <motion.section
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        className="mb-16"
-      >
-        <div className="max-w-3xl">
-          <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-6 text-gray-900 dark:text-white">
-            안녕하세요,
-            <br />
-            <span className="text-gray-600 dark:text-gray-400">디자이너</span> Jjine입니다.
-          </h1>
-          <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 leading-relaxed mb-8">
-            사용자 중심의 디자인과 기술을 통해 의미 있는 경험을 만들어갑니다. 
-            UX/UI 디자인부터 프론트엔드 개발까지, 아이디어를 현실로 만드는 과정을 즐깁니다.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4">
-            <Link
-              href="/project"
-              className="inline-flex items-center justify-center px-6 py-3 text-sm font-medium text-white bg-gray-900 dark:bg-white dark:text-gray-900 rounded-md hover:bg-gray-800 dark:hover:bg-gray-100 transition-colors"
-            >
-              프로젝트 보기
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </Link>
-            <Link
-              href="/about"
-              className="inline-flex items-center justify-center px-6 py-3 text-sm font-medium text-gray-900 dark:text-white border border-gray-200 dark:border-gray-700 rounded-md hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
-            >
-              더 알아보기
-            </Link>
-          </div>
+      <section className="py-32">
+        <div className="max-w-4xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="space-y-8"
+          >
+            <div className="space-y-6">
+              <h1 className="text-5xl md:text-6xl lg:text-7xl font-light tracking-tight leading-tight">
+                안녕하세요,
+                <br />
+                <span className="font-normal">진</span>입니다
+              </h1>
+              
+              <div className="space-y-4 text-lg md:text-xl text-gray-600 dark:text-gray-400 leading-relaxed max-w-2xl">
+                <p>
+                  사용자 중심의 디자인과 기술을 통해 의미 있는 경험을 만들어가는 
+                  UX/UI Designer & Frontend Developer입니다.
+                </p>
+                <p>
+                  복잡한 문제를 간단하고 직관적인 해결책으로 풀어내는 것을 좋아합니다.
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-center space-x-8 pt-4">
+              <Link
+                href="/project"
+                className="inline-flex items-center text-lg font-medium text-black dark:text-white hover:text-gray-600 dark:hover:text-gray-400 transition-colors"
+              >
+                프로젝트 보기
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
+              <Link
+                href="/about"
+                className="inline-flex items-center text-lg font-medium text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors"
+              >
+                더 알아보기
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
+            </div>
+          </motion.div>
         </div>
-      </motion.section>
+      </section>
 
       {/* Featured Projects */}
-      <motion.section
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.2 }}
-        className="mb-16"
-      >
-        <div className="flex items-center justify-between mb-8">
-          <h2 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white">Featured Projects</h2>
-          <Link
-            href="/project"
-            className="inline-flex items-center text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
+      <section className="py-20 border-t border-gray-200 dark:border-gray-800">
+        <div className="max-w-4xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="space-y-12"
           >
-            모든 프로젝트 보기
-            <ArrowRight className="ml-1 h-4 w-4" />
-          </Link>
-        </div>
+            <div>
+              <h2 className="text-2xl md:text-3xl font-light tracking-tight mb-2">
+                Featured Work
+              </h2>
+              <p className="text-gray-600 dark:text-gray-400">
+                최근 작업한 프로젝트들을 소개합니다
+              </p>
+            </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {featuredProjects.map((project, index) => (
-            <motion.div
-              key={project.id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 * index }}
-              className="group"
-            >
-              <Link href={`/project/${project.id}`} className="block">
-                <div className="aspect-[4/3] relative overflow-hidden rounded-lg bg-gray-100 dark:bg-gray-800 mb-4">
-                  <div className="absolute inset-0 bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-700 flex items-center justify-center">
-                    <span className="text-gray-500 dark:text-gray-400">Project Image</span>
-                  </div>
-                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300" />
-                </div>
-                <div className="space-y-2">
-                  <div className="flex items-center justify-between">
-                    <span className="text-xs text-gray-500 dark:text-gray-400 font-medium uppercase tracking-wide">
-                      {project.category}
-                    </span>
-                    <span className="text-xs text-gray-500 dark:text-gray-400">
-                      {project.year}
-                    </span>
-                  </div>
-                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white group-hover:text-gray-600 dark:group-hover:text-gray-300 transition-colors">
-                    {project.title}
-                  </h3>
-                  <p className="text-sm text-gray-600 dark:text-gray-400 line-clamp-2">
-                    {project.description}
-                  </p>
-                  <div className="flex flex-wrap gap-2 pt-2">
-                    {project.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="text-xs px-2 py-1 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 rounded-full"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                </div>
+            <div className="space-y-8">
+              {projects.map((project, index) => (
+                <motion.div
+                  key={project.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.1 * index }}
+                >
+                  <Link 
+                    href={`/project/${project.id}`}
+                    className="group block"
+                  >
+                    <div className="py-6 border-b border-gray-100 dark:border-gray-900 hover:border-gray-300 dark:hover:border-gray-700 transition-colors">
+                      <div className="flex items-start justify-between">
+                        <div className="flex-1 space-y-2">
+                          <div className="flex items-center space-x-4">
+                            <h3 className="text-xl font-medium group-hover:text-gray-600 dark:group-hover:text-gray-400 transition-colors">
+                              {project.title}
+                            </h3>
+                            <span className="text-sm text-gray-500 dark:text-gray-500">
+                              {project.status}
+                            </span>
+                          </div>
+                          <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
+                            {project.description}
+                          </p>
+                          <p className="text-sm text-gray-500 dark:text-gray-500">
+                            {project.tech}
+                          </p>
+                        </div>
+                        <ArrowRight className="h-5 w-5 text-gray-400 group-hover:text-black dark:group-hover:text-white group-hover:translate-x-1 transition-all ml-6 mt-1" />
+                      </div>
+                    </div>
+                  </Link>
+                </motion.div>
+              ))}
+            </div>
+
+            <div className="pt-8">
+              <Link
+                href="/project"
+                className="inline-flex items-center text-lg font-medium text-black dark:text-white hover:text-gray-600 dark:hover:text-gray-400 transition-colors"
+              >
+                모든 프로젝트 보기
+                <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
-            </motion.div>
-          ))}
+            </div>
+          </motion.div>
         </div>
-      </motion.section>
+      </section>
 
-      {/* Recent Projects Grid */}
-      <motion.section
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.4 }}
-        className="mb-16"
-      >
-        <h2 className="text-2xl md:text-3xl font-bold mb-8 text-gray-900 dark:text-white">Recent Work</h2>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {regularProjects.map((project, index) => (
-            <motion.div
-              key={project.id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 * index }}
-              className="group"
+      {/* Contact CTA */}
+      <section className="py-20 border-t border-gray-200 dark:border-gray-800">
+        <div className="max-w-4xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.5 }}
+            className="text-center space-y-6"
+          >
+            <h2 className="text-2xl md:text-3xl font-light tracking-tight">
+              함께 작업하고 싶으시다면
+            </h2>
+            <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+              새로운 프로젝트나 협업 기회에 대해 이야기하고 싶으시다면 언제든지 연락주세요.
+            </p>
+            <Link
+              href="/info"
+              className="inline-flex items-center text-lg font-medium text-black dark:text-white hover:text-gray-600 dark:hover:text-gray-400 transition-colors"
             >
-              <Link href={`/project/${project.id}`} className="block">
-                <div className="aspect-[3/2] relative overflow-hidden rounded-lg bg-gray-100 dark:bg-gray-800 mb-3">
-                  <div className="absolute inset-0 bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-700 flex items-center justify-center">
-                    <span className="text-gray-500 dark:text-gray-400 text-sm">Project Image</span>
-                  </div>
-                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300" />
-                </div>
-                <div className="space-y-1">
-                  <div className="flex items-center justify-between">
-                    <span className="text-xs text-gray-500 dark:text-gray-400 font-medium uppercase tracking-wide">
-                      {project.category}
-                    </span>
-                    <span className="text-xs text-gray-500 dark:text-gray-400">
-                      {project.year}
-                    </span>
-                  </div>
-                  <h3 className="font-semibold text-gray-900 dark:text-white group-hover:text-gray-600 dark:group-hover:text-gray-300 transition-colors">
-                    {project.title}
-                  </h3>
-                  <p className="text-sm text-gray-600 dark:text-gray-400 line-clamp-1">
-                    {project.description}
-                  </p>
-                </div>
-              </Link>
-            </motion.div>
-          ))}
+              연락하기
+              <ArrowRight className="ml-2 h-4 w-4" />
+            </Link>
+          </motion.div>
         </div>
-      </motion.section>
-
-      {/* Call to Action */}
-      <motion.section
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.6 }}
-        className="text-center py-16 border-t border-gray-200 dark:border-gray-700"
-      >
-        <h2 className="text-2xl md:text-3xl font-bold mb-4 text-gray-900 dark:text-white">
-          함께 작업하고 싶으신가요?
-        </h2>
-        <p className="text-gray-600 dark:text-gray-300 mb-8 max-w-2xl mx-auto">
-          새로운 프로젝트나 협업 기회에 대해 언제든 연락주세요. 
-          좋은 아이디어를 현실로 만드는 과정을 함께 할 수 있기를 기대합니다.
-        </p>
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Link
-            href="/info"
-            className="inline-flex items-center justify-center px-6 py-3 text-sm font-medium text-white bg-gray-900 dark:bg-white dark:text-gray-900 rounded-md hover:bg-gray-800 dark:hover:bg-gray-100 transition-colors"
-          >
-            연락하기
-            <ArrowRight className="ml-2 h-4 w-4" />
-          </Link>
-          <a
-            href="mailto:your-email@example.com"
-            className="inline-flex items-center justify-center px-6 py-3 text-sm font-medium text-gray-900 dark:text-white border border-gray-200 dark:border-gray-700 rounded-md hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
-          >
-            <ExternalLink className="mr-2 h-4 w-4" />
-            이메일 보내기
-          </a>
-        </div>
-      </motion.section>
+      </section>
     </div>
   )
 }
-
-export default HomePage
