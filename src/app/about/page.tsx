@@ -3,170 +3,286 @@
 import { motion } from 'framer-motion'
 
 export default function AboutPage() {
-  const experiences = [
+  const experience = [
     {
-      period: '2024.04 - 2025.05',
-      title: 'Product Builder',
-      company: 'Startup Inc.',
-      description: '[1] 커뮤니티와 후기 데이터를 스크래핑하여 연예 유무와 구매 목적을 기준으로 백엔드 고객관을 분류하고, 이를 바탕으로 대표 페르소나 설계',
-      tasks: [
-        '[2] 정성적 데이터 기반으로 사용자 블린 요소 파악 및 UX 개선',
-        '"구매 전 정보 부족에 상황 신뢰성 어려움이라는 반복적인 사용자 Pain Point를 도출',
-        '이를 개선하기 위해 입점사 가이드 콘텐츠 리뉴얼과 제품 상세 정보를 담은 MD\'Note를 도입',
-        '제품 브랜딩 구조 개선하여 분류 체계를 정의하여 매출상승 반영'
-      ]
-    },
-    {
-      period: '2024.06',
-      title: 'TMF(Time Management Framework) 개인 업무스케줄링 툴',
-      company: 'Personal Project',
-      description: '[1] GTD(Getting Things Done) 기반 UX 플로우 및 UI 구조 설계',
-      tasks: [
-        '사용자의 사고 흐름(Brain Dump → Categories → Do & Review) use-case를 기반으로, Inbox – Planning Desk – Calendar – Archive 단계로 서비스 플로우 정의',
-        '[2] 외디즈 선세대이저 기획 및 기능(사진의 가치 개선)요소 제안, 디자인 단안',
-        '[3] 회고 문화 도입 및 프로세스 정의',
-        '프로젝트 내 회고를 지속 기능하여 안물건 위에 힌컨 플룹뭇을 구축하고, 주간 회고 회의의 주도'
+      period: '2022.06 - 2024.01',
+      company: '(주) 브릭메이트',
+      position: 'Project Manager',
+      summary: 'B2B 서비스 기획 및 고객사 커뮤니케이션 총괄, 모바일 서비스 정책 수립 및 사용자 플로우 설계',
+      projects: [
+        {
+          name: 'SmileMe (이모티콘 제작 플랫폼)',
+          description: '다날엔터테인먼트와의 협업으로 진행된 이모티콘 제작 및 판매 플랫폼',
+          achievements: [
+            '뷰티카메라 SDK와 AI 감정분석 기술을 활용한 차별화된 UX 구현',
+            '베트남 개발팀과의 글로벌 협업 체계 구축 및 Jira 기반 프로세스 정립',
+            '사용자 전환율 22.1% 향상 및 클라이언트 MOU 체결 성공'
+          ]
+        },
+        {
+          name: 'Remaker (명품 리폼/수선 중개 플랫폼)',
+          description: '프리미엄 중고 명품 리폼 서비스와 전문 마스터를 연결하는 모바일 플랫폼',
+          achievements: [
+            '카카오 알림톡 API 연동을 통한 실시간 알림 시스템 구축',
+            '사용자 의뢰 후 재의뢰율 12.3% 향상',
+            '구글/애플 스토어 총 2천회 다운로드 수 달성'
+          ]
+        },
+        {
+          name: '밀당365 (혈당 관리 플랫폼)',
+          description: '당뇨병 환자를 위한 혈당 관리 및 건강 정보 제공 모바일 앱',
+          achievements: [
+            '사용자 맞춤형 타이머 알림 기능 기획 및 구현',
+            '이벤트 참여율 6%에서 48%로 대폭 개선',
+            'Google Analytics 기반 MAU 1천 명 이상, 누적 다운로드 1만 회 달성'
+          ]
+        }
       ]
     }
   ]
 
+  const personalProjects = [
+    {
+      name: 'TMF(Time Management Framework)',
+      period: '2024.06',
+      description: '개인 업무스케줄링 툴',
+      details: [
+        'GTD(Getting Things Done) 기반 UX 플로우 및 UI 구조 설계',
+        'Inbox – Planning Desk – Calendar – Archive 단계로 서비스 플로우 정의',
+        '회고 문화 도입 및 프로세스 정의로 프로젝트 효율성 향상'
+      ]
+    }
+  ]
+
+  const skills = {
+    planning: ['서비스 기획', '프로젝트 관리', '사용자 리서치', 'UX/UI 설계', '데이터 분석'],
+    tools: ['Figma', 'Notion', 'Jira', 'Slack', 'Google Analytics', 'Adobe XD'],
+    development: ['HTML', 'CSS', 'JavaScript(React.js)', 'MySQL', 'Git/GitHub']
+  }
+
+  const education = {
+    school: '수원정보과학고등학교',
+    major: 'IT소프트웨어과',
+    period: '2019.03 - 2022.02'
+  }
+
+  const awards = [
+    {
+      name: '전기·에너지 분야 국민 아이디어 공모전 대회 금상',
+      organization: '한국전력공사',
+      date: '2020.11'
+    },
+    {
+      name: '2020-2 Ajou SOFTCON 고등부문 인기상',
+      organization: '아주대학교 SW중심대학사업단',
+      date: '2020.12'
+    }
+  ]
+
   return (
-    <div className="min-h-screen bg-white dark:bg-black text-black dark:text-white py-32">
-      <div className="max-w-4xl mx-auto">
+    <div className="min-h-screen bg-white dark:bg-black text-gray-900 dark:text-gray-100">
+      <div className="w-full px-8 md:px-12 lg:px-16 py-32 max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="space-y-16"
+          className="space-y-20"
         >
           {/* Header */}
           <div className="flex items-start justify-between">
-            <div className="space-y-6">
-              <h1 className="text-4xl md:text-5xl font-light tracking-tight">
-                Resume
-              </h1>
-            </div>
-            <div className="text-right">
-              <span className="text-sm text-gray-500 dark:text-gray-500">KR</span>
-            </div>
+            <h1 className="text-4xl md:text-5xl font-light text-gray-900 dark:text-gray-100">Resume</h1>
+            <button 
+              onClick={() => {
+                // 이력서 다운로드 로직
+                const link = document.createElement('a')
+                link.href = '/resume.pdf' // 실제 이력서 파일 경로
+                link.download = '조예진_이력서.pdf'
+                link.click()
+              }}
+              className="px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg text-sm font-medium text-gray-900 dark:text-gray-100 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+            >
+              이력서 다운로드
+            </button>
           </div>
 
-          {/* Experience */}
-          <div className="space-y-12">
-            {experiences.map((exp, index) => (
+          {/* 회사 경력 */}
+          <section className="space-y-12">
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 border-b border-gray-200 dark:border-gray-800 pb-4">
+              Experience
+            </h2>
+            
+            {experience.map((exp, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.1 * index }}
-                className="space-y-6"
+                className="space-y-8"
               >
-                <div className="flex items-start justify-between">
-                  <div>
-                    <h2 className="text-xl font-medium mb-1">
-                      {exp.title}
-                    </h2>
-                    <p className="text-gray-600 dark:text-gray-400">
+                <div className="flex items-start justify-between border-b border-gray-100 dark:border-gray-900 pb-6">
+                  <div className="space-y-2">
+                    <h3 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
                       {exp.company}
+                    </h3>
+                    <h4 className="text-xl font-medium text-gray-700 dark:text-gray-300">
+                      {exp.position}
+                    </h4>
+                    <p className="text-gray-600 dark:text-gray-400 leading-relaxed max-w-3xl">
+                      {exp.summary}
                     </p>
                   </div>
-                  <span className="text-sm text-gray-500 dark:text-gray-500 mt-1">
+                  <span className="text-sm text-gray-500 dark:text-gray-400 font-medium">
                     {exp.period}
                   </span>
                 </div>
 
-                <div className="space-y-4 text-gray-700 dark:text-gray-300 leading-relaxed">
-                  <p>{exp.description}</p>
-                  
-                  {exp.tasks && (
-                    <div className="space-y-2">
-                      {exp.tasks.map((task, taskIndex) => (
-                        <div key={taskIndex} className="flex items-start space-x-2">
-                          <span className="text-gray-400 mt-1.5 text-xs">•</span>
-                          <span className="flex-1">{task}</span>
-                        </div>
-                      ))}
+                {/* 프로젝트들 */}
+                <div className="space-y-8 ml-4">
+                  {exp.projects.map((project, projectIndex) => (
+                    <div key={projectIndex} className="space-y-4">
+                      <div className="space-y-2">
+                        <h5 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
+                          {project.name}
+                        </h5>
+                        <p className="text-gray-600 dark:text-gray-400">
+                          {project.description}
+                        </p>
+                      </div>
+                      <ul className="space-y-2">
+                        {project.achievements.map((achievement, achIndex) => (
+                          <li key={achIndex} className="flex items-start space-x-3">
+                            <span className="text-gray-400 mt-2">•</span>
+                            <span className="text-gray-700 dark:text-gray-300 leading-relaxed">
+                              {achievement}
+                            </span>
+                          </li>
+                        ))}
+                      </ul>
                     </div>
-                  )}
+                  ))}
                 </div>
-
-                {index < experiences.length - 1 && (
-                  <div className="pt-8 border-b border-gray-200 dark:border-gray-800" />
-                )}
               </motion.div>
             ))}
-          </div>
+          </section>
 
-          {/* Skills & Expertise */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="space-y-8 pt-8 border-t border-gray-200 dark:border-gray-800"
-          >
-            <h2 className="text-xl font-medium">Skills & Expertise</h2>
+          {/* 개인 프로젝트 */}
+          <section className="space-y-8">
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 border-b border-gray-200 dark:border-gray-800 pb-4">
+              Personal Projects
+            </h2>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div className="space-y-4">
-                <h3 className="font-medium text-gray-600 dark:text-gray-400">Design</h3>
-                <div className="space-y-2 text-gray-700 dark:text-gray-300">
-                  <p>UI/UX Design</p>
-                  <p>Design System</p>
-                  <p>User Research</p>
-                  <p>Prototyping</p>
+            {personalProjects.map((project, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2}}
+                className="space-y-4"
+              >
+                <div className="flex items-start justify-between">
+                  <div className="space-y-2">
+                    <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100">
+                      {project.name}
+                    </h3>
+                    <p className="text-gray-600 dark:text-gray-400">
+                      {project.description}
+                    </p>
+                  </div>
+                  <span className="text-sm text-gray-500 dark:text-gray-400 font-medium">
+                    {project.period}
+                  </span>
                 </div>
-              </div>
-              
-              <div className="space-y-4">
-                <h3 className="font-medium text-gray-600 dark:text-gray-400">Development</h3>
-                <div className="space-y-2 text-gray-700 dark:text-gray-300">
-                  <p>Frontend Development</p>
-                  <p>React / Next.js</p>
-                  <p>TypeScript</p>
-                  <p>Responsive Web Design</p>
-                </div>
-              </div>
-            </div>
-          </motion.div>
+                <ul className="space-y-2 ml-4">
+                  {project.details.map((detail, detailIndex) => (
+                    <li key={detailIndex} className="flex items-start space-x-3">
+                      <span className="text-gray-400 mt-2">•</span>
+                      <span className="text-gray-700 dark:text-gray-300 leading-relaxed">
+                        {detail}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </motion.div>
+            ))}
+          </section>
 
-          {/* Tools */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.5 }}
-            className="space-y-8 pt-8 border-t border-gray-200 dark:border-gray-800"
-          >
-            <h2 className="text-xl font-medium">Tools</h2>
+          {/* Skills */}
+          <section className="space-y-8">
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 border-b border-gray-200 dark:border-gray-800 pb-4">
+              Skills & Tools
+            </h2>
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               <div className="space-y-4">
-                <h3 className="font-medium text-gray-600 dark:text-gray-400">Design</h3>
-                <div className="space-y-2 text-gray-700 dark:text-gray-300">
-                  <p>Figma</p>
-                  <p>Adobe Creative Suite</p>
-                  <p>Principle</p>
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">기획 및 협업</h3>
+                <div className="flex flex-wrap gap-2">
+                  {skills.planning.map((skill, index) => (
+                    <span key={index} className="px-3 py-1 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg text-sm hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+                      {skill}
+                    </span>
+                  ))}
                 </div>
               </div>
               
               <div className="space-y-4">
-                <h3 className="font-medium text-gray-600 dark:text-gray-400">Development</h3>
-                <div className="space-y-2 text-gray-700 dark:text-gray-300">
-                  <p>VS Code</p>
-                  <p>Git/GitHub</p>
-                  <p>Vercel</p>
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">도구</h3>
+                <div className="flex flex-wrap gap-2">
+                  {skills.tools.map((tool, index) => (
+                    <span key={index} className="px-3 py-1 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg text-sm hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+                      {tool}
+                    </span>
+                  ))}
                 </div>
               </div>
               
               <div className="space-y-4">
-                <h3 className="font-medium text-gray-600 dark:text-gray-400">Collaboration</h3>
-                <div className="space-y-2 text-gray-700 dark:text-gray-300">
-                  <p>Notion</p>
-                  <p>Slack</p>
-                  <p>Linear</p>
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">개발</h3>
+                <div className="flex flex-wrap gap-2">
+                  {skills.development.map((dev, index) => (
+                    <span key={index} className="px-3 py-1 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg text-sm hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+                      {dev}
+                    </span>
+                  ))}
                 </div>
               </div>
             </div>
-          </motion.div>
+          </section>
+
+          {/* Education & Awards */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+            <section className="space-y-6">
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 border-b border-gray-200 dark:border-gray-800 pb-4">
+                학력
+              </h2>
+              <div className="space-y-2">
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
+                  {education.school}
+                </h3>
+                <p className="text-gray-600 dark:text-gray-400">{education.major}</p>
+                <p className="text-sm text-gray-500 dark:text-gray-500">{education.period}</p>
+              </div>
+            </section>
+
+            <section className="space-y-6">
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 border-b border-gray-200 dark:border-gray-800 pb-4">
+                수상 및 활동
+              </h2>
+              <div className="space-y-4">
+                {awards.map((award, index) => (
+                  <div key={index} className="space-y-1">
+                    <h3 className="font-semibold text-gray-900 dark:text-gray-100 leading-tight">
+                      {award.name}
+                    </h3>
+                    <p className="text-gray-600 dark:text-gray-400 text-sm">{award.organization}</p>
+                    <p className="text-gray-500 dark:text-gray-500 text-sm">{award.date}</p>
+                  </div>
+                ))}
+              </div>
+            </section>
+          </div>
+
+          {/* Bottom Spacing */}
+          <div className="pb-32"></div>
         </motion.div>
       </div>
     </div>

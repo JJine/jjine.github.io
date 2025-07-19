@@ -22,11 +22,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko" className={inter.variable}>
-      <body className="antialiased bg-white dark:bg-gray-950 text-gray-900 dark:text-white font-inter">
+      <body className="antialiased bg-white dark:bg-black text-black dark:text-white font-inter">
         <div className="min-h-screen flex flex-col">
           <Header />
           <main className="flex-grow">
-            <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="w-full">
               {children}
             </div>
           </main>

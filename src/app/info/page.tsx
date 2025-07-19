@@ -1,21 +1,39 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Copy, Check } from 'lucide-react'
-import { useState } from 'react'
+import { ExternalLink, Mail } from 'lucide-react'
 
 export default function InfoPage() {
-  const [copiedEmail, setCopiedEmail] = useState(false)
-
-  const handleCopyEmail = async () => {
-    await navigator.clipboard.writeText('hello@jjine.dev')
-    setCopiedEmail(true)
-    setTimeout(() => setCopiedEmail(false), 2000)
-  }
+  const contactItems = [
+    {
+      title: 'E-mail',
+      value: 'jo.yejin121@gmail.com',
+      href: 'mailto:jo.yejin121@gmail.com',
+      type: 'email'
+    },
+    {
+      title: 'LinkedIn',
+      value: 'linkedin.com/in/jjine',
+      href: 'https://linkedin.com/in/jjine',
+      type: 'link'
+    },
+    {
+      title: 'Behance',
+      value: 'behance.net/jjine',
+      href: 'https://behance.net/jjine',
+      type: 'link'
+    },
+    {
+      title: 'brunch',
+      value: 'brunch.co.kr/@jjine',
+      href: 'https://brunch.co.kr/@jjine',
+      type: 'link'
+    }
+  ]
 
   return (
-    <div className="min-h-screen bg-white dark:bg-black text-black dark:text-white py-32">
-      <div className="max-w-4xl mx-auto">
+    <div className="min-h-screen bg-white dark:bg-black text-gray-900 dark:text-gray-100">
+      <div className="w-full px-8 md:px-12 lg:px-16 py-32 max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -24,7 +42,7 @@ export default function InfoPage() {
         >
           {/* Header */}
           <div className="space-y-6">
-            <h1 className="text-4xl md:text-5xl font-light tracking-tight">
+            <h1 className="text-4xl md:text-5xl font-light text-gray-900 dark:text-gray-100">
               Contact
             </h1>
             <p className="text-lg text-gray-600 dark:text-gray-400 leading-relaxed max-w-2xl">
@@ -33,79 +51,50 @@ export default function InfoPage() {
             </p>
           </div>
 
-          {/* Contact Information */}
-          <div className="space-y-8">
-            <div className="border-b border-gray-200 dark:border-gray-800 pb-8">
-              <h2 className="text-lg font-medium mb-6">E-mail</h2>
-              <div className="flex items-center justify-between">
-                <a 
-                  href="mailto:hello@jjine.dev"
-                  className="text-lg hover:text-gray-600 dark:hover:text-gray-400 transition-colors"
-                >
-                  hello@jjine.dev
-                </a>
-                <button
-                  onClick={handleCopyEmail}
-                  className="flex items-center space-x-2 px-3 py-1 text-sm text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors"
-                >
-                  {copiedEmail ? (
-                    <>
-                      <Check className="h-4 w-4" />
-                      <span>복사됨</span>
-                    </>
-                  ) : (
-                    <>
-                      <Copy className="h-4 w-4" />
-                      <span>복사</span>
-                    </>
-                  )}
-                </button>
-              </div>
-            </div>
-
-            <div className="border-b border-gray-200 dark:border-gray-800 pb-8">
-              <h2 className="text-lg font-medium mb-6">LinkedIn</h2>
-              <a 
-                href="https://linkedin.com/in/jjine"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-lg hover:text-gray-600 dark:hover:text-gray-400 transition-colors"
+          {/* Contact Information - 양쪽 끝 배치 */}
+          <div className="space-y-0">
+            {contactItems.map((item, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: 0.1 * index }}
+                className="group"
               >
-                linkedin.com/in/jjine
-              </a>
-            </div>
-
-            <div className="border-b border-gray-200 dark:border-gray-800 pb-8">
-              <h2 className="text-lg font-medium mb-6">Behance</h2>
-              <a 
-                href="https://behance.net/jjine"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-lg hover:text-gray-600 dark:hover:text-gray-400 transition-colors"
-              >
-                behance.net/jjine
-              </a>
-            </div>
-
-            <div className="pb-8">
-              <h2 className="text-lg font-medium mb-6">brunch</h2>
-              <a 
-                href="https://brunch.co.kr/@jjine"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-lg hover:text-gray-600 dark:hover:text-gray-400 transition-colors"
-              >
-                brunch.co.kr/@jjine
-              </a>
-            </div>
+                <div className="flex items-center justify-between py-8 border-b border-gray-200 dark:border-gray-800 last:border-b-0">
+                  <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100">{item.title}</h2>
+                  
+                  <div className="flex items-center space-x-4">
+                    <a 
+                      href={item.href}
+                      target={item.type === 'link' ? '_blank' : undefined}
+                      rel={item.type === 'link' ? 'noopener noreferrer' : undefined}
+                      className="text-lg font-medium text-gray-900 dark:text-gray-100 hover:text-gray-600 dark:hover:text-gray-400 transition-colors"
+                    >
+                      {item.value}
+                    </a>
+                    
+                    <a
+                      href={item.href}
+                      target={item.type === 'link' ? '_blank' : undefined}
+                      rel={item.type === 'link' ? 'noopener noreferrer' : undefined}
+                      className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors"
+                      aria-label={`${item.title} 링크 열기`}
+                    >
+                      {item.type === 'email' ? (
+                        <Mail className="h-4 w-4 text-gray-400 dark:text-gray-500" />
+                      ) : (
+                        <ExternalLink className="h-4 w-4 text-gray-400 dark:text-gray-500" />
+                      )}
+                    </a>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
           </div>
 
-          {/* Footer */}
-          <div className="pt-16 border-t border-gray-200 dark:border-gray-800">
-            <p className="text-sm text-gray-500 dark:text-gray-500">
-              Copyright 2025. Jjine All rights reserved.
-            </p>
-          </div>
+          {/* Bottom Spacing */}
+          <div className="pb-32"></div>
         </motion.div>
       </div>
     </div>

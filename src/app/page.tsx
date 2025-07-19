@@ -1,177 +1,166 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import Link from 'next/link'
-import { ArrowRight } from 'lucide-react'
+import { ArrowUpRight } from 'lucide-react'
 
 export default function HomePage() {
-  const projects = [
+  const portfolioItems = [
     {
       id: 1,
-      title: 'E-commerce Platform',
-      description: '사용자 경험을 중심으로 설계된 이커머스 플랫폼',
-      tech: 'React, Next.js, TypeScript',
-      status: '2024'
+      title: 'SmileMe',
+      category: '이모티콘 제작 플랫폼',
+      description: '뷰티카메라 SDK와 AI 감정분석을 활용한 이모티콘 제작 및 마켓 플랫폼',
+      tech: 'React Native, AI, SDK Integration',
+      status: '2022-2024',
+      role: 'Product Manager',
+      image: '/api/placeholder/400/300'
     },
     {
       id: 2,
-      title: 'Task Management App',
-      description: '효율적인 업무 관리를 위한 협업 도구',
-      tech: 'Vue.js, Node.js, MongoDB',
-      status: '2024'
+      title: 'Remaker',
+      category: '명품 리폼/수선 중개 플랫폼',
+      description: '전문 리폼 마스터와 고객을 연결하는 모바일 중개 서비스',
+      tech: 'Mobile App, Payment System',
+      status: '2022-2024',
+      role: 'PM & UX Design',
+      image: '/api/placeholder/400/300'
     },
     {
       id: 3,
-      title: 'Design System',
-      description: '일관된 디자인 언어를 위한 컴포넌트 시스템',
-      tech: 'Figma, Storybook, React',
-      status: '2023'
+      title: '밀당365',
+      category: '혈당 관리 및 건강 정보 플랫폼',
+      description: '당뇨병 환자를 위한 혈당 관리 및 건강 정보 제공 모바일 앱',
+      tech: 'Health Data, Push Notification',
+      status: '2023',
+      role: 'Product Manager',
+      image: '/api/placeholder/400/300'
     }
   ]
 
   return (
-    <div className="min-h-screen bg-white dark:bg-black text-black dark:text-white">
-      {/* Hero Section */}
-      <section className="py-32">
-        <div className="max-w-4xl mx-auto">
+    <div className="min-h-screen bg-white dark:bg-black text-gray-900 dark:text-gray-100">
+      {/* 커서 애니메이션 효과 */}
+      <div className="cursor-effect"></div>
+      
+      <div className="w-full">
+        {/* Hero Section */}
+        <section className="pt-32 pb-20 px-8 md:px-12 lg:px-16">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="space-y-8"
+            transition={{ duration: 0.8 }}
+            className="space-y-12 max-w-6xl mx-auto"
           >
-            <div className="space-y-6">
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-light tracking-tight leading-tight">
-                안녕하세요,
-                <br />
-                <span className="font-normal">진</span>입니다
+            {/* Philosophy Quote */}
+            <div className="space-y-8">
+              <h1 className="text-3xl md:text-4xl lg:text-5xl font-light leading-tight tracking-tight text-gray-900 dark:text-gray-100">
+                A well-designed product should be both visually appealing and highly functional, prioritizing usability
+                <sup className="text-lg">1</sup> and efficiency<sup className="text-lg">2</sup>. The ultimate goal of design is to create
+                a seamless experience for the user, meeting their needs and expectations without complication or frustration.
+                <sup className="text-lg">3</sup>
               </h1>
-              
-              <div className="space-y-4 text-lg md:text-xl text-gray-600 dark:text-gray-400 leading-relaxed max-w-2xl">
+
+              {/* Korean Translation */}
+              <div className="space-y-4 text-sm text-gray-600 dark:text-gray-400">
                 <p>
-                  사용자 중심의 디자인과 기술을 통해 의미 있는 경험을 만들어가는 
-                  UX/UI Designer & Frontend Developer입니다.
+                  ¹ 제품 디자인에서 사용성은 제품이 얼마나 사용하기 쉽고자, 사용자가 목표를 달성하는 데 얼마나 도움이 되는지를 측정하는 척도입니다.
                 </p>
                 <p>
-                  복잡한 문제를 간단하고 직관적인 해결책으로 풀어내는 것을 좋아합니다.
+                  ² 제품 디자인에서 효율성은 사용하는 노력이나 비용을 최소화하면서 최대의 성과를 달성하는 능력입니다.
+                </p>
+                <p>
+                  ³ 복합적 디자인의 궁극적 목표는 사용자로부터 불편함이나 기능적인 제약 없이 효율적인 경험을 제공하는 것입니다.
                 </p>
               </div>
             </div>
 
-            <div className="flex items-center space-x-8 pt-4">
-              <Link
-                href="/project"
-                className="inline-flex items-center text-lg font-medium text-black dark:text-white hover:text-gray-600 dark:hover:text-gray-400 transition-colors"
-              >
-                프로젝트 보기
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
-              <Link
-                href="/about"
-                className="inline-flex items-center text-lg font-medium text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors"
-              >
-                더 알아보기
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
+            {/* Introduction */}
+            <div className="space-y-6">
+              <h2 className="text-2xl md:text-3xl font-light text-gray-900 dark:text-gray-100">
+                안녕하세요, 진입니다
+              </h2>
+              <p className="text-lg text-gray-600 dark:text-gray-400 leading-relaxed max-w-3xl">
+                기획부터 개발, 출시, 운영, 개선까지 프로젝트 전 과정을 직접 주도하며 실무 경험을 쌓아왔습니다.
+                사용자 경험과 클라이언트 요구를 균형있게 고려한 프로젝트를 성공적으로 수행해왔습니다.
+              </p>
             </div>
           </motion.div>
-        </div>
-      </section>
+        </section>
 
-      {/* Featured Projects */}
-      <section className="py-20 border-t border-gray-200 dark:border-gray-800">
-        <div className="max-w-4xl mx-auto">
+        {/* Featured Projects - 3 Column Grid */}
+        <section className="py-20 px-8 md:px-12 lg:px-16">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="space-y-12"
+            transition={{ duration: 0.8, delay: 0.3 }}
+            className="space-y-16 max-w-7xl mx-auto"
           >
-            <div>
-              <h2 className="text-2xl md:text-3xl font-light tracking-tight mb-2">
-                Featured Work
-              </h2>
-              <p className="text-gray-600 dark:text-gray-400">
-                최근 작업한 프로젝트들을 소개합니다
-              </p>
-            </div>
-
-            <div className="space-y-8">
-              {projects.map((project, index) => (
+            <h2 className="text-2xl font-light text-gray-900 dark:text-gray-100">Featured Work</h2>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {portfolioItems.map((project, index) => (
                 <motion.div
                   key={project.id}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.1 * index }}
+                  className="group cursor-pointer"
                 >
-                  <Link 
-                    href={`/project/${project.id}`}
-                    className="group block"
-                  >
-                    <div className="py-6 border-b border-gray-100 dark:border-gray-900 hover:border-gray-300 dark:hover:border-gray-700 transition-colors">
-                      <div className="flex items-start justify-between">
-                        <div className="flex-1 space-y-2">
-                          <div className="flex items-center space-x-4">
-                            <h3 className="text-xl font-medium group-hover:text-gray-600 dark:group-hover:text-gray-400 transition-colors">
-                              {project.title}
-                            </h3>
-                            <span className="text-sm text-gray-500 dark:text-gray-500">
-                              {project.status}
-                            </span>
-                          </div>
-                          <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
-                            {project.description}
-                          </p>
-                          <p className="text-sm text-gray-500 dark:text-gray-500">
-                            {project.tech}
-                          </p>
-                        </div>
-                        <ArrowRight className="h-5 w-5 text-gray-400 group-hover:text-black dark:group-hover:text-white group-hover:translate-x-1 transition-all ml-6 mt-1" />
+                  <a href={`/project/${project.id}`} className="block">
+                    {/* Project Image */}
+                    <div className="aspect-[4/3] bg-gray-100 dark:bg-gray-900 rounded-lg overflow-hidden mb-6">
+                      <div className="w-full h-full bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-700 flex items-center justify-center group-hover:scale-105 transition-transform duration-500">
+                        <span className="text-gray-500 dark:text-gray-400 text-lg">
+                          {project.title}
+                        </span>
                       </div>
                     </div>
-                  </Link>
+
+                    {/* Project Info */}
+                    <div className="space-y-4">
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm text-gray-500 dark:text-gray-500">
+                          {project.status}
+                        </span>
+                        <ArrowUpRight className="h-4 w-4 text-gray-400 group-hover:text-black dark:group-hover:text-white group-hover:translate-x-1 group-hover:-translate-y-1 transition-all" />
+                      </div>
+                      
+                      <h3 className="text-xl font-medium group-hover:text-gray-600 dark:group-hover:text-gray-400 transition-colors">
+                        {project.title}
+                      </h3>
+                      
+                      <p className="text-gray-500 dark:text-gray-500 text-sm">
+                        {project.category}
+                      </p>
+                      
+                      <p className="text-gray-600 dark:text-gray-400 leading-relaxed text-sm">
+                        {project.description}
+                      </p>
+                      
+                      <div className="text-sm">
+                        <span className="text-gray-500 dark:text-gray-500">{project.tech}</span>
+                      </div>
+                    </div>
+                  </a>
                 </motion.div>
               ))}
             </div>
 
-            <div className="pt-8">
-              <Link
+            <div className="pt-8 text-center">
+              <a
                 href="/project"
-                className="inline-flex items-center text-lg font-medium text-black dark:text-white hover:text-gray-600 dark:hover:text-gray-400 transition-colors"
+                className="inline-flex items-center text-lg font-medium text-gray-900 dark:text-gray-100 hover:text-gray-600 dark:hover:text-gray-400 transition-colors"
               >
                 모든 프로젝트 보기
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
+                <ArrowUpRight className="ml-2 h-4 w-4" />
+              </a>
             </div>
           </motion.div>
-        </div>
-      </section>
+        </section>
 
-      {/* Contact CTA */}
-      <section className="py-20 border-t border-gray-200 dark:border-gray-800">
-        <div className="max-w-4xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.5 }}
-            className="text-center space-y-6"
-          >
-            <h2 className="text-2xl md:text-3xl font-light tracking-tight">
-              함께 작업하고 싶으시다면
-            </h2>
-            <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-              새로운 프로젝트나 협업 기회에 대해 이야기하고 싶으시다면 언제든지 연락주세요.
-            </p>
-            <Link
-              href="/info"
-              className="inline-flex items-center text-lg font-medium text-black dark:text-white hover:text-gray-600 dark:hover:text-gray-400 transition-colors"
-            >
-              연락하기
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </Link>
-          </motion.div>
-        </div>
-      </section>
+        {/* Bottom Spacing */}
+        <div className="pb-32"></div>
+      </div>
     </div>
   )
 }
