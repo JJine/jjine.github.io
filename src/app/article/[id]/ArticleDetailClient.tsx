@@ -1,285 +1,252 @@
-// 📍 파일 경로: src/app/article/[id]/ArticleDetailClient.tsx
-
+// src/app/article/[id]/ArticleDetailClient.tsx
 'use client'
 
 import { motion } from 'framer-motion'
-import { ArrowLeft, Share2 } from 'lucide-react'
-import Link from 'next/link'
 import { useState, useEffect } from 'react'
-import { useParams } from 'next/navigation'
-import { getArticle, getArticleContent } from '../data/articles-content'
+import { ArrowLeft, ArrowRight, Share2, ArrowUp, Calendar, Clock } from 'lucide-react'
+import { articles } from '../data/articles-content'
+import CursorAnimation from '../../components/CursorAnimation'
+import Link from 'next/link'
 
-export default function ArticleDetailClient() {
-  const params = useParams()
-  const id = params?.id as string
-  const [article, setArticle] = useState<any>(null)
-  const [content, setContent] = useState<string>('')
-  const [loading, setLoading] = useState(true)
-  const [isCopied, setIsCopied] = useState(false)
+interface ArticleDetailProps {
+  articleId: string
+  content: string
+}
 
+export default function ArticleDetailClient({ articleId, content }: ArticleDetailProps) {
+  const [showScrollTop, setShowScrollTop] = useState(false)
+  const [showToast, setShowToast] = useState(false)
+  
+  const article = articles.find(a => a.id === articleId)
+  if (!article) return <div>Article not found</div>
+
+  const currentIndex = articles.findIndex(a => a.id === articleId)
+  const prevArticle = currentIndex > 0 ? articles[currentIndex - 1] : null
+  const nextArticle = currentIndex < articles.length - 1 ? articles[currentIndex + 1] : null
+
+  // 스크롤 위치 감지
   useEffect(() => {
-    const loadArticle = async () => {
-      if (id) {
-        const articleData = getArticle(id)
-        if (articleData) {
-          setArticle(articleData)
-          try {
-            const articleContent = await getArticleContent(id)
-            setContent(articleContent)
-          } catch (error) {
-            console.error('Error loading content:', error)
-            setContent('콘텐츠를 불러올 수 없습니다.')
-          }
-        }
-      }
-      setLoading(false)
+    const handleScroll = () => {
+      setShowScrollTop(window.scrollY > 500)
     }
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
-    loadArticle()
-  }, [id])
+  // 스크롤 맨 위로
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
 
+  // 공유 기능 (링크 복사)
   const handleShare = async () => {
     try {
-      if (navigator.share) {
-        await navigator.share({
-          title: article.title,
-          text: article.excerpt,
-          url: window.location.href,
-        })
-      } else {
-        await navigator.clipboard.writeText(window.location.href)
-        setIsCopied(true)
-        setTimeout(() => setIsCopied(false), 2000)
-      }
-    } catch (error) {
-      console.log('Error sharing:', error)
+      await navigator.clipboard.writeText(window.location.href)
+      setShowToast(true)
+      setTimeout(() => setShowToast(false), 3000)
+    } catch (err) {
+      // 폴백: 텍스트 선택
+      const textArea = document.createElement('textarea')
+      textArea.value = window.location.href
+      document.body.appendChild(textArea)
+      textArea.select()
+      document.execCommand('copy')
+      document.body.removeChild(textArea)
+      setShowToast(true)
+      setTimeout(() => setShowToast(false), 3000)
     }
-  }
-
-  const formatDate = (dateString: string) => {
-    const date = new Date(dateString)
-    return date.toLocaleDateString('ko-KR', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
-    })
-  }
-
-  const formatContent = (content: string) => {
-    const lines = content.split('\n')
-    const elements = []
-    let currentIndex = 0
-    
-    for (let i = 0; i < lines.length; i++) {
-      const line = lines[i].trim()
-      
-      if (line === '') {
-        continue
-      } else if (line.startsWith('## ')) {
-        elements.push(
-          <h2 key={`h2-${currentIndex++}`} className="text-2xl font-semibold mb-6 mt-12 text-gray-900">
-            {line.replace('## ', '')}
-          </h2>
-        )
-      } else if (line.startsWith('### ')) {
-        elements.push(
-          <h3 key={`h3-${currentIndex++}`} className="text-xl font-semibold mb-4 mt-8 text-gray-900">
-            {line.replace('### ', '')}
-          </h3>
-        )
-      } else if (line.startsWith('- ')) {
-        const listItems = []
-        while (i < lines.length && lines[i].trim().startsWith('- ')) {
-          listItems.push(lines[i].trim().replace('- ', ''))
-          i++
-        }
-        i-- // 마지막 증가를 되돌림
-        
-        elements.push(
-          <ul key={`ul-${currentIndex++}`} className="mb-6 space-y-2">
-            {listItems.map((item, index) => (
-              <li key={index} className="flex items-start space-x-3">
-                <span className="text-gray-400 mt-2">•</span>
-                <span className="text-gray-700 leading-relaxed">{item}</span>
-              </li>
-            ))}
-          </ul>
-        )
-      } else {
-        const boldRegex = /\*\*(.*?)\*\*/g
-        const parts = line.split(boldRegex)
-        const formattedLine = parts.map((part, index) => {
-          if (index % 2 === 1) {
-            return <strong key={`bold-${currentIndex}-${index}`} className="font-semibold text-gray-900">{part}</strong>
-          }
-          return part
-        })
-        
-        elements.push(
-          <p key={`p-${currentIndex++}`} className="mb-4 leading-relaxed text-gray-700">
-            {formattedLine}
-          </p>
-        )
-      }
-    }
-    
-    return elements
-  }
-
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-white text-gray-900 flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900 mx-auto mb-4"></div>
-          <p>로딩 중...</p>
-        </div>
-      </div>
-    )
-  }
-
-  if (!article) {
-    return (
-      <div className="min-h-screen bg-white text-gray-900 flex items-center justify-center">
-        <div className="text-center">
-          <h1 className="text-2xl font-medium mb-4">아티클을 찾을 수 없습니다</h1>
-          <Link href="/article" className="text-gray-600 hover:text-gray-900 transition-colors">
-            아티클 목록으로 돌아가기
-          </Link>
-        </div>
-      </div>
-    )
   }
 
   return (
-    <div className="min-h-screen bg-white text-gray-900">
-      <div className="w-full px-8 md:px-12 lg:px-16 py-32 max-w-4xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="space-y-20"
-        >
-          {/* Back Button */}
-          <Link
-            href="/article"
-            className="inline-flex items-center text-gray-600 hover:text-gray-900 transition-colors"
-          >
-            <ArrowLeft className="mr-2 h-4 w-4" />
-            아티클 목록으로 돌아가기
-          </Link>
-
-          {/* Article Header */}
-          <header className="space-y-8">
-            <div className="space-y-4">
-              <div className="flex items-center space-x-4 text-sm">
-                <span className="text-gray-500">{article.category}</span>
-                <span className="text-gray-400">•</span>
-                <span className="text-gray-500">{formatDate(article.date)}</span>
-                <span className="text-gray-400">•</span>
-                <span className="text-gray-500">{article.readTime}</span>
-                {article.featured && (
-                  <>
-                    <span className="text-gray-400">•</span>
-                    <span className="px-2 py-1 bg-blue-100 text-blue-600 rounded-full text-xs">
-                      Featured
-                    </span>
-                  </>
-                )}
-              </div>
-              
-              <h1 className="text-4xl md:text-5xl font-light text-gray-900">
-                {article.title}
-              </h1>
-              
-              <p className="text-xl text-gray-600 leading-relaxed">
-                {article.excerpt}
-              </p>
-            </div>
-
-            {/* Article Actions */}
-            <div className="flex items-center justify-between border-b border-gray-200 pb-8">
-              <div className="flex items-center space-x-4">
-                <span className="text-sm text-gray-500">작성자: {article.author}</span>
-              </div>
-              
-              <button
-                onClick={handleShare}
-                className="flex items-center space-x-2 px-4 py-2 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors text-sm"
-              >
-                <Share2 className="h-4 w-4" />
-                <span>{isCopied ? '복사됨!' : '공유'}</span>
-              </button>
-            </div>
-          </header>
-
-          {/* Hero Image */}
-          <div className="aspect-[16/9] bg-gray-100 rounded-lg overflow-hidden">
-            <div className="w-full h-full bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
-              <span className="text-gray-500">Article Hero Image</span>
-            </div>
+    <div className="min-h-screen bg-white dark:bg-black">
+      <CursorAnimation />
+      
+      {/* 전체 영역으로 설정 */}
+      <div className="w-full">
+        {/* 썸네일 영역 */}
+        <div className="w-full h-[60vh] bg-gray-100 dark:bg-gray-900 relative overflow-hidden">
+          <div className="w-full h-full bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-700 flex items-center justify-center">
+            <span className="text-gray-500 dark:text-gray-400 text-2xl">
+              {article.title}
+            </span>
           </div>
-
-          {/* Tags - About 스킬 스타일 적용 */}
-          <div className="flex flex-wrap gap-2">
-            {article.tags.map((tag: string) => (
-              <span
-                key={tag}
-                className="px-3 py-1 bg-white border border-gray-300 text-gray-700 rounded-lg text-sm hover:bg-gray-50 transition-colors"
+          
+          {/* 헤더 네비게이션 - 오른쪽 영역으로 이동 */}
+          <div className="absolute top-8 right-8 flex items-center space-x-4">
+            <button
+              onClick={handleShare}
+              className="p-3 bg-white dark:bg-gray-900 rounded-full shadow-lg hover:shadow-xl transition-shadow"
+            >
+              <Share2 className="h-5 w-5 text-gray-900 dark:text-gray-100" />
+            </button>
+            
+            {prevArticle && (
+              <a
+                href={`/article/${prevArticle.id}`}
+                className="p-3 bg-white dark:bg-gray-900 rounded-full shadow-lg hover:shadow-xl transition-shadow"
               >
-                #{tag}
-              </span>
-            ))}
+                <ArrowLeft className="h-5 w-5 text-gray-900 dark:text-gray-100" />
+              </a>
+            )}
+            
+            {nextArticle && (
+              <a
+                href={`/article/${nextArticle.id}`}
+                className="p-3 bg-white dark:bg-gray-900 rounded-full shadow-lg hover:shadow-xl transition-shadow"
+              >
+                <ArrowRight className="h-5 w-5 text-gray-900 dark:text-gray-100" />
+              </a>
+            )}
           </div>
+        </div>
 
-          {/* Content */}
-          <article className="space-y-6">
-            {formatContent(content)}
-          </article>
-
-          {/* Author Bio */}
-          <section className="p-6 bg-gray-50 rounded-lg">
-            <div className="flex items-start space-x-4">
-              <div className="w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center flex-shrink-0">
-                <span className="text-sm text-gray-500">Photo</span>
-              </div>
-              <div>
-                <h3 className="font-semibold mb-2 text-gray-900">작성자: {article.author}</h3>
-                <p className="text-sm text-gray-600 leading-relaxed">
-                  프로덕트 매니저이자 UX/UI 디자이너입니다. 사용자 중심의 디자인과 
-                  기술을 통해 의미 있는 경험을 만들어가는 것을 좋아합니다.
+        {/* 콘텐츠 영역 */}
+        <div className="px-8 md:px-12 lg:px-16 py-16"> {/* Home 페이지와 동일한 여백 */}
+          <div className="max-w-4xl mx-auto">
+            {/* 아티클 헤더 정보 */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="mb-16"
+            >
+              <div className="space-y-6">
+                <div className="flex items-center space-x-4 text-sm text-gray-500 dark:text-gray-500">
+                  <div className="flex items-center space-x-1">
+                    <Calendar className="h-4 w-4" />
+                    <span>{new Date(article.date).toLocaleDateString('ko-KR')}</span>
+                  </div>
+                  <div className="flex items-center space-x-1">
+                    <Clock className="h-4 w-4" />
+                    <span>{article.readTime}</span>
+                  </div>
+                  <span className="px-3 py-1 bg-gray-100 dark:bg-gray-800 rounded text-xs">
+                    {article.category}
+                  </span>
+                </div>
+                
+                <h1 className="text-4xl md:text-5xl font-light text-gray-900 dark:text-gray-100">
+                  {article.title}
+                </h1>
+                
+                <p className="text-xl text-gray-600 dark:text-gray-400 leading-relaxed">
+                  {article.excerpt}
                 </p>
-              </div>
-            </div>
-          </section>
 
-          {/* Navigation */}
-          <nav className="pt-8 border-t border-gray-200">
-            <div className="flex flex-col sm:flex-row justify-between gap-4">
-              <Link
-                href="/article"
-                className="inline-flex items-center text-sm text-gray-600 hover:text-gray-900 transition-colors"
-              >
-                <ArrowLeft className="mr-2 h-4 w-4" />
-                모든 아티클 보기
-              </Link>
-              <div className="flex space-x-4">
-                <Link
-                  href="/about"
-                  className="inline-flex items-center text-sm text-gray-600 hover:text-gray-900 transition-colors"
-                >
-                  작성자 소개
-                </Link>
-                <Link
-                  href="/info"
-                  className="inline-flex items-center text-sm text-gray-600 hover:text-gray-900 transition-colors"
-                >
-                  연락하기
-                </Link>
+                {/* 태그들 */}
+                <div className="flex flex-wrap gap-2 pt-4 border-t border-gray-200 dark:border-gray-800">
+                  {article.tags.map((tag, index) => (
+                    <span 
+                      key={index} 
+                      className="px-3 py-1 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg text-sm"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
               </div>
-            </div>
-          </nav>
-        </motion.div>
+            </motion.div>
+
+            {/* 아티클 상세 내용 (마크다운) */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="prose prose-lg dark:prose-invert max-w-none mb-20"
+              dangerouslySetInnerHTML={{ __html: content }}
+            />
+
+            {/* 작성자 소개 영역 - 하단으로 이동 (Project 상세에서 가져온 디자인) */}
+            <motion.section
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              className="border-t border-gray-200 dark:border-gray-800 pt-16 pb-16"
+            >
+              <div className="flex items-start space-x-6">
+                <div className="w-16 h-16 bg-gray-200 dark:bg-gray-800 rounded-full flex items-center justify-center">
+                  <span className="text-gray-600 dark:text-gray-400 text-lg font-medium">진</span>
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-xl font-semibold mb-3 text-gray-900 dark:text-gray-100">
+                    {article.author}
+                  </h3>
+                  <p className="text-gray-600 dark:text-gray-400 leading-relaxed mb-4">
+                    사용자 중심의 디자인과 기술을 통해 의미 있는 경험을 만들어가는 것을 좋아합니다.
+                    기획부터 개발, 출시, 운영, 개선까지 프로젝트 전 과정을 직접 주도하며 실무 경험을 쌓아왔습니다.
+                  </p>
+                  <div className="mt-3">
+                    <Link
+                      href="/about"
+                      className="text-sm text-gray-900 dark:text-gray-100 hover:text-gray-600 dark:hover:text-gray-400 transition-colors underline underline-offset-4"
+                    >
+                      더 알아보기 →
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </motion.section>
+
+            {/* Related Articles */}
+            <motion.section
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.6 }}
+              className="border-t border-gray-200 dark:border-gray-800 pt-16"
+            >
+              <h3 className="text-xl font-semibold mb-6 text-gray-900 dark:text-gray-100">관련 글</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="p-4 border border-gray-200 dark:border-gray-700 rounded-lg hover:border-gray-300 dark:hover:border-gray-600 transition-colors">
+                  <h4 className="font-medium mb-2 text-gray-900 dark:text-gray-100">다른 흥미로운 글들</h4>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">
+                    더 많은 아티클을 준비 중입니다.
+                  </p>
+                </div>
+                <div className="p-4 border border-gray-200 dark:border-gray-700 rounded-lg hover:border-gray-300 dark:hover:border-gray-600 transition-colors">
+                  <h4 className="font-medium mb-2 text-gray-900 dark:text-gray-100">추천 글</h4>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">
+                    비슷한 주제의 글들을 곧 추가할 예정입니다.
+                  </p>
+                </div>
+              </div>
+            </motion.section>
+          </div>
+        </div>
       </div>
+
+      {/* 맨 위로 스크롤 버튼 - 오른쪽 하단 */}
+      {showScrollTop && (
+        <motion.button
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0.8 }}
+          onClick={scrollToTop}
+          className="fixed bottom-8 right-8 p-3 bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900 rounded-full shadow-lg hover:shadow-xl transition-all z-50"
+        >
+          <ArrowUp className="h-5 w-5" />
+        </motion.button>
+      )}
+
+      {/* 토스트 메시지 - 투명 모달 형태 */}
+      {showToast && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+        >
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.9 }}
+            className="bg-white dark:bg-gray-900 px-6 py-4 rounded-lg shadow-xl"
+          >
+            <p className="text-gray-900 dark:text-gray-100 font-medium">
+              링크 복사가 완료되었습니다
+            </p>
+          </motion.div>
+        </motion.div>
+      )}
     </div>
   )
 }

@@ -5,7 +5,7 @@
 import { motion } from 'framer-motion'
 import { ArrowLeft, ArrowUpRight, Share2, ArrowRight } from 'lucide-react'
 import Link from 'next/link'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { getProject, getProjectContent } from '../data/projects-content'
 
 interface ProjectDetailClientProps {
@@ -15,41 +15,12 @@ interface ProjectDetailClientProps {
 }
 
 export default function ProjectDetailClient({ params }: ProjectDetailClientProps) {
-  const [content, setContent] = useState<string>('')
-  const [loading, setLoading] = useState(true)
   const [isCopied, setIsCopied] = useState(false)
   
   // 기존 데이터에서 프로젝트 정보 가져오기
   const project = getProject(params.id)
+  const content = getProjectContent(params.id)
   
-  useEffect(() => {
-    const loadContent = async () => {
-      if (project) {
-        try {
-          const projectContent = await getProjectContent(params.id)
-          setContent(projectContent)
-        } catch (error) {
-          console.error('Error loading content:', error)
-          setContent('콘텐츠를 불러올 수 없습니다.')
-        }
-      }
-      setLoading(false)
-    }
-
-    loadContent()
-  }, [params.id, project])
-  
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-white text-gray-900 flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900 mx-auto mb-4"></div>
-          <p>로딩 중...</p>
-        </div>
-      </div>
-    )
-  }
-
   if (!project) {
     return (
       <div className="min-h-screen bg-white text-gray-900 flex items-center justify-center">

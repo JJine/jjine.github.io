@@ -34,13 +34,14 @@ export default function InfoPage() {
   ]
 
   return (
-    <div className="min-h-screen bg-white text-gray-900">
-      <div className="w-full px-8 md:px-12 lg:px-16 py-32 max-w-7xl mx-auto">
+    <div className="min-h-screen bg-white">
+      {/* 여백만 Home 페이지와 동일하게 수정 */}
+      <div className="px-8 md:px-12 lg:px-16 py-32 max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="space-y-16"
+          className="space-y-20"
         >
           {/* Header */}
           <div className="space-y-6">

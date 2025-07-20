@@ -1,5 +1,3 @@
-// 📍 파일 경로: src/app/page.tsx
-
 'use client'
 
 import { motion } from 'framer-motion'
@@ -151,12 +149,12 @@ export default function HomePage() {
                           {project.description}
                         </p>
                         
-                        {/* 태그에 디자인 요소 추가 */}
+                        {/* About>Skill 영역과 동일한 태그 디자인 */}
                         <div className="flex flex-wrap gap-2">
                           {project.tech.map((tech, techIndex) => (
                             <span
                               key={techIndex}
-                              className={`px-3 py-1 text-xs font-medium rounded-full border transition-all duration-200 hover:scale-105 ${project.color}`}
+                              className="px-3 py-1 border border-gray-300 text-gray-700 rounded-lg text-sm hover:bg-gray-50 transition-colors"
                             >
                               {tech}
                             </span>

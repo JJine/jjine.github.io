@@ -35,7 +35,7 @@
     ".next/types/**/*.ts",
     "next-env.d.ts",
     "docs/types/**/*.ts"
-  ],
+, "src/app/components/ScrollToTop"  ],
   "exclude": [
     "node_modules"
   ]
