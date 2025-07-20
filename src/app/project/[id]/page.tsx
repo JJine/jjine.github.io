@@ -1,6 +1,5 @@
 // src/app/project/[id]/page.tsx (서버 컴포넌트)
 import { notFound } from 'next/navigation'
-import { getProject, getProjectContent, getAllProjectIds } from '../data/projects-content'
 import ProjectDetailClient from './ProjectDetailClient'
 
 interface ProjectDetailPageProps {
@@ -9,20 +8,26 @@ interface ProjectDetailPageProps {
   }>
 }
 
-// 정적 빌드를 위한 generateStaticParams 함수 - 자동으로 모든 프로젝트 ID 반환
+// 정적 빌드를 위한 generateStaticParams 함수
 export async function generateStaticParams() {
-  return getAllProjectIds()
+  return [
+    { id: '1' },
+    { id: '2' },
+    { id: '3' },
+    { id: '4' },
+    { id: '5' },
+    { id: '6' }
+  ]
 }
 
 export default async function ProjectDetailPage({ params }: ProjectDetailPageProps) {
   const { id } = await params
   
-  const project = getProject(id)
-  if (!project) {
+  // 유효한 프로젝트 ID인지 확인
+  const validIds = ['1', '2', '3', '4', '5', '6']
+  if (!validIds.includes(id)) {
     notFound()
   }
 
-  const content = getProjectContent(id)
-
-  return <ProjectDetailClient project={project} content={content} />
+  return <ProjectDetailClient params={{ id }} />
 }
