@@ -1,10 +1,13 @@
+// src/app/components/Footer.tsx
 export default function Footer() {
   return (
-    <footer className="w-full border-t border-gray-200 dark:border-gray-800 bg-white dark:bg-black">
-      <div className="max-w-5xl mx-auto px-4 py-8">
-        <p className="text-sm text-gray-500 dark:text-gray-400 text-center">
-          Copyright 2025. Jjine All rights reserved.
-        </p>
+    <footer className="w-full border-t border-gray-200/50 dark:border-gray-800/50 bg-white dark:bg-black">
+      <div className="max-w-6xl mx-auto px-6 py-12">
+        <div className="text-center">
+          <p className="text-sm text-gray-500 dark:text-gray-400">
+            Copyright 2025. Jin All rights reserved.
+          </p>
+        </div>
       </div>
     </footer>
   )

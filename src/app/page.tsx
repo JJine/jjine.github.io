@@ -13,7 +13,7 @@ export default function HomePage() {
       tech: 'React Native, AI, SDK Integration',
       status: '2022-2024',
       role: 'Product Manager',
-      image: '/api/placeholder/400/300'
+      image: '/api/placeholder/500/350'
     },
     {
       id: 2,
@@ -23,7 +23,7 @@ export default function HomePage() {
       tech: 'Mobile App, Payment System',
       status: '2022-2024',
       role: 'PM & UX Design',
-      image: '/api/placeholder/400/300'
+      image: '/api/placeholder/500/350'
     },
     {
       id: 3,
@@ -33,15 +33,22 @@ export default function HomePage() {
       tech: 'Health Data, Push Notification',
       status: '2023',
       role: 'Product Manager',
-      image: '/api/placeholder/400/300'
+      image: '/api/placeholder/500/350'
+    },
+    {
+      id: 4,
+      title: 'TMF Framework',
+      category: '개인 업무스케줄링 툴',
+      description: 'GTD 기반 개인 생산성 향상을 위한 시간 관리 시스템',
+      tech: 'Productivity, GTD',
+      status: '2024',
+      role: 'Personal Project',
+      image: '/api/placeholder/500/350'
     }
   ]
 
   return (
     <div className="min-h-screen bg-white dark:bg-black text-gray-900 dark:text-gray-100">
-      {/* 커서 애니메이션 효과 */}
-      <div className="cursor-effect"></div>
-      
       <div className="w-full">
         {/* Hero Section */}
         <section className="pt-32 pb-20 px-8 md:px-12 lg:px-16">
@@ -87,7 +94,7 @@ export default function HomePage() {
           </motion.div>
         </section>
 
-        {/* Featured Projects - 3 Column Grid */}
+        {/* Featured Projects - 2x2 Grid */}
         <section className="py-20 px-8 md:px-12 lg:px-16">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -97,7 +104,8 @@ export default function HomePage() {
           >
             <h2 className="text-2xl font-light text-gray-900 dark:text-gray-100">Featured Work</h2>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {/* 2x2 Grid Layout */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
               {portfolioItems.map((project, index) => (
                 <motion.div
                   key={project.id}
@@ -107,10 +115,10 @@ export default function HomePage() {
                   className="group cursor-pointer"
                 >
                   <a href={`/project/${project.id}`} className="block">
-                    {/* Project Image */}
-                    <div className="aspect-[4/3] bg-gray-100 dark:bg-gray-900 rounded-lg overflow-hidden mb-6">
+                    {/* Project Image - 더 큰 비율 */}
+                    <div className="aspect-[4/3] bg-gray-100 dark:bg-gray-900 rounded-lg overflow-hidden mb-8">
                       <div className="w-full h-full bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-700 flex items-center justify-center group-hover:scale-105 transition-transform duration-500">
-                        <span className="text-gray-500 dark:text-gray-400 text-lg">
+                        <span className="text-gray-500 dark:text-gray-400 text-2xl font-light">
                           {project.title}
                         </span>
                       </div>
@@ -122,18 +130,18 @@ export default function HomePage() {
                         <span className="text-sm text-gray-500 dark:text-gray-500">
                           {project.status}
                         </span>
-                        <ArrowUpRight className="h-4 w-4 text-gray-400 group-hover:text-black dark:group-hover:text-white group-hover:translate-x-1 group-hover:-translate-y-1 transition-all" />
+                        <ArrowUpRight className="h-5 w-5 text-gray-400 group-hover:text-black dark:group-hover:text-white group-hover:translate-x-1 group-hover:-translate-y-1 transition-all" />
                       </div>
                       
-                      <h3 className="text-xl font-medium group-hover:text-gray-600 dark:group-hover:text-gray-400 transition-colors">
+                      <h3 className="text-2xl font-medium group-hover:text-gray-600 dark:group-hover:text-gray-400 transition-colors">
                         {project.title}
                       </h3>
                       
-                      <p className="text-gray-500 dark:text-gray-500 text-sm">
+                      <p className="text-gray-500 dark:text-gray-500">
                         {project.category}
                       </p>
                       
-                      <p className="text-gray-600 dark:text-gray-400 leading-relaxed text-sm">
+                      <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
                         {project.description}
                       </p>
                       

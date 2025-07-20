@@ -1,15 +1,15 @@
-import type { Config } from 'tailwindcss'
-
-const config: Config = {
+/** @type {import('tailwindcss').Config} */
+module.exports = {
   content: [
-    './pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './components/**/*.{js,ts,jsx,tsx,mdx}',
-    './app/**/*.{js,ts,jsx,tsx,mdx}',
+    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
+  darkMode: 'class', // 중요: 다크모드 활성화
   theme: {
     extend: {
       fontFamily: {
-        'pretendard': ['Pretendard', '-apple-system', 'BlinkMacSystemFont', 'system-ui', 'Roboto', 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'sans-serif'],
+        'inter': ['var(--font-inter)', 'system-ui', 'sans-serif'],
       },
       colors: {
         background: 'hsl(var(--background))',
@@ -24,65 +24,21 @@ const config: Config = {
         },
         border: 'hsl(var(--border))',
       },
-      typography: {
-        DEFAULT: {
-          css: {
-            fontFamily: 'Pretendard, sans-serif',
-            h1: {
-              fontSize: '2.5rem',
-              fontWeight: '700',
-              lineHeight: '1.2',
-              marginTop: '2rem',
-              marginBottom: '1rem',
-            },
-            h2: {
-              fontSize: '2rem',
-              fontWeight: '600',
-              lineHeight: '1.3',
-              marginTop: '1.75rem',
-              marginBottom: '0.875rem',
-            },
-            h3: {
-              fontSize: '1.5rem',
-              fontWeight: '600',
-              lineHeight: '1.4',
-              marginTop: '1.5rem',
-              marginBottom: '0.75rem',
-            },
-            p: {
-              fontSize: '1rem',
-              lineHeight: '1.7',
-              marginBottom: '1rem',
-            },
-            blockquote: {
-              borderLeftWidth: '4px',
-              borderLeftColor: 'hsl(var(--accent))',
-              paddingLeft: '1rem',
-              fontStyle: 'italic',
-              backgroundColor: 'hsl(var(--muted))',
-              padding: '1rem',
-              borderRadius: '0.5rem',
-            },
-            code: {
-              backgroundColor: 'hsl(var(--muted))',
-              padding: '0.25rem 0.5rem',
-              borderRadius: '0.25rem',
-              fontSize: '0.875rem',
-            },
-            pre: {
-              backgroundColor: 'hsl(var(--muted))',
-              padding: '1rem',
-              borderRadius: '0.5rem',
-              overflow: 'auto',
-            },
-          },
+      animation: {
+        'fade-in': 'fadeIn 0.5s ease-in-out',
+        'slide-up': 'slideUp 0.3s ease-out',
+      },
+      keyframes: {
+        fadeIn: {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
+        slideUp: {
+          '0%': { transform: 'translateY(10px)', opacity: '0' },
+          '100%': { transform: 'translateY(0)', opacity: '1' },
         },
       },
     },
   },
-  plugins: [
-    require('@tailwindcss/typography'),
-  ],
+  plugins: [],
 }
-
-export default config

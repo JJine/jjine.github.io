@@ -1,6 +1,7 @@
+// src/app/components/CommentSection.tsx
 'use client'
 
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useCallback } from 'react'
 import { Heart, MessageCircle, Send, MoreHorizontal, Reply, Flag } from 'lucide-react'
 
 interface Comment {
@@ -19,61 +20,61 @@ interface CommentSectionProps {
   initialComments?: Comment[]
 }
 
+// 기본 댓글 데이터를 컴포넌트 외부로 이동
+const DEFAULT_COMMENTS: Comment[] = [
+  {
+    id: '1',
+    author: '김디자이너',
+    content: '정말 인상적인 프로젝트네요! 특히 사용자 경험 부분에서 많은 고민이 담겨있다는 것이 느껴집니다. 혹시 디자인 시스템 구축 과정에서 가장 어려웠던 부분이 무엇인지 궁금합니다.',
+    timestamp: '2시간 전',
+    likes: 12,
+    isLiked: false,
+    avatar: '🎨',
+    replies: [
+      {
+        id: '1-1',
+        author: '진',
+        content: '감사합니다! 가장 어려웠던 부분은 다양한 디바이스에서의 일관성을 유지하는 것이었어요. 특히 모바일과 데스크탑 간의 인터랙션 패턴을 조화롭게 만드는 과정이 도전적이었습니다.',
+        timestamp: '1시간 전',
+        likes: 8,
+        isLiked: true,
+        avatar: '👨‍💻'
+      }
+    ]
+  },
+  {
+    id: '2',
+    author: '개발자박',
+    content: '기술 스택 선택이 흥미롭네요. React Native와 네이티브 기능 연동 부분에서 성능 이슈는 없었나요?',
+    timestamp: '3시간 전',
+    likes: 7,
+    isLiked: false,
+    avatar: '⚡'
+  },
+  {
+    id: '3',
+    author: 'PM이수진',
+    content: '프로젝트 관리 관점에서 정말 잘 정리되어 있어요. 일정 관리나 이해관계자 소통에서 특별히 신경 쓴 부분이 있다면 공유해주실 수 있나요?',
+    timestamp: '5시간 전',
+    likes: 15,
+    isLiked: true,
+    avatar: '📋'
+  }
+]
+
 export default function CommentSection({ projectId, initialComments = [] }: CommentSectionProps) {
-  const [comments, setComments] = useState<Comment[]>(initialComments)
+  // 초기 댓글 설정 - 한 번만 실행
+  const [comments, setComments] = useState<Comment[]>(() => {
+    return initialComments.length > 0 ? initialComments : DEFAULT_COMMENTS
+  })
+  
   const [newComment, setNewComment] = useState('')
   const [replyingTo, setReplyingTo] = useState<string | null>(null)
   const [replyContent, setReplyContent] = useState('')
   const textareaRef = useRef<HTMLTextAreaElement>(null)
   const replyTextareaRef = useRef<HTMLTextAreaElement>(null)
 
-  // 샘플 댓글 데이터
-  useEffect(() => {
-    if (initialComments.length === 0) {
-      setComments([
-        {
-          id: '1',
-          author: '김디자이너',
-          content: '정말 인상적인 프로젝트네요! 특히 사용자 경험 부분에서 많은 고민이 담겨있다는 것이 느껴집니다. 혹시 디자인 시스템 구축 과정에서 가장 어려웠던 부분이 무엇인지 궁금합니다.',
-          timestamp: '2시간 전',
-          likes: 12,
-          isLiked: false,
-          avatar: '🎨',
-          replies: [
-            {
-              id: '1-1',
-              author: '진',
-              content: '감사합니다! 가장 어려웠던 부분은 다양한 디바이스에서의 일관성을 유지하는 것이었어요. 특히 모바일과 데스크탑 간의 인터랙션 패턴을 조화롭게 만드는 과정이 도전적이었습니다.',
-              timestamp: '1시간 전',
-              likes: 8,
-              isLiked: true,
-              avatar: '👨‍💻'
-            }
-          ]
-        },
-        {
-          id: '2',
-          author: '개발자박',
-          content: '기술 스택 선택이 흥미롭네요. React Native와 네이티브 기능 연동 부분에서 성능 이슈는 없었나요?',
-          timestamp: '3시간 전',
-          likes: 7,
-          isLiked: false,
-          avatar: '⚡'
-        },
-        {
-          id: '3',
-          author: 'PM이수진',
-          content: '프로젝트 관리 관점에서 정말 잘 정리되어 있어요. 일정 관리나 이해관계자 소통에서 특별히 신경 쓴 부분이 있다면 공유해주실 수 있나요?',
-          timestamp: '5시간 전',
-          likes: 15,
-          isLiked: true,
-          avatar: '📋'
-        }
-      ])
-    }
-  }, [initialComments])
-
-  const handleSubmitComment = () => {
+  const handleSubmitComment = useCallback(() => {
     if (!newComment.trim()) return
 
     const comment: Comment = {
@@ -86,16 +87,16 @@ export default function CommentSection({ projectId, initialComments = [] }: Comm
       avatar: '👤'
     }
 
-    setComments([comment, ...comments])
+    setComments(prev => [comment, ...prev])
     setNewComment('')
     
     // 텍스트영역 높이 초기화
     if (textareaRef.current) {
       textareaRef.current.style.height = '60px'
     }
-  }
+  }, [newComment])
 
-  const handleSubmitReply = (parentId: string) => {
+  const handleSubmitReply = useCallback((parentId: string) => {
     if (!replyContent.trim()) return
 
     const reply: Comment = {
@@ -108,7 +109,7 @@ export default function CommentSection({ projectId, initialComments = [] }: Comm
       avatar: '👤'
     }
 
-    setComments(comments.map(comment => 
+    setComments(prev => prev.map(comment => 
       comment.id === parentId 
         ? { ...comment, replies: [...(comment.replies || []), reply] }
         : comment
@@ -116,11 +117,11 @@ export default function CommentSection({ projectId, initialComments = [] }: Comm
     
     setReplyContent('')
     setReplyingTo(null)
-  }
+  }, [replyContent])
 
-  const handleLike = (commentId: string, isReply: boolean = false, parentId?: string) => {
+  const handleLike = useCallback((commentId: string, isReply: boolean = false, parentId?: string) => {
     if (isReply && parentId) {
-      setComments(comments.map(comment => 
+      setComments(prev => prev.map(comment => 
         comment.id === parentId 
           ? {
               ...comment,
@@ -137,7 +138,7 @@ export default function CommentSection({ projectId, initialComments = [] }: Comm
           : comment
       ))
     } else {
-      setComments(comments.map(comment => 
+      setComments(prev => prev.map(comment => 
         comment.id === commentId
           ? {
               ...comment,
@@ -147,12 +148,12 @@ export default function CommentSection({ projectId, initialComments = [] }: Comm
           : comment
       ))
     }
-  }
+  }, [])
 
-  const autoResize = (textarea: HTMLTextAreaElement) => {
+  const autoResize = useCallback((textarea: HTMLTextAreaElement) => {
     textarea.style.height = '60px'
     textarea.style.height = Math.min(textarea.scrollHeight, 120) + 'px'
-  }
+  }, [])
 
   return (
     <div className="max-w-4xl mx-auto px-8 py-16">
@@ -271,11 +272,8 @@ export default function CommentSection({ projectId, initialComments = [] }: Comm
                     
                     <div className="flex justify-end space-x-2">
                       <button
-                        onClick={() => {
-                          setReplyingTo(null)
-                          setReplyContent('')
-                        }}
-                        className="px-4 py-2 text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 transition-colors"
+                        onClick={() => setReplyingTo(null)}
+                        className="px-4 py-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 transition-colors"
                       >
                         취소
                       </button>
@@ -295,27 +293,21 @@ export default function CommentSection({ projectId, initialComments = [] }: Comm
               {comment.replies && comment.replies.length > 0 && (
                 <div className="ml-8 space-y-4">
                   {comment.replies.map((reply) => (
-                    <div key={reply.id} className="bg-gray-50/50 dark:bg-gray-900/50 border border-gray-200/30 dark:border-gray-700/30 rounded-xl p-4">
+                    <div key={reply.id} className="bg-gray-50/50 dark:bg-gray-900/50 border border-gray-200/50 dark:border-gray-700/50 rounded-xl p-4">
                       <div className="space-y-3">
                         {/* 답글 헤더 */}
-                        <div className="flex items-start justify-between">
-                          <div className="flex items-center space-x-3">
-                            <div className="w-8 h-8 bg-gray-100 dark:bg-gray-800 rounded-full flex items-center justify-center text-sm">
-                              {reply.avatar}
-                            </div>
-                            <div>
-                              <p className="font-medium text-gray-900 dark:text-gray-100 text-sm">
-                                {reply.author}
-                              </p>
-                              <p className="text-xs text-gray-500 dark:text-gray-400">
-                                {reply.timestamp}
-                              </p>
-                            </div>
+                        <div className="flex items-center space-x-3">
+                          <div className="w-8 h-8 bg-gray-100 dark:bg-gray-800 rounded-full flex items-center justify-center text-sm">
+                            {reply.avatar}
                           </div>
-                          
-                          <button className="p-1 hover:bg-gray-100 dark:hover:bg-gray-800 rounded transition-colors">
-                            <MoreHorizontal className="h-3 w-3 text-gray-400" />
-                          </button>
+                          <div>
+                            <p className="font-medium text-gray-900 dark:text-gray-100 text-sm">
+                              {reply.author}
+                            </p>
+                            <p className="text-xs text-gray-500 dark:text-gray-400">
+                              {reply.timestamp}
+                            </p>
+                          </div>
                         </div>
 
                         {/* 답글 내용 */}
@@ -345,15 +337,6 @@ export default function CommentSection({ projectId, initialComments = [] }: Comm
             </div>
           ))}
         </div>
-
-        {/* 더 보기 */}
-        {comments.length > 0 && (
-          <div className="text-center pt-8">
-            <button className="px-6 py-3 border border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-400 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
-              댓글 더 보기
-            </button>
-          </div>
-        )}
       </div>
     </div>
   )
