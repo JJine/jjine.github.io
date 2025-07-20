@@ -7,10 +7,15 @@ const nextConfig = {
   images: {
     unoptimized: true
   },
-  // headers 설정 주석 처리 또는 제거
-  // async headers() {
-  //   return [...]
-  // }
+  webpack: (config, { isServer }) => {
+    if (!isServer) {
+      config.resolve.fallback = {
+        ...config.resolve.fallback,
+        fs: false,
+      }
+    }
+    return config
+  }
 }
 
 module.exports = nextConfig

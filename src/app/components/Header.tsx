@@ -1,27 +1,20 @@
-// src/app/components/Header.tsx
 'use client'
 
 import Link from 'next/link'
-import { useTheme } from 'next-themes'
-import { Moon, Sun } from 'lucide-react'
-import { useEffect, useState } from 'react'
 import { usePathname } from 'next/navigation'
+import { useState } from 'react'
+import { Menu, X } from 'lucide-react'
 
 export default function Header() {
-  const { theme, setTheme } = useTheme()
-  const [mounted, setMounted] = useState(false)
   const pathname = usePathname()
-
-  useEffect(() => {
-    setMounted(true)
-  }, [])
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   const navigation = [
-    { name: 'Home', href: '/' },
-    { name: 'Project', href: '/project' },
-    { name: 'Article', href: '/article' },
-    { name: 'About', href: '/about' },
-    { name: 'Info', href: '/info' },
+    { name: 'HOME', href: '/' },
+    { name: 'ABOUT', href: '/about' },
+    { name: 'PRODUCTS', href: '/project' },
+    { name: 'ARTICLE', href: '/article' },
+    { name: 'INFO', href: '/info' },
   ]
 
   const isActive = (href: string) => {
@@ -32,54 +25,71 @@ export default function Header() {
   }
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-white dark:bg-black backdrop-blur-md">
-      <div className="max-w-6xl mx-auto px-6">
-        <div className="flex h-20 items-center justify-between">
-          {/* 로고 */}
-          <Link 
-            href="/" 
-            className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
-          >
-            Jin
-          </Link>
-          
-          {/* 네비게이션 */}
-          <nav className="hidden md:flex items-center space-x-8">
-            {navigation.map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                className={`relative text-sm font-medium transition-colors ${
-                  isActive(item.href)
-                    ? 'text-gray-900 dark:text-white'
-                    : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
-                }`}
-              >
-                {item.name}
-                {isActive(item.href) && (
-                  <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-gray-900 dark:bg-white rounded-full" />
-                )}
-              </Link>
-            ))}
+    <header className="sticky top-0 z-50 w-full bg-white/70 backdrop-blur-xl border-b border-gray-200/20">
+      <div className="w-full">
+        <div className="flex justify-center items-center h-16 px-4">
+          {/* Center Navigation - Desktop */}
+          <nav className="hidden md:flex items-center">
+            <div className="flex items-center border border-gray-200/30 rounded-full px-6 py-2 bg-white/50 backdrop-blur-sm">
+              {navigation.map((item, index) => (
+                <div key={item.name} className="flex items-center">
+                  <Link
+                    href={item.href}
+                    className={`text-xs font-medium transition-colors hover:text-gray-600 ${
+                      isActive(item.href)
+                        ? 'text-black'
+                        : 'text-gray-600'
+                    }`}
+                  >
+                    {item.name}
+                  </Link>
+                  {index < navigation.length - 1 && (
+                    <div className="w-px h-4 bg-gray-200/50 mx-6" />
+                  )}
+                </div>
+              ))}
+            </div>
           </nav>
 
-          {/* 다크모드 토글 */}
-          <div className="flex items-center">
-            {mounted && (
-              <button
-                onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-                className="p-3 rounded-xl bg-gray-100 dark:bg-gray-900 hover:bg-gray-200 dark:hover:bg-gray-800 transition-all duration-200 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
-                aria-label="다크모드 토글"
-              >
-                {theme === 'dark' ? (
-                  <Sun className="h-5 w-5" />
-                ) : (
-                  <Moon className="h-5 w-5" />
-                )}
-              </button>
+          {/* Logo - Mobile */}
+          <Link href="/" className="md:hidden font-medium text-xl text-black">
+            Jjine
+          </Link>
+
+          {/* Mobile Menu Button */}
+          <button
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="md:hidden absolute right-4 p-2 rounded-lg hover:bg-white/20 transition-colors"
+          >
+            {isMenuOpen ? (
+              <X className="h-5 w-5 text-gray-600" />
+            ) : (
+              <Menu className="h-5 w-5 text-gray-600" />
             )}
-          </div>
+          </button>
         </div>
+
+        {/* Mobile Navigation */}
+        {isMenuOpen && (
+          <div className="md:hidden py-4 border-t border-gray-200/20 bg-white/80 backdrop-blur-xl">
+            <nav className="flex flex-col items-center space-y-4">
+              {navigation.map((item) => (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  onClick={() => setIsMenuOpen(false)}
+                  className={`text-sm font-medium transition-colors hover:text-gray-600 ${
+                    isActive(item.href)
+                      ? 'text-black'
+                      : 'text-gray-600'
+                  }`}
+                >
+                  {item.name}
+                </Link>
+              ))}
+            </nav>
+          </div>
+        )}
       </div>
     </header>
   )

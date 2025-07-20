@@ -6,69 +6,64 @@ import { ArrowUpRight } from 'lucide-react'
 export default function HomePage() {
   const portfolioItems = [
     {
-      id: 1,
+      id: 'smileme',
       title: 'SmileMe',
-      category: '이모티콘 제작 플랫폼',
-      description: '뷰티카메라 SDK와 AI 감정분석을 활용한 이모티콘 제작 및 마켓 플랫폼',
-      tech: 'React Native, AI, SDK Integration',
-      status: '2022-2024',
-      role: 'Product Manager',
-      image: '/api/placeholder/500/350'
+      description: 'AI 감정분석을 활용한 이모티콘 제작 플랫폼으로 사용자 경험 혁신',
+      category: 'Mobile App',
+      status: 'LAUNCHED',
+      tech: 'React Native, AI SDK'
     },
     {
-      id: 2,
+      id: 'remaker',
       title: 'Remaker',
-      category: '명품 리폼/수선 중개 플랫폼',
-      description: '전문 리폼 마스터와 고객을 연결하는 모바일 중개 서비스',
-      tech: 'Mobile App, Payment System',
-      status: '2022-2024',
-      role: 'PM & UX Design',
-      image: '/api/placeholder/500/350'
+      description: '명품 리폼 서비스와 전문 마스터를 연결하는 중개 플랫폼',
+      category: 'Service Platform',
+      status: 'LAUNCHED',
+      tech: 'React, Node.js'
     },
     {
-      id: 3,
+      id: 'mildang365',
       title: '밀당365',
-      category: '혈당 관리 및 건강 정보 플랫폼',
-      description: '당뇨병 환자를 위한 혈당 관리 및 건강 정보 제공 모바일 앱',
-      tech: 'Health Data, Push Notification',
-      status: '2023',
-      role: 'Product Manager',
-      image: '/api/placeholder/500/350'
+      description: '당뇨병 환자를 위한 혈당 관리 및 건강정보 제공 앱',
+      category: 'Healthcare',
+      status: 'LAUNCHED',
+      tech: 'React Native, Analytics'
     },
     {
-      id: 4,
-      title: 'TMF Framework',
-      category: '개인 업무스케줄링 툴',
-      description: 'GTD 기반 개인 생산성 향상을 위한 시간 관리 시스템',
-      tech: 'Productivity, GTD',
-      status: '2024',
-      role: 'Personal Project',
-      image: '/api/placeholder/500/350'
+      id: 'tmf',
+      title: 'TMF',
+      description: 'GTD 방법론 기반의 개인 업무 스케줄링 도구',
+      category: 'Productivity',
+      status: 'CONCEPT',
+      tech: 'Figma, UX Research'
     }
   ]
 
   return (
-    <div className="min-h-screen bg-white dark:bg-black text-gray-900 dark:text-gray-100">
+    <div className="min-h-screen bg-white text-gray-900">
       <div className="w-full">
         {/* Hero Section */}
-        <section className="pt-32 pb-20 px-8 md:px-12 lg:px-16">
+        <section className="px-8 md:px-12 lg:px-16 py-32">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="space-y-12 max-w-6xl mx-auto"
+            className="max-w-7xl mx-auto space-y-16"
           >
-            {/* Philosophy Quote */}
+            {/* Philosophy Statement */}
             <div className="space-y-8">
-              <h1 className="text-3xl md:text-4xl lg:text-5xl font-light leading-tight tracking-tight text-gray-900 dark:text-gray-100">
-                A well-designed product should be both visually appealing and highly functional, prioritizing usability
-                <sup className="text-lg">1</sup> and efficiency<sup className="text-lg">2</sup>. The ultimate goal of design is to create
-                a seamless experience for the user, meeting their needs and expectations without complication or frustration.
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-light leading-tight text-gray-900">
+                제품 디자인에서의 사용성
+                <sup className="text-lg">1</sup>
+                과 효율성
+                <sup className="text-lg">2</sup>
+                을 모두 고려한<br />
+                복합적 디자인
                 <sup className="text-lg">3</sup>
               </h1>
 
               {/* Korean Translation */}
-              <div className="space-y-4 text-sm text-gray-600 dark:text-gray-400">
+              <div className="space-y-4 text-sm text-gray-600">
                 <p>
                   ¹ 제품 디자인에서 사용성은 제품이 얼마나 사용하기 쉽고자, 사용자가 목표를 달성하는 데 얼마나 도움이 되는지를 측정하는 척도입니다.
                 </p>
@@ -83,10 +78,10 @@ export default function HomePage() {
 
             {/* Introduction */}
             <div className="space-y-6">
-              <h2 className="text-2xl md:text-3xl font-light text-gray-900 dark:text-gray-100">
+              <h2 className="text-2xl md:text-3xl font-light text-gray-900">
                 안녕하세요, 진입니다
               </h2>
-              <p className="text-lg text-gray-600 dark:text-gray-400 leading-relaxed max-w-3xl">
+              <p className="text-lg text-gray-600 leading-relaxed max-w-3xl">
                 기획부터 개발, 출시, 운영, 개선까지 프로젝트 전 과정을 직접 주도하며 실무 경험을 쌓아왔습니다.
                 사용자 경험과 클라이언트 요구를 균형있게 고려한 프로젝트를 성공적으로 수행해왔습니다.
               </p>
@@ -94,18 +89,18 @@ export default function HomePage() {
           </motion.div>
         </section>
 
-        {/* Featured Projects - 2x2 Grid */}
-        <section className="py-20 px-8 md:px-12 lg:px-16">
+        {/* Featured Projects - 일정한 양옆 정렬 */}
+        <section className="px-8 md:px-12 lg:px-16 py-20">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="space-y-16 max-w-7xl mx-auto"
+            className="max-w-7xl mx-auto space-y-16"
           >
-            <h2 className="text-2xl font-light text-gray-900 dark:text-gray-100">Featured Work</h2>
+            <h2 className="text-2xl font-light text-gray-900">Recent Projects</h2>
             
             {/* 2x2 Grid Layout */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
               {portfolioItems.map((project, index) => (
                 <motion.div
                   key={project.id}
@@ -115,38 +110,44 @@ export default function HomePage() {
                   className="group cursor-pointer"
                 >
                   <a href={`/project/${project.id}`} className="block">
-                    {/* Project Image - 더 큰 비율 */}
-                    <div className="aspect-[4/3] bg-gray-100 dark:bg-gray-900 rounded-lg overflow-hidden mb-8">
-                      <div className="w-full h-full bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-700 flex items-center justify-center group-hover:scale-105 transition-transform duration-500">
-                        <span className="text-gray-500 dark:text-gray-400 text-2xl font-light">
+                    {/* Project Image */}
+                    <div className="aspect-[4/3] bg-gray-100 rounded-lg overflow-hidden mb-8">
+                      <div className="w-full h-full bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center group-hover:scale-105 transition-transform duration-500">
+                        <span className="text-gray-500 text-lg">
                           {project.title}
                         </span>
                       </div>
                     </div>
 
-                    {/* Project Info */}
-                    <div className="space-y-4">
+                    {/* Project Info - 텍스트 간격 다양화 */}
+                    <div className="space-y-3">
                       <div className="flex items-center justify-between">
-                        <span className="text-sm text-gray-500 dark:text-gray-500">
+                        <span className="text-sm text-gray-500">
                           {project.status}
                         </span>
-                        <ArrowUpRight className="h-5 w-5 text-gray-400 group-hover:text-black dark:group-hover:text-white group-hover:translate-x-1 group-hover:-translate-y-1 transition-all" />
+                        <ArrowUpRight className="h-4 w-4 text-gray-400 group-hover:text-black group-hover:translate-x-1 group-hover:-translate-y-1 transition-all" />
                       </div>
                       
-                      <h3 className="text-2xl font-medium group-hover:text-gray-600 dark:group-hover:text-gray-400 transition-colors">
-                        {project.title}
-                      </h3>
+                      {/* 제목과 소제목 간격 줄이기 */}
+                      <div className="space-y-1">
+                        <h3 className="text-xl font-medium group-hover:text-gray-600 transition-colors">
+                          {project.title}
+                        </h3>
+                        
+                        <p className="text-gray-500 text-sm">
+                          {project.category}
+                        </p>
+                      </div>
                       
-                      <p className="text-gray-500 dark:text-gray-500">
-                        {project.category}
-                      </p>
-                      
-                      <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
-                        {project.description}
-                      </p>
-                      
-                      <div className="text-sm">
-                        <span className="text-gray-500 dark:text-gray-500">{project.tech}</span>
+                      {/* 설명과 기술 스택은 간격 넓게 */}
+                      <div className="space-y-4">
+                        <p className="text-gray-600 leading-relaxed text-sm">
+                          {project.description}
+                        </p>
+                        
+                        <div className="text-xs">
+                          <span className="text-gray-500">{project.tech}</span>
+                        </div>
                       </div>
                     </div>
                   </a>
@@ -157,7 +158,7 @@ export default function HomePage() {
             <div className="pt-8 text-center">
               <a
                 href="/project"
-                className="inline-flex items-center text-lg font-medium text-gray-900 dark:text-gray-100 hover:text-gray-600 dark:hover:text-gray-400 transition-colors"
+                className="inline-flex items-center text-lg font-medium text-gray-900 hover:text-gray-600 transition-colors"
               >
                 모든 프로젝트 보기
                 <ArrowUpRight className="ml-2 h-4 w-4" />

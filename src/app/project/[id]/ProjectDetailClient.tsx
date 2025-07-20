@@ -1,204 +1,245 @@
-// src/app/project/[id]/ProjectDetailClient.tsx
 'use client'
 
-import { useState } from 'react'
+import { motion } from 'framer-motion'
+import { ArrowLeft, ArrowUpRight, Share2, ArrowRight } from 'lucide-react'
 import Link from 'next/link'
-import { ArrowLeft, ArrowUpRight, Share2, Copy, Check, ChevronLeft, ChevronRight } from 'lucide-react'
-import MarkdownRenderer from '../../components/MarkdownRenderer'
-import type { ProjectData } from '../../lib/markdown'
+import { useState } from 'react'
 
 interface ProjectDetailClientProps {
-  project: ProjectData
-  prevProject: ProjectData | null
-  nextProject: ProjectData | null
+  project: any
+  content: string
 }
 
-export default function ProjectDetailClient({ project, prevProject, nextProject }: ProjectDetailClientProps) {
-  const [isSharing, setIsSharing] = useState(false)
+export default function ProjectDetailClient({ project, content }: ProjectDetailClientProps) {
   const [isCopied, setIsCopied] = useState(false)
 
+  // 이전/다음 프로젝트 데이터 (실제로는 props로 전달받아야 함)
+  const prevProject = { id: 'remaker', title: 'Remaker' }
+  const nextProject = { id: 'mildang365', title: '밀당365' }
+
   const handleShare = async () => {
-    setIsSharing(true)
-    
-    if (navigator.share && /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
-      try {
+    try {
+      if (navigator.share) {
         await navigator.share({
           title: project.title,
           text: project.description,
           url: window.location.href,
         })
-      } catch (error) {
-        console.log('Share cancelled')
-      }
-    } else {
-      // 링크 복사
-      try {
+      } else {
         await navigator.clipboard.writeText(window.location.href)
         setIsCopied(true)
         setTimeout(() => setIsCopied(false), 2000)
-      } catch (error) {
-        console.log('Copy failed')
+      }
+    } catch (error) {
+      console.log('Error sharing:', error)
+    }
+  }
+
+  const formatContent = (content: string) => {
+    const lines = content.split('\n')
+    const elements = []
+    let currentIndex = 0
+    
+    for (let i = 0; i < lines.length; i++) {
+      const line = lines[i].trim()
+      
+      if (line === '') {
+        continue
+      } else if (line.startsWith('## ')) {
+        elements.push(
+          <h2 key={`h2-${currentIndex++}`} className="text-2xl font-semibold mb-6 mt-12 text-gray-900">
+            {line.replace('## ', '')}
+          </h2>
+        )
+      } else if (line.startsWith('### ')) {
+        elements.push(
+          <h3 key={`h3-${currentIndex++}`} className="text-xl font-semibold mb-4 mt-8 text-gray-900">
+            {line.replace('### ', '')}
+          </h3>
+        )
+      } else if (line.startsWith('- ')) {
+        const listItems = []
+        while (i < lines.length && lines[i].trim().startsWith('- ')) {
+          listItems.push(lines[i].trim().replace('- ', ''))
+          i++
+        }
+        i-- // 마지막 증가를 되돌림
+        
+        elements.push(
+          <ul key={`ul-${currentIndex++}`} className="mb-6 space-y-2">
+            {listItems.map((item, index) => (
+              <li key={index} className="flex items-start space-x-3">
+                <span className="text-gray-400 mt-2">•</span>
+                <span className="text-gray-700 leading-relaxed">{item}</span>
+              </li>
+            ))}
+          </ul>
+        )
+      } else {
+        const boldRegex = /\*\*(.*?)\*\*/g
+        const parts = line.split(boldRegex)
+        const formattedLine = parts.map((part, index) => {
+          if (index % 2 === 1) {
+            return <strong key={`bold-${currentIndex}-${index}`} className="font-semibold text-gray-900">{part}</strong>
+          }
+          return part
+        })
+        
+        elements.push(
+          <p key={`p-${currentIndex++}`} className="mb-4 leading-relaxed text-gray-700">
+            {formattedLine}
+          </p>
+        )
       }
     }
     
-    setIsSharing(false)
+    return elements
   }
 
   return (
-    <div className="min-h-screen bg-white dark:bg-black">
-      <div className="max-w-5xl mx-auto px-6">
-        {/* Back Button */}
-        <div className="pt-8 pb-6">
-          <Link
-            href="/project"
-            className="inline-flex items-center text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
-          >
-            <ArrowLeft className="h-4 w-4 mr-2" />
-            Back to Projects
-          </Link>
-        </div>
+    <div className="min-h-screen bg-white text-gray-900">
+      <div className="w-full px-8 md:px-12 lg:px-16 py-32 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
+          {/* Main Content */}
+          <div className="lg:col-span-8">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="space-y-12"
+            >
+              {/* Back Button */}
+              <Link
+                href="/project"
+                className="inline-flex items-center text-gray-600 hover:text-gray-900 transition-colors"
+              >
+                <ArrowLeft className="mr-2 h-4 w-4" />
+                프로젝트 목록으로 돌아가기
+              </Link>
 
-        {/* Project Header */}
-        <section className="pb-12">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-            <div className="lg:col-span-8">
-              <div className="space-y-6">
+              {/* Project Header */}
+              <header className="space-y-8">
                 <div className="space-y-4">
-                  <div className="flex items-center space-x-4">
-                    <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white">
-                      {project.title}
-                    </h1>
+                  <div className="flex items-center space-x-4 text-sm">
+                    <span className="text-gray-500">{project.category}</span>
+                    <span className="text-gray-400">•</span>
+                    <span className="text-gray-500">{project.year}</span>
+                    <span className="text-gray-400">•</span>
+                    <span className="text-gray-500">{project.client}</span>
                     {project.featured && (
-                      <span className="px-3 py-1 bg-black dark:bg-white text-white dark:text-black rounded-full text-xs font-medium">
-                        Featured
-                      </span>
-                    )}
-                  </div>
-                  
-                  <div className="flex items-center space-x-4 text-gray-500 dark:text-gray-400">
-                    <span>{project.category}</span>
-                    <span>•</span>
-                    <span>{project.year}</span>
-                    {project.client && (
                       <>
-                        <span>•</span>
-                        <span>{project.client}</span>
+                        <span className="text-gray-400">•</span>
+                        <span className="px-2 py-1 bg-blue-100 text-blue-600 rounded-full text-xs">
+                          Featured
+                        </span>
                       </>
                     )}
                   </div>
+                  
+                  <h1 className="text-4xl md:text-5xl font-light text-gray-900">
+                    {project.title}
+                  </h1>
+                  
+                  <p className="text-xl text-gray-600 leading-relaxed">
+                    {project.description}
+                  </p>
                 </div>
-                
-                <p className="text-xl text-gray-600 dark:text-gray-300 leading-relaxed">
-                  {project.description}
-                </p>
+
+                {/* Tags */}
+                <div className="flex flex-wrap gap-2">
+                  {project.tags?.map((tag: string) => (
+                    <span
+                      key={tag}
+                      className="px-3 py-1 text-sm bg-gray-100 text-gray-600 rounded-full"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </header>
+
+              {/* Hero Image */}
+              <div className="aspect-[16/9] bg-gray-100 rounded-lg overflow-hidden">
+                <div className="w-full h-full bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
+                  <span className="text-gray-500">Project Hero Image</span>
+                </div>
               </div>
-            </div>
 
-            {/* Project Meta */}
-            <div className="lg:col-span-4">
-              <div className="bg-gray-50 dark:bg-gray-900 rounded-2xl p-6 space-y-6">
-                {project.role && (
-                  <div className="space-y-2">
-                    <div className="text-sm text-gray-500 dark:text-gray-400">역할</div>
-                    <p className="font-medium text-gray-900 dark:text-white">{project.role}</p>
-                  </div>
-                )}
-                
-                {project.team && (
-                  <div className="space-y-2">
-                    <div className="text-sm text-gray-500 dark:text-gray-400">팀 구성</div>
-                    <p className="font-medium text-gray-900 dark:text-white">{project.team}</p>
-                  </div>
-                )}
-                
-                {project.duration && (
-                  <div className="space-y-2">
-                    <div className="text-sm text-gray-500 dark:text-gray-400">기간</div>
-                    <p className="font-medium text-gray-900 dark:text-white">{project.duration}</p>
-                  </div>
-                )}
-                
-                {project.tech && (
-                  <div className="space-y-2">
-                    <div className="text-sm text-gray-500 dark:text-gray-400">기술 스택</div>
-                    <p className="font-medium text-gray-900 dark:text-white">{project.tech}</p>
-                  </div>
-                )}
-              </div>
-            </div>
+              {/* Content */}
+              <article className="space-y-6">
+                {formatContent(content)}
+              </article>
+            </motion.div>
           </div>
-        </section>
 
-        {/* Project Image */}
-        <section className="pb-16">
-          <div className="aspect-[16/10] bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-700 rounded-2xl overflow-hidden">
-            <div className="w-full h-full flex items-center justify-center">
-              <span className="text-gray-500 dark:text-gray-400 text-3xl font-light">
-                {project.title}
-              </span>
-            </div>
-          </div>
-        </section>
-
-        {/* Project Content */}
-        <section className="pb-16">
-          <MarkdownRenderer content={project.content} />
-        </section>
-
-        {/* Navigation */}
-        <section className="pb-16">
-          <div className="flex items-center justify-between border-t border-gray-200 dark:border-gray-800 pt-8">
-            {/* Previous Project */}
-            <div className="flex-1">
-              {prevProject && (
-                <Link
-                  href={`/project/${prevProject.id}`}
-                  className="group flex items-center space-x-3 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
+          {/* Right Sidebar Navigation */}
+          <div className="lg:col-span-4">
+            <div className="sticky top-32 space-y-8">
+              {/* Share Button */}
+              <div className="bg-gray-50 rounded-lg p-6">
+                <h3 className="font-semibold mb-4 text-gray-900">프로젝트 공유</h3>
+                <button
+                  onClick={handleShare}
+                  className="w-full flex items-center justify-center space-x-2 px-4 py-3 bg-black text-white rounded-lg hover:bg-gray-800 transition-colors"
                 >
-                  <ChevronLeft className="h-5 w-5" />
-                  <div className="text-left">
-                    <div className="text-sm">Previous</div>
-                    <div className="font-medium">{prevProject.title}</div>
-                  </div>
-                </Link>
-              )}
-            </div>
-
-            {/* Share Button */}
-            <button
-              onClick={handleShare}
-              className="flex items-center space-x-2 px-4 py-2 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-xl transition-colors"
-            >
-              {isCopied ? (
-                <>
-                  <Check className="h-4 w-4 text-green-500" />
-                  <span className="text-sm text-green-500">Copied!</span>
-                </>
-              ) : (
-                <>
                   <Share2 className="h-4 w-4" />
-                  <span className="text-sm">Share</span>
-                </>
-              )}
-            </button>
+                  <span>{isCopied ? '링크 복사됨!' : '공유하기'}</span>
+                </button>
+              </div>
 
-            {/* Next Project */}
-            <div className="flex-1 flex justify-end">
-              {nextProject && (
-                <Link
-                  href={`/project/${nextProject.id}`}
-                  className="group flex items-center space-x-3 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
-                >
-                  <div className="text-right">
-                    <div className="text-sm">Next</div>
-                    <div className="font-medium">{nextProject.title}</div>
-                  </div>
-                  <ChevronRight className="h-5 w-5" />
-                </Link>
+              {/* Previous Project */}
+              {prevProject && (
+                <div className="bg-gray-50 rounded-lg p-6">
+                  <h3 className="font-semibold mb-4 text-gray-900">이전 프로젝트</h3>
+                  <Link
+                    href={`/project/${prevProject.id}`}
+                    className="group flex items-center justify-between p-4 bg-white rounded-lg hover:bg-gray-50 transition-colors"
+                  >
+                    <div className="flex items-center space-x-3">
+                      <ArrowLeft className="h-4 w-4 text-gray-400 group-hover:text-gray-600 transition-colors" />
+                      <span className="font-medium text-gray-900">{prevProject.title}</span>
+                    </div>
+                  </Link>
+                </div>
               )}
+
+              {/* Next Project */}
+              {nextProject && (
+                <div className="bg-gray-50 rounded-lg p-6">
+                  <h3 className="font-semibold mb-4 text-gray-900">다음 프로젝트</h3>
+                  <Link
+                    href={`/project/${nextProject.id}`}
+                    className="group flex items-center justify-between p-4 bg-white rounded-lg hover:bg-gray-50 transition-colors"
+                  >
+                    <div className="flex items-center space-x-3">
+                      <span className="font-medium text-gray-900">{nextProject.title}</span>
+                      <ArrowRight className="h-4 w-4 text-gray-400 group-hover:text-gray-600 transition-colors" />
+                    </div>
+                  </Link>
+                </div>
+              )}
+
+              {/* Project Info */}
+              <div className="bg-gray-50 rounded-lg p-6">
+                <h3 className="font-semibold mb-4 text-gray-900">프로젝트 정보</h3>
+                <div className="space-y-3 text-sm">
+                  <div>
+                    <span className="text-gray-500">카테고리:</span>
+                    <span className="ml-2 text-gray-900">{project.category}</span>
+                  </div>
+                  <div>
+                    <span className="text-gray-500">연도:</span>
+                    <span className="ml-2 text-gray-900">{project.year}</span>
+                  </div>
+                  <div>
+                    <span className="text-gray-500">클라이언트:</span>
+                    <span className="ml-2 text-gray-900">{project.client}</span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-        </section>
+        </div>
       </div>
     </div>
   )
