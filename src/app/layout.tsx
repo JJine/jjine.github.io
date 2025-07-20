@@ -1,27 +1,54 @@
-// src/app/layout.tsx
-import './globals.css'
+// 📍 파일 경로: src/app/layout.tsx
+
+import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
-import { ThemeProvider } from 'next-themes'
+import './globals.css'
 import Header from './components/Header'
 import Footer from './components/Footer'
-import CursorAnimation from './components/CursorAnimation'
 
 const inter = Inter({ 
   subsets: ['latin'],
   variable: '--font-inter',
 })
 
-export const metadata = {
-  title: 'Jin - Portfolio',
-  description: 'Personal Portfolio Website by Jin',
+export const metadata: Metadata = {
+  title: 'Jjine - Product Manager & UX Designer',
+  description: '프로덕트 매니저이자 UX/UI 디자이너 조예진의 포트폴리오입니다. 사용자 중심의 디자인과 기술을 통해 의미 있는 경험을 만들어갑니다.',
+  keywords: ['Product Manager', 'UX Designer', 'UI Designer', '프로덕트 매니저', 'UX 디자이너'],
+  authors: [{ name: 'Jjine', url: 'https://jjine.github.io' }],
+  creator: 'Jjine',
+  publisher: 'Jjine',
   openGraph: {
-    title: 'Jin - Portfolio',
-    description: 'Personal Portfolio Website by Jin',
-    url: 'https://jjine.github.io',
-    siteName: 'Jin Portfolio',
-    locale: 'ko_KR',
     type: 'website',
+    locale: 'ko_KR',
+    url: 'https://jjine.github.io',
+    title: 'Jjine - Product Manager & UX Designer',
+    description: '프로덕트 매니저이자 UX/UI 디자이너 조예진의 포트폴리오입니다.',
+    siteName: 'Jjine Portfolio',
   },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Jjine - Product Manager & UX Designer',
+    description: '프로덕트 매니저이자 UX/UI 디자이너 조예진의 포트폴리오입니다.',
+    creator: '@jjine',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  icons: {
+    icon: '/favicon.ico',
+    shortcut: '/favicon-16x16.png',
+    apple: '/apple-touch-icon.png',
+  },
+  manifest: '/manifest.json',
 }
 
 export default function RootLayout({
@@ -30,25 +57,11 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="ko" suppressHydrationWarning>
-      <body className={`${inter.variable} font-inter antialiased`}>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          {/* 다크모드 완전 적용을 위한 컨테이너 */}
-          <div className="min-h-screen bg-white dark:bg-black text-gray-900 dark:text-white transition-colors duration-300">
-            <CursorAnimation />
-            
-            {/* 메인 레이아웃 */}
-            <div className="flex flex-col min-h-screen">
-              <Header />
-              
-              <main className="flex-1 bg-white dark:bg-black">
-                {children}
-              </main>
-              
-              <Footer />
-            </div>
-          </div>
-        </ThemeProvider>
+    <html lang="ko" className={inter.variable}>
+      <body className="font-inter antialiased bg-white text-gray-900 min-h-screen">
+        <Header />
+        <main>{children}</main>
+        <Footer />
       </body>
     </html>
   )

@@ -1,7 +1,4 @@
-// src/app/project/data/projects-content.ts
-import fs from 'fs'
-import path from 'path'
-import matter from 'gray-matter'
+// 📍 파일 경로: src/app/project/data/projects-content.ts
 
 export interface Project {
   id: string
@@ -17,7 +14,6 @@ export interface Project {
   liveUrl?: string
   githubUrl?: string
   featured: boolean
-  // content는 별도 파일에서 가져옴
 }
 
 export const projects: Project[] = [
@@ -48,7 +44,6 @@ export const projects: Project[] = [
     tags: ['Mobile', 'Fintech', 'UX', 'Security', 'React Native'],
     images: ['/images/project-2-hero.jpg', '/images/project-2-screens.jpg'],
     liveUrl: 'https://app.example.com',
-    githubUrl: '',
     featured: true,
   },
   {
@@ -124,9 +119,8 @@ export function getProjectsByCategory(category: string): Project[] {
 }
 
 export function getAllCategories(): string[] {
-  // const categories = ['All', ...new Set(projects.map(project => project.category))]
-    const uniqueCategories = new Set(projects.map(project => project.category))
-    const categories = ['All', ...Array.from(uniqueCategories)]
+  const uniqueCategories = new Set(projects.map(project => project.category))
+  const categories = ['All', ...Array.from(uniqueCategories)]
   return categories
 }
 
@@ -135,19 +129,16 @@ export function getAllProjectIds() {
   return projects.map(project => ({ id: project.id }))
 }
 
-// 마크다운 파일에서 프로젝트 콘텐츠를 가져오는 함수
-export function getProjectContent(id: string): string {
+// 마크다운 파일에서 프로젝트 콘텐츠를 가져오는 함수 (클라이언트용)
+export async function getProjectContent(id: string): Promise<string> {
   try {
-    const contentDir = path.join(process.cwd(), 'src/app/project/data/content')
-    const filePath = path.join(contentDir, `project-${id}.md`)
-    
-    if (!fs.existsSync(filePath)) {
+    // 클라이언트에서 public 폴더의 마크다운 파일을 fetch로 가져오기
+    const response = await fetch(`/content/projects/project-${id}.md`)
+    if (!response.ok) {
       return '프로젝트 내용을 찾을 수 없습니다.'
     }
     
-    const fileContent = fs.readFileSync(filePath, 'utf8')
-    const { content } = matter(fileContent)
-    
+    const content = await response.text()
     return content
   } catch (error) {
     console.error(`Error reading project ${id}:`, error)
@@ -156,12 +147,12 @@ export function getProjectContent(id: string): string {
 }
 
 // 마크다운 파일에서 메타데이터도 함께 가져오는 함수 (옵션)
-export function getProjectWithContent(id: string): (Project & { content: string }) | null {
+export async function getProjectWithContent(id: string): Promise<(Project & { content: string }) | null> {
   try {
     const project = getProject(id)
     if (!project) return null
     
-    const content = getProjectContent(id)
+    const content = await getProjectContent(id)
     return { ...project, content }
   } catch (error) {
     console.error(`Error getting project with content ${id}:`, error)

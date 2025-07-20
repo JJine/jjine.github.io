@@ -1,7 +1,4 @@
-// src/app/article/data/articles-content.ts
-import fs from 'fs'
-import path from 'path'
-import matter from 'gray-matter'
+// 📍 파일 경로: src/app/article/data/articles-content.ts
 
 export interface Article {
   id: string
@@ -13,7 +10,6 @@ export interface Article {
   tags: string[]
   author: string
   featured: boolean
-  // content는 별도 파일에서 가져옴
 }
 
 export const articles: Article[] = [
@@ -118,19 +114,16 @@ export function getAllArticleIds() {
   return articles.map(article => ({ id: article.id }))
 }
 
-// 마크다운 파일에서 아티클 콘텐츠를 가져오는 함수
-export function getArticleContent(id: string): string {
+// 마크다운 파일에서 아티클 콘텐츠를 가져오는 함수 (클라이언트용)
+export async function getArticleContent(id: string): Promise<string> {
   try {
-    const contentDir = path.join(process.cwd(), 'src/app/article/data/content')
-    const filePath = path.join(contentDir, `article-${id}.md`)
-    
-    if (!fs.existsSync(filePath)) {
+    // 클라이언트에서 public 폴더의 마크다운 파일을 fetch로 가져오기
+    const response = await fetch(`/content/articles/article-${id}.md`)
+    if (!response.ok) {
       return '아티클 내용을 찾을 수 없습니다.'
     }
     
-    const fileContent = fs.readFileSync(filePath, 'utf8')
-    const { content } = matter(fileContent)
-    
+    const content = await response.text()
     return content
   } catch (error) {
     console.error(`Error reading article ${id}:`, error)
@@ -139,12 +132,12 @@ export function getArticleContent(id: string): string {
 }
 
 // 마크다운 파일에서 메타데이터도 함께 가져오는 함수 (옵션)
-export function getArticleWithContent(id: string): (Article & { content: string }) | null {
+export async function getArticleWithContent(id: string): Promise<(Article & { content: string }) | null> {
   try {
     const article = getArticle(id)
     if (!article) return null
     
-    const content = getArticleContent(id)
+    const content = await getArticleContent(id)
     return { ...article, content }
   } catch (error) {
     console.error(`Error getting article with content ${id}:`, error)

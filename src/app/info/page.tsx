@@ -1,3 +1,5 @@
+// 📍 파일 경로: src/app/info/page.tsx
+
 'use client'
 
 import { motion } from 'framer-motion'

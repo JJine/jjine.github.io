@@ -1,3 +1,5 @@
+// 📍 파일 경로: src/app/page.tsx
+
 'use client'
 
 import { motion } from 'framer-motion'
@@ -11,7 +13,8 @@ export default function HomePage() {
       description: 'AI 감정분석을 활용한 이모티콘 제작 플랫폼으로 사용자 경험 혁신',
       category: 'Mobile App',
       status: 'LAUNCHED',
-      tech: 'React Native, AI SDK'
+      tech: ['React Native', 'AI SDK', 'Firebase'],
+      color: 'bg-blue-50 text-blue-600 border-blue-200'
     },
     {
       id: 'remaker',
@@ -19,7 +22,8 @@ export default function HomePage() {
       description: '명품 리폼 서비스와 전문 마스터를 연결하는 중개 플랫폼',
       category: 'Service Platform',
       status: 'LAUNCHED',
-      tech: 'React, Node.js'
+      tech: ['React', 'Node.js', 'API'],
+      color: 'bg-green-50 text-green-600 border-green-200'
     },
     {
       id: 'mildang365',
@@ -27,7 +31,8 @@ export default function HomePage() {
       description: '당뇨병 환자를 위한 혈당 관리 및 건강정보 제공 앱',
       category: 'Healthcare',
       status: 'LAUNCHED',
-      tech: 'React Native, Analytics'
+      tech: ['React Native', 'Analytics', 'API'],
+      color: 'bg-purple-50 text-purple-600 border-purple-200'
     },
     {
       id: 'tmf',
@@ -35,7 +40,8 @@ export default function HomePage() {
       description: 'GTD 방법론 기반의 개인 업무 스케줄링 도구',
       category: 'Productivity',
       status: 'CONCEPT',
-      tech: 'Figma, UX Research'
+      tech: ['Figma', 'UX Research', 'Design'],
+      color: 'bg-orange-50 text-orange-600 border-orange-200'
     }
   ]
 
@@ -145,8 +151,16 @@ export default function HomePage() {
                           {project.description}
                         </p>
                         
-                        <div className="text-xs">
-                          <span className="text-gray-500">{project.tech}</span>
+                        {/* 태그에 디자인 요소 추가 */}
+                        <div className="flex flex-wrap gap-2">
+                          {project.tech.map((tech, techIndex) => (
+                            <span
+                              key={techIndex}
+                              className={`px-3 py-1 text-xs font-medium rounded-full border transition-all duration-200 hover:scale-105 ${project.color}`}
+                            >
+                              {tech}
+                            </span>
+                          ))}
                         </div>
                       </div>
                     </div>

@@ -1,21 +1,71 @@
+// 📍 파일 경로: src/app/project/[id]/ProjectDetailClient.tsx
+
 'use client'
 
 import { motion } from 'framer-motion'
 import { ArrowLeft, ArrowUpRight, Share2, ArrowRight } from 'lucide-react'
 import Link from 'next/link'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { getProject, getProjectContent } from '../data/projects-content'
 
 interface ProjectDetailClientProps {
-  project: any
-  content: string
+  params: {
+    id: string
+  }
 }
 
-export default function ProjectDetailClient({ project, content }: ProjectDetailClientProps) {
+export default function ProjectDetailClient({ params }: ProjectDetailClientProps) {
+  const [content, setContent] = useState<string>('')
+  const [loading, setLoading] = useState(true)
   const [isCopied, setIsCopied] = useState(false)
+  
+  // 기존 데이터에서 프로젝트 정보 가져오기
+  const project = getProject(params.id)
+  
+  useEffect(() => {
+    const loadContent = async () => {
+      if (project) {
+        try {
+          const projectContent = await getProjectContent(params.id)
+          setContent(projectContent)
+        } catch (error) {
+          console.error('Error loading content:', error)
+          setContent('콘텐츠를 불러올 수 없습니다.')
+        }
+      }
+      setLoading(false)
+    }
 
-  // 이전/다음 프로젝트 데이터 (실제로는 props로 전달받아야 함)
-  const prevProject = { id: 'remaker', title: 'Remaker' }
-  const nextProject = { id: 'mildang365', title: '밀당365' }
+    loadContent()
+  }, [params.id, project])
+  
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-white text-gray-900 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900 mx-auto mb-4"></div>
+          <p>로딩 중...</p>
+        </div>
+      </div>
+    )
+  }
+
+  if (!project) {
+    return (
+      <div className="min-h-screen bg-white text-gray-900 flex items-center justify-center">
+        <div className="text-center">
+          <h1 className="text-2xl font-medium mb-4">프로젝트를 찾을 수 없습니다</h1>
+          <Link href="/project" className="text-gray-600 hover:text-gray-900 transition-colors">
+            프로젝트 목록으로 돌아가기
+          </Link>
+        </div>
+      </div>
+    )
+  }
+
+  // 이전/다음 프로젝트 (실제로는 데이터에서 가져와야 함)
+  const prevProject = { id: '2', title: 'Mobile Banking App' }
+  const nextProject = { id: '4', title: 'Design System Library' }
 
   const handleShare = async () => {
     try {
@@ -125,7 +175,7 @@ export default function ProjectDetailClient({ project, content }: ProjectDetailC
                     <span className="text-gray-400">•</span>
                     <span className="text-gray-500">{project.year}</span>
                     <span className="text-gray-400">•</span>
-                    <span className="text-gray-500">{project.client}</span>
+                    <span className="text-gray-500">{project.duration}</span>
                     {project.featured && (
                       <>
                         <span className="text-gray-400">•</span>
@@ -145,12 +195,12 @@ export default function ProjectDetailClient({ project, content }: ProjectDetailC
                   </p>
                 </div>
 
-                {/* Tags */}
+                {/* Tags - About 스킬 스타일 적용 */}
                 <div className="flex flex-wrap gap-2">
                   {project.tags?.map((tag: string) => (
                     <span
                       key={tag}
-                      className="px-3 py-1 text-sm bg-gray-100 text-gray-600 rounded-full"
+                      className="px-3 py-1 bg-white border border-gray-300 text-gray-700 rounded-lg text-sm hover:bg-gray-50 transition-colors"
                     >
                       {tag}
                     </span>
@@ -232,8 +282,12 @@ export default function ProjectDetailClient({ project, content }: ProjectDetailC
                     <span className="ml-2 text-gray-900">{project.year}</span>
                   </div>
                   <div>
-                    <span className="text-gray-500">클라이언트:</span>
-                    <span className="ml-2 text-gray-900">{project.client}</span>
+                    <span className="text-gray-500">기간:</span>
+                    <span className="ml-2 text-gray-900">{project.duration}</span>
+                  </div>
+                  <div>
+                    <span className="text-gray-500">팀:</span>
+                    <span className="ml-2 text-gray-900">{project.team.join(', ')}</span>
                   </div>
                 </div>
               </div>
