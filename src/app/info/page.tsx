@@ -3,7 +3,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { ArrowUpRight, Mail } from 'lucide-react'
+import { ArrowUpRight } from 'lucide-react'
 import CursorAnimation from '../components/CursorAnimation'
 
 export default function InfoPage() {

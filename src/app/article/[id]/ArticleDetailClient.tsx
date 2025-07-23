@@ -13,18 +13,13 @@ interface ArticleDetailProps {
   content: string
 }
 
-export default function ArticleDetailClient({ articleId, content }: ArticleDetailProps) {
+export default function ArticleDetailClient({ articleId, content: initialContent }: ArticleDetailProps) {
   const [showScrollTop, setShowScrollTop] = useState(false)
   const [showToast, setShowToast] = useState(false)
+  const [content, setContent] = useState(initialContent)
+  const [loading, setLoading] = useState(!initialContent)
   
-  const article = articles.find(a => a.id === articleId)
-  if (!article) return <div>Article not found</div>
-
-  const currentIndex = articles.findIndex(a => a.id === articleId)
-  const prevArticle = currentIndex > 0 ? articles[currentIndex - 1] : null
-  const nextArticle = currentIndex < articles.length - 1 ? articles[currentIndex + 1] : null
-
-  // 스크롤 위치 감지
+  // useEffect를 early return 이전에 호출
   useEffect(() => {
     const handleScroll = () => {
       setShowScrollTop(window.scrollY > 500)
@@ -33,18 +28,62 @@ export default function ArticleDetailClient({ articleId, content }: ArticleDetai
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
+  // 마크다운 콘텐츠 로드
+  useEffect(() => {
+    if (!initialContent) {
+      const loadContent = async () => {
+        try {
+          const response = await fetch(`/content/articles/article-${articleId}.md`)
+          if (response.ok) {
+            const markdownContent = await response.text()
+            setContent(markdownContent)
+          } else {
+            setContent('아티클 내용을 찾을 수 없습니다.')
+          }
+        } catch (error) {
+          console.error('Error loading article content:', error)
+          setContent('아티클 내용을 불러올 수 없습니다.')
+        } finally {
+          setLoading(false)
+        }
+      }
+      loadContent()
+    }
+  }, [articleId, initialContent])
+
+  const article = articles.find(a => a.id === articleId)
+  
+  // 로딩 상태 처리
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-white dark:bg-black flex items-center justify-center">
+        <div className="text-center">
+          <div className="loading-spin w-8 h-8 border-2 border-gray-300 dark:border-gray-600 border-t-gray-900 dark:border-t-gray-100 rounded-full mx-auto mb-4"></div>
+          <p className="text-gray-600 dark:text-gray-400">아티클을 불러오는 중...</p>
+        </div>
+      </div>
+    )
+  }
+  
+  // early return은 useEffect 이후에
+  if (!article) return <div>Article not found</div>
+
+  const currentIndex = articles.findIndex(a => a.id === articleId)
+  const prevArticle = currentIndex > 0 ? articles[currentIndex - 1] : null
+  const nextArticle = currentIndex < articles.length - 1 ? articles[currentIndex + 1] : null
+
   // 스크롤 맨 위로
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
-  // 공유 기능 (링크 복사)
+  // 공유 기능 (링크 복사) - 사용하지 않는 변수 제거
   const handleShare = async () => {
     try {
       await navigator.clipboard.writeText(window.location.href)
       setShowToast(true)
       setTimeout(() => setShowToast(false), 3000)
-    } catch (err) {
+    } catch {
       // 폴백: 텍스트 선택
       const textArea = document.createElement('textarea')
       textArea.value = window.location.href

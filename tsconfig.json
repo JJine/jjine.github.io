@@ -33,9 +33,11 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
+    "docs/types/**/*.ts",
     "next-env.d.ts",
-    "docs/types/**/*.ts"
-, "src/app/components/ScrollToTop"  ],
+    "src/app/components/ScrollToTop",
+    "out/types/**/*.ts"
+  ],
   "exclude": [
     "node_modules"
   ]

@@ -6,6 +6,7 @@ import { useState } from 'react'
 import { ArrowUpRight, Calendar, Clock } from 'lucide-react'
 import { articles, getAllCategories } from './data/articles-content'
 import CursorAnimation from '../components/CursorAnimation'
+import Link from 'next/link'
 
 export default function ArticlesPage() {
   const [activeFilter, setActiveFilter] = useState('All')
@@ -73,15 +74,15 @@ export default function ArticlesPage() {
 
           {/* Articles List - Toss tech 스타일 (테두리 없음) */}
           <div className="space-y-12">
-            {sortedArticles.map((article, index) => (
+            {sortedArticles.map((article) => (
               <motion.article
                 key={article.id}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.1 * index }}
+                transition={{ duration: 0.6 }}
                 className="group hover-animate"
               >
-                <a href={`/article/${article.id}`} className="block">
+                <Link href={`/article/${article.id}`} className="block">
                   <div className="flex flex-col md:flex-row gap-8 py-6 hover:bg-gray-50 dark:hover:bg-gray-900/50 rounded-lg transition-all duration-300 -mx-4 px-4">
                     
                     {/* 썸네일 영역 */}
@@ -150,7 +151,7 @@ export default function ArticlesPage() {
                       </div>
                     </div>
                   </div>
-                </a>
+                </Link>
               </motion.article>
             ))}
           </div>

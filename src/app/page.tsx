@@ -1,51 +1,53 @@
+// 📍 파일 경로: src/app/page.tsx
 'use client'
 
 import { motion } from 'framer-motion'
 import { ArrowUpRight } from 'lucide-react'
+import Link from 'next/link'
+import CursorAnimation from './components/CursorAnimation'
+
+// Portfolio data - Featured projects
+const portfolioItems = [
+  {
+    id: '1',
+    title: 'E-commerce Platform Redesign',
+    category: 'UX/UI Design',
+    description: '사용자 경험을 개선한 이커머스 플랫폼 리디자인',
+    status: '완료 • 2024',
+    tech: ['Figma', 'React', 'TypeScript', 'User Research', 'Prototyping']
+  },
+  {
+    id: '2',
+    title: 'Mobile Banking App',
+    category: 'Mobile Design',
+    description: '직관적이고 안전한 모바일 뱅킹 애플리케이션',
+    status: '완료 • 2024',
+    tech: ['Mobile', 'Fintech', 'UX', 'Security', 'React Native']
+  },
+  {
+    id: '3',
+    title: 'Brand Identity System',
+    category: 'Branding',
+    description: '스타트업을 위한 브랜드 아이덴티티 시스템',
+    status: '완료 • 2023',
+    tech: ['Branding', 'Visual Identity', 'Guidelines', 'Logo Design']
+  },
+  {
+    id: '4',
+    title: 'Design System Library',
+    category: 'Design System',
+    description: '확장 가능한 디자인 시스템과 컴포넌트 라이브러리',
+    status: '완료 • 2023',
+    tech: ['Design System', 'Storybook', 'Components', 'Documentation']
+  }
+]
 
 export default function HomePage() {
-  const portfolioItems = [
-    {
-      id: 'smileme',
-      title: 'SmileMe',
-      description: 'AI 감정분석을 활용한 이모티콘 제작 플랫폼으로 사용자 경험 혁신',
-      category: 'Mobile App',
-      status: 'LAUNCHED',
-      tech: ['React Native', 'AI SDK', 'Firebase'],
-      color: 'bg-blue-50 text-blue-600 border-blue-200'
-    },
-    {
-      id: 'remaker',
-      title: 'Remaker',
-      description: '명품 리폼 서비스와 전문 마스터를 연결하는 중개 플랫폼',
-      category: 'Service Platform',
-      status: 'LAUNCHED',
-      tech: ['React', 'Node.js', 'API'],
-      color: 'bg-green-50 text-green-600 border-green-200'
-    },
-    {
-      id: 'mildang365',
-      title: '밀당365',
-      description: '당뇨병 환자를 위한 혈당 관리 및 건강정보 제공 앱',
-      category: 'Healthcare',
-      status: 'LAUNCHED',
-      tech: ['React Native', 'Analytics', 'API'],
-      color: 'bg-purple-50 text-purple-600 border-purple-200'
-    },
-    {
-      id: 'tmf',
-      title: 'TMF',
-      description: 'GTD 방법론 기반의 개인 업무 스케줄링 도구',
-      category: 'Productivity',
-      status: 'CONCEPT',
-      tech: ['Figma', 'UX Research', 'Design'],
-      color: 'bg-orange-50 text-orange-600 border-orange-200'
-    }
-  ]
-
   return (
-    <div className="min-h-screen bg-white text-gray-900">
-      <div className="w-full">
+    <div className="min-h-screen bg-white">
+      <CursorAnimation />
+      
+      <div className="relative">
         {/* Hero Section */}
         <section className="px-8 md:px-12 lg:px-16 py-32">
           <motion.div
@@ -54,25 +56,19 @@ export default function HomePage() {
             transition={{ duration: 0.8 }}
             className="max-w-7xl mx-auto space-y-16"
           >
-            {/* Philosophy Statement */}
+            {/* Main Title */}
             <div className="space-y-8">
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-light leading-tight text-gray-900">
-                제품 디자인에서의 사용성
-                <sup className="text-lg">1</sup>
-                과 효율성
-                <sup className="text-lg">2</sup>
-                을 모두 고려한<br />
-                복합적 디자인
-                <sup className="text-lg">3</sup>
-              </h1>
-
-              {/* Korean Translation */}
-              <div className="space-y-4 text-sm text-gray-600">
-                <p>
-                  ¹ 제품 디자인에서 사용성은 제품이 얼마나 사용하기 쉽고자, 사용자가 목표를 달성하는 데 얼마나 도움이 되는지를 측정하는 척도입니다.
+              <div className="space-y-4">
+                <p className="text-sm text-gray-500 tracking-wide">
+                  ¹ 현재는 여러 개의 프로젝트가 진행 중이며, 각각의 프로젝트는 독립적으로 개발되고 있습니다.
                 </p>
+                <h1 className="text-5xl md:text-6xl lg:text-7xl font-light leading-tight text-gray-900">
+                  여러 프로젝트를<br />
+                  기획부터 출시까지<br />
+                  주도하고 있습니다
+                </h1>
                 <p>
-                  ² 제품 디자인에서 효율성은 사용하는 노력이나 비용을 최소화하면서 최대의 성과를 달성하는 능력입니다.
+                  ² 기획, 디자인, 개발, 출시, 운영의 전체 과정을 다룰 수 있는 역량을 가지고 있습니다.
                 </p>
                 <p>
                   ³ 복합적 디자인의 궁극적 목표는 사용자로부터 불편함이나 기능적인 제약 없이 효율적인 경험을 제공하는 것입니다.
@@ -111,9 +107,9 @@ export default function HomePage() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.1 * index }}
-                  className="group cursor-pointer"
+                  className="group cursor-pointer hover-animate"
                 >
-                  <a href={`/project/${project.id}`} className="block">
+                  <Link href={`/project/${project.id}`} className="block">
                     {/* Project Image */}
                     <div className="aspect-[4/3] bg-gray-100 rounded-lg overflow-hidden mb-8">
                       <div className="w-full h-full bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center group-hover:scale-105 transition-transform duration-500">
@@ -149,12 +145,12 @@ export default function HomePage() {
                           {project.description}
                         </p>
                         
-                        {/* About>Skill 영역과 동일한 태그 디자인 */}
+                        {/* About>Skill 영역과 동일한 태그 디자인 - 흰색 배경, 회색 테두리 */}
                         <div className="flex flex-wrap gap-2">
                           {project.tech.map((tech, techIndex) => (
                             <span
                               key={techIndex}
-                              className="px-3 py-1 border border-gray-300 text-gray-700 rounded-lg text-sm hover:bg-gray-50 transition-colors"
+                              className="px-3 py-1 bg-white border border-gray-300 text-gray-700 rounded-lg text-sm hover:bg-gray-50 transition-colors"
                             >
                               {tech}
                             </span>
@@ -162,19 +158,19 @@ export default function HomePage() {
                         </div>
                       </div>
                     </div>
-                  </a>
+                  </Link>
                 </motion.div>
               ))}
             </div>
 
             <div className="pt-8 text-center">
-              <a
+              <Link
                 href="/project"
                 className="inline-flex items-center text-lg font-medium text-gray-900 hover:text-gray-600 transition-colors"
               >
                 모든 프로젝트 보기
                 <ArrowUpRight className="ml-2 h-4 w-4" />
-              </a>
+              </Link>
             </div>
           </motion.div>
         </section>
