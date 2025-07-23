@@ -8,75 +8,68 @@ export interface Article {
   date: string
   readTime: string
   tags: string[]
-  author: string
   featured: boolean
 }
 
 export const articles: Article[] = [
   {
     id: '1',
-    title: 'AI와 함께하는 UX 디자인의 미래',
-    excerpt: 'AI 도구들이 UX 디자인 프로세스를 어떻게 변화시키고 있는지, 그리고 디자이너가 준비해야 할 것들에 대해 이야기합니다.',
-    category: 'AI & Design',
+    title: 'UX 디자인에서 사용자 리서치의 중요성',
+    excerpt: '좋은 디자인의 출발점은 사용자를 이해하는 것입니다. 사용자 리서치를 통해 진짜 문제를 찾고 해결하는 방법에 대해 이야기합니다.',
+    category: 'UX Design',
     date: '2024-07-15',
-    readTime: '8분',
-    tags: ['AI', 'UX Design', 'Future', 'Technology'],
-    author: 'Jjine',
+    readTime: '5분',
+    tags: ['UX', 'User Research', 'Design Process'],
     featured: true,
   },
   {
     id: '2',
-    title: '디자인 시스템을 구축하며 배운 것들',
-    excerpt: '스타트업에서 디자인 시스템을 처음부터 구축하면서 겪었던 시행착오와 교훈들을 공유합니다.',
-    category: 'Design System',
+    title: 'React와 TypeScript로 컴포넌트 설계하기',
+    excerpt: '재사용 가능하고 유지보수하기 쉬운 React 컴포넌트를 TypeScript와 함께 설계하는 모범 사례를 소개합니다.',
+    category: 'Development',
     date: '2024-07-10',
-    readTime: '5분',
-    tags: ['Design System', 'Figma', 'Component', 'Startup'],
-    author: 'Jjine',
+    readTime: '8분',
+    tags: ['React', 'TypeScript', 'Component Design'],
     featured: true,
   },
   {
     id: '3',
-    title: '사용자 리서치가 제품을 구했던 순간',
-    excerpt: '정량적 데이터만으로는 알 수 없었던 사용자의 진짜 문제를 발견하고, 제품 방향을 완전히 바꾼 경험을 공유합니다.',
-    category: 'User Research',
+    title: '디자인 시스템 구축 경험기',
+    excerpt: '스타트업에서 처음부터 디자인 시스템을 구축하며 겪은 시행착오와 배운 점들을 공유합니다.',
+    category: 'Design System',
     date: '2024-07-05',
     readTime: '6분',
-    tags: ['User Research', 'Product Strategy', 'Data Analysis'],
-    author: 'Jjine',
+    tags: ['Design System', 'Figma', 'Collaboration'],
     featured: false,
   },
   {
     id: '4',
-    title: '모바일 퍼스트 디자인 실전 가이드',
-    excerpt: '모바일 환경을 우선으로 고려한 디자인 접근법과 실제 프로젝트에서 적용한 방법론을 소개합니다.',
-    category: 'Mobile Design',
+    title: 'Next.js 14와 App Router 실전 활용법',
+    excerpt: 'Next.js 14의 새로운 App Router를 실제 프로젝트에 적용하며 배운 팁과 주의사항을 정리했습니다.',
+    category: 'Development',
     date: '2024-06-28',
-    readTime: '7분',
-    tags: ['Mobile Design', 'Responsive', 'UX Strategy'],
-    author: 'Jjine',
+    readTime: '10분',
+    tags: ['Next.js', 'App Router', 'React'],
     featured: false,
   },
   {
     id: '5',
-    title: '디자이너를 위한 코드 기초 지식',
-    excerpt: '개발자와 더 나은 협업을 위해 디자이너가 알아두면 좋은 기본적인 코드 지식들을 정리했습니다.',
-    category: 'Design & Development',
+    title: '모바일 퍼스트 디자인 원칙',
+    excerpt: '모바일 환경을 우선으로 고려한 디자인 접근법과 실무에서 적용할 수 있는 구체적인 방법론을 소개합니다.',
+    category: 'Mobile Design',
     date: '2024-06-20',
-    readTime: '4분',
-    tags: ['HTML', 'CSS', 'Collaboration', 'Frontend'],
-    author: 'Jjine',
+    readTime: '7분',
+    tags: ['Mobile', 'Responsive Design', 'UX'],
     featured: false,
   },
   {
     id: '6',
-    title: '원격 근무 환경에서의 디자인 협업',
-    excerpt: '팬데믹 이후 변화한 원격 근무 환경에서 효과적인 디자인 협업 방법과 도구들을 소개합니다.',
-    category: 'Remote Work',
+    title: 'API 설계와 프론트엔드 협업',
+    excerpt: '효율적인 API 설계를 통해 프론트엔드와 백엔드 간의 협업을 개선하는 방법에 대해 다룹니다.',
+    category: 'Development',
     date: '2024-06-15',
-    readTime: '5분',
-    tags: ['Remote Work', 'Collaboration', 'Design Tools', 'Productivity'],
-    author: 'Jjine',
+    readTime: '9분',
+    tags: ['API', 'Frontend', 'Backend', 'Collaboration'],
     featured: false,
   }
 ]
@@ -87,7 +80,7 @@ export function getArticle(id: string): Article | undefined {
 }
 
 export function getAllArticles(): Article[] {
-  return articles.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+  return articles
 }
 
 export function getFeaturedArticles(): Article[] {
@@ -95,7 +88,7 @@ export function getFeaturedArticles(): Article[] {
 }
 
 export function getArticlesByCategory(category: string): Article[] {
-  if (category === 'All') return getAllArticles()
+  if (category === 'All') return articles
   return articles.filter(article => article.category === category)
 }
 
@@ -103,10 +96,6 @@ export function getAllCategories(): string[] {
   const uniqueCategories = new Set(articles.map(article => article.category))
   const categories = ['All', ...Array.from(uniqueCategories)]
   return categories
-}
-
-export function getRecentArticles(limit: number = 3): Article[] {
-  return getAllArticles().slice(0, limit)
 }
 
 // 정적 빌드를 위한 아티클 ID 목록 반환
