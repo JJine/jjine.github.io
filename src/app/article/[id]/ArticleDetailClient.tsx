@@ -5,7 +5,6 @@ import { motion } from 'framer-motion'
 import { useState, useEffect } from 'react'
 import { ArrowLeft, ArrowRight, Share2, ArrowUp, Calendar, Clock, User } from 'lucide-react'
 import { articles } from '../data/articles-content'
-import CursorAnimation from '../../components/CursorAnimation'
 import Link from 'next/link'
 
 interface ArticleDetailProps {
@@ -58,7 +57,7 @@ export default function ArticleDetailClient({ articleId, content: initialContent
     return (
       <div className="min-h-screen bg-white dark:bg-black flex items-center justify-center">
         <div className="text-center">
-          <div className="loading-spin w-8 h-8 border-2 border-gray-300 dark:border-gray-600 border-t-gray-900 dark:border-t-gray-100 rounded-full mx-auto mb-4"></div>
+          <div className="animate-spin w-8 h-8 border-2 border-gray-300 dark:border-gray-600 border-t-gray-900 dark:border-t-gray-100 rounded-full mx-auto mb-4"></div>
           <p className="text-gray-600 dark:text-gray-400">아티클을 불러오는 중...</p>
         </div>
       </div>
@@ -77,7 +76,7 @@ export default function ArticleDetailClient({ articleId, content: initialContent
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
-  // 공유 기능 (링크 복사) - 사용하지 않는 변수 제거
+  // 공유 기능 (링크 복사)
   const handleShare = async () => {
     try {
       await navigator.clipboard.writeText(window.location.href)
@@ -96,73 +95,48 @@ export default function ArticleDetailClient({ articleId, content: initialContent
     }
   }
 
-  // 마크다운을 HTML로 변환하는 간단한 함수
+  // 초간단 마크다운 파싱 함수 (HTML 주석 지원)
   const formatContent = (content: string) => {
-    const lines = content.split('\n')
-    const elements = []
-    let currentIndex = 0
-    
-    for (let i = 0; i < lines.length; i++) {
-      const line = lines[i].trim()
-      
-      if (line === '') {
-        continue
-      } else if (line.startsWith('## ')) {
-        elements.push(
-          <h2 key={`h2-${currentIndex++}`} className="text-2xl font-semibold mb-6 mt-12 text-gray-900 dark:text-gray-100">
-            {line.replace('## ', '')}
-          </h2>
-        )
-      } else if (line.startsWith('### ')) {
-        elements.push(
-          <h3 key={`h3-${currentIndex++}`} className="text-xl font-semibold mb-4 mt-8 text-gray-900 dark:text-gray-100">
-            {line.replace('### ', '')}
-          </h3>
-        )
-      } else if (line.startsWith('- ')) {
-        const listItems = []
-        while (i < lines.length && lines[i].trim().startsWith('- ')) {
-          listItems.push(lines[i].trim().replace('- ', ''))
-          i++
-        }
-        i-- // 마지막 증가를 되돌림
-        
-        elements.push(
-          <ul key={`ul-${currentIndex++}`} className="mb-6 space-y-2">
-            {listItems.map((item, index) => (
-              <li key={index} className="flex items-start space-x-3">
-                <span className="text-gray-400 dark:text-gray-500 mt-2">•</span>
-                <span className="text-gray-700 dark:text-gray-300 leading-relaxed">{item}</span>
-              </li>
-            ))}
-          </ul>
-        )
-      } else {
-        const boldRegex = /\*\*(.*?)\*\*/g
-        const parts = line.split(boldRegex)
-        const formattedLine = parts.map((part, index) => {
-          if (index % 2 === 1) {
-            return <strong key={`bold-${currentIndex}-${index}`} className="font-semibold text-gray-900 dark:text-gray-100">{part}</strong>
-          }
-          return part
-        })
-        
-        elements.push(
-          <p key={`p-${currentIndex++}`} className="mb-4 leading-relaxed text-gray-700 dark:text-gray-300">
-            {formattedLine}
-          </p>
-        )
-      }
-    }
-    
-    return elements
+    return (
+      <div 
+        className="prose prose-lg max-w-none dark:prose-invert prose-headings:text-gray-900 dark:prose-headings:text-gray-100 prose-p:text-gray-700 dark:prose-p:text-gray-300 prose-strong:text-gray-900 dark:prose-strong:text-gray-100 prose-ul:text-gray-700 dark:prose-ul:text-gray-300 prose-li:text-gray-700 dark:prose-li:text-gray-300"
+        dangerouslySetInnerHTML={{ 
+          __html: content
+            // HTML 주석 제거 (<!-- 내용 -->)
+            .replace(/<!--[\s\S]*?-->/g, '')
+            // YAML frontmatter도 제거 (혹시 모르니)
+            .replace(/^---[\s\S]*?---\n?/g, '')
+            // 빈 줄 정리
+            .replace(/^\s*\n/gm, '')
+            // 기본 마크다운 파싱
+            .replace(/^# (.*$)/gim, '<h1 class="text-3xl font-bold mb-8 mt-12 text-gray-900 dark:text-gray-100 first:mt-0">$1</h1>')
+            .replace(/^## (.*$)/gim, '<h2 class="text-2xl font-semibold mb-6 mt-12 text-gray-900 dark:text-gray-100">$1</h2>')
+            .replace(/^### (.*$)/gim, '<h3 class="text-xl font-semibold mb-4 mt-8 text-gray-900 dark:text-gray-100">$1</h3>')
+            .replace(/^- (.*$)/gim, '<li class="mb-2 pl-4 text-gray-700 dark:text-gray-300 list-disc list-inside">$1</li>')
+            .replace(/\*\*(.*?)\*\*/gim, '<strong class="font-semibold text-gray-900 dark:text-gray-100">$1</strong>')
+            .replace(/\*(.*?)\*/gim, '<em class="italic text-gray-600 dark:text-gray-400">$1</em>')
+            .replace(/^> (.*$)/gim, '<blockquote class="border-l-4 border-gray-300 dark:border-gray-600 pl-6 mb-6 italic text-gray-700 dark:text-gray-300">$1</blockquote>')
+            // 줄바꿈을 문단으로 변환
+            .split('\n\n')
+            .map(paragraph => {
+              if (paragraph.trim() === '') return ''
+              if (paragraph.includes('<h1') || paragraph.includes('<h2') || paragraph.includes('<h3') || 
+                  paragraph.includes('<li') || paragraph.includes('<blockquote')) {
+                return paragraph
+              }
+              return `<p class="mb-4 text-gray-700 dark:text-gray-300 leading-relaxed">${paragraph}</p>`
+            })
+            .join('')
+            // 빈 p 태그 제거
+            .replace(/<p[^>]*>\s*<\/p>/g, '')
+        }}
+      />
+    )
   }
 
   return (
-    <div className="min-h-screen bg-white dark:bg-black">
-      <CursorAnimation />
-      
-      {/* 전체 영역으로 설정 - Home 페이지처럼 양옆 여백 최소화 */}
+    <div className="min-h-screen bg-white dark:bg-black">      
+      {/* 전체 영역으로 설정 */}
       <div className="w-full">
 
         {/* 메인 콘텐츠 영역 */}
@@ -239,7 +213,7 @@ export default function ArticleDetailClient({ articleId, content: initialContent
               </div>
             </motion.div>
 
-            {/* 썸네일 영역 - 컨텐츠 안에 상단에 배치 */}
+            {/* 썸네일 영역 */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -258,14 +232,12 @@ export default function ArticleDetailClient({ articleId, content: initialContent
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="prose prose-lg dark:prose-invert max-w-none mb-16"
+              className="mb-16"
             >
-              <div className="space-y-6">
-                {formatContent(content)}
-              </div>
+              {formatContent(content)}
             </motion.div>
 
-            {/* 작성자 소개 영역 - Project에서 이동해온 디자인 */}
+            {/* 작성자 소개 영역 */}
             <motion.section
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -349,7 +321,7 @@ export default function ArticleDetailClient({ articleId, content: initialContent
         </div>
       </div>
 
-      {/* 맨 위로 스크롤 버튼 - 오른쪽 하단 */}
+      {/* 맨 위로 스크롤 버튼 */}
       {showScrollTop && (
         <motion.button
           initial={{ opacity: 0, scale: 0.8 }}
@@ -362,7 +334,7 @@ export default function ArticleDetailClient({ articleId, content: initialContent
         </motion.button>
       )}
 
-      {/* 토스트 메시지 - 하단 기본 토스트 형태 */}
+      {/* 토스트 메시지 */}
       {showToast && (
         <motion.div
           initial={{ opacity: 0, y: 50 }}

@@ -97,6 +97,9 @@ export default function InfoPage() {
             </div>
 
           </motion.div>
+
+          {/* Bottom Spacing - 추가됨 */}
+          <div className="pb-16"></div>
         </div>
       </div>
     </div>

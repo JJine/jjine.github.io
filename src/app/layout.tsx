@@ -57,6 +57,15 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ko" className={inter.variable}>
+       <head>
+        {/* Pretendard 폰트 로드 */}
+        <link
+          rel="stylesheet"
+          as="style"
+          crossOrigin=""
+          href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css"
+        />
+      </head>
       <body className="font-inter antialiased bg-white text-gray-900 min-h-screen">
         <CursorAnimation />
         <Header />

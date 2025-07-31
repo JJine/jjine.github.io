@@ -20,7 +20,7 @@ export default async function ArticleDetailPage({
 }) {
   // Next.js 15에서는 params가 Promise이므로 await 필요
   const { id } = await params
-  
+    
   // 현재 ArticleDetailClient가 기대하는 props: articleId, content
   // content는 빈 문자열로 전달하고, 클라이언트에서 로드하도록 함
   return <ArticleDetailClient articleId={id} content="" />

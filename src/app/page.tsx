@@ -4,7 +4,6 @@
 import { motion } from 'framer-motion'
 import { ArrowUpRight } from 'lucide-react'
 import Link from 'next/link'
-import CursorAnimation from './components/CursorAnimation'
 
 // Portfolio data - Featured projects
 const portfolioItems = [
@@ -45,7 +44,6 @@ const portfolioItems = [
 export default function HomePage() {
   return (
     <div className="min-h-screen bg-white">
-      <CursorAnimation />
       
       <div className="relative">
         {/* Hero Section */}
@@ -176,7 +174,7 @@ export default function HomePage() {
         </section>
 
         {/* Bottom Spacing */}
-        <div className="pb-32"></div>
+        <div className="pb-16"></div>
       </div>
     </div>
   )

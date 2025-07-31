@@ -27,9 +27,9 @@
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export',
-  distDir: 'docs',  // 기존 docs 폴더 유지
-  trailingSlash: true,
+  // output: 'export',
+  // distDir: 'docs',  // 기존 docs 폴더 유지
+  // trailingSlash: true,
   images: {
     unoptimized: true
   },

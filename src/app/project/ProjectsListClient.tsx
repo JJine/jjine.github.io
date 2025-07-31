@@ -60,8 +60,8 @@ export default function ProjectsListClient({
             <h1 className="text-4xl md:text-5xl font-light text-gray-900 dark:text-gray-100 mb-6">
               Projects
             </h1>
-            <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl">
-              기획부터 출시까지 주도한 프로젝트들입니다. 각 프로젝트의 배경과 과정, 그리고 결과를 확인해보세요.
+            <p className="text-lg text-gray-600 dark:text-gray-400 max-w-3xl">
+              기획부터 출시까지 주도한 프로젝트들입니다. 각 프로젝트의 배경과 과정, 그리고 결과를 확인해주세요.
             </p>
             
             {/* 필터 버튼들 */}
@@ -76,7 +76,7 @@ export default function ProjectsListClient({
               >
                 All
               </button>
-              {categories.map((filter, index) => (
+              {categories.map((filter) => (
                 <div key={filter} className="flex items-center gap-1">
                   <span className="text-gray-400">/</span>
                   <button
@@ -96,12 +96,12 @@ export default function ProjectsListClient({
 
           {/* Projects Grid - artisd.studio & fficial.naver.com 스타일 */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {sortedProjects.map((project, index) => (
+            {sortedProjects.map((project, _index) => (
               <motion.article
                 key={project.id}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.1 * index }}
+                transition={{ duration: 0.6, delay: 0.1 * _index }}
                 className="group hover-animate"
               >
                 <Link href={`/project/${project.id}`} className="block">
@@ -182,6 +182,9 @@ export default function ProjectsListClient({
 
         </div>
       </div>
+      
+      {/* Home 페이지처럼 하단 여백 추가 */}
+      <div className="pb-16"></div>
     </div>
   )
 }
