@@ -102,7 +102,7 @@ export default function ArticleDetailClient({ articleId, content: initialContent
         className="prose prose-lg max-w-none dark:prose-invert prose-headings:text-gray-900 dark:prose-headings:text-gray-100 prose-p:text-gray-700 dark:prose-p:text-gray-300 prose-strong:text-gray-900 dark:prose-strong:text-gray-100 prose-ul:text-gray-700 dark:prose-ul:text-gray-300 prose-li:text-gray-700 dark:prose-li:text-gray-300"
         dangerouslySetInnerHTML={{ 
           __html: content
-            // HTML 주석 제거 (<!-- 내용 -->)
+            // HTML 주석제거 (<!-- 내용 -->)
             .replace(/<!--[\s\S]*?-->/g, '')
             // YAML frontmatter도 제거 (혹시 모르니)
             .replace(/^---[\s\S]*?---\n?/g, '')

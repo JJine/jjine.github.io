@@ -102,7 +102,7 @@ export default function ProjectDetailClient({ projectId, content: initialContent
         className="prose prose-lg max-w-none dark:prose-invert prose-headings:text-gray-900 dark:prose-headings:text-gray-100 prose-p:text-gray-700 dark:prose-p:text-gray-300 prose-strong:text-gray-900 dark:prose-strong:text-gray-100 prose-ul:text-gray-700 dark:prose-ul:text-gray-300 prose-li:text-gray-700 dark:prose-li:text-gray-300"
         dangerouslySetInnerHTML={{ 
           __html: content
-            // HTML 주석 제거 (<!-- 내용 -->)
+            // HTML 주석제거 (<!-- 내용 -->)
             .replace(/<!--[\s\S]*?-->/g, '')
             // YAML frontmatter도 제거 (혹시 모르니)
             .replace(/^---[\s\S]*?---\n?/g, '')
@@ -323,7 +323,7 @@ export default function ProjectDetailClient({ projectId, content: initialContent
                 <div className="p-4 border border-gray-200 dark:border-gray-700 rounded-lg hover:border-gray-300 dark:hover:border-gray-600 transition-colors">
                   <h4 className="font-medium mb-2 text-gray-900 dark:text-gray-100">최신 프로젝트</h4>
                   <p className="text-sm text-gray-600 dark:text-gray-400">
-                    최근에 완료된 프로젝트들을 곧 추가할 예정입니다.
+                    최근에 완료된 프로젝트들 곧 추가할 예정입니다.
                   </p>
                 </div>
               </div>

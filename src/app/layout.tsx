@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import Header from './components/Header'
 import Footer from './components/Footer'
+/* 커서 애니메이션 */
 import CursorAnimation from './components/CursorAnimation'
 
 const inter = Inter({ 

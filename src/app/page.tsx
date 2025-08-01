@@ -4,7 +4,6 @@
 import { motion } from 'framer-motion'
 import { ArrowUpRight } from 'lucide-react'
 import Link from 'next/link'
-
 // Portfolio data - Featured projects
 const portfolioItems = [
   {

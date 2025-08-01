@@ -12,7 +12,7 @@ export async function generateStaticParams() {
   }))
 }
 
-// 서버 컴포넌트 - generateStaticParams와 함께 사용
+// 서버 컴포넌트 - generateStaticParams와 함께 사용함
 export default async function ProjectDetailPage({ 
   params 
 }: { 
